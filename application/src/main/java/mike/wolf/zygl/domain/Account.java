@@ -38,8 +38,8 @@ public class Account {
 	 * persisted.
 	 */
 	public static Account withoutId(
-					Money baselineBalance,
-					ActivityWindow activityWindow) {
+			Money baselineBalance,
+			ActivityWindow activityWindow) {
 		return new Account(null, baselineBalance, activityWindow);
 	}
 
@@ -47,9 +47,9 @@ public class Account {
 	 * Creates an {@link Account} entity with an ID. Use to reconstitute a persisted entity.
 	 */
 	public static Account withId(
-					AccountId accountId,
-					Money baselineBalance,
-					ActivityWindow activityWindow) {
+			AccountId accountId,
+			Money baselineBalance,
+			ActivityWindow activityWindow) {
 		return new Account(accountId, baselineBalance, activityWindow);
 	}
 

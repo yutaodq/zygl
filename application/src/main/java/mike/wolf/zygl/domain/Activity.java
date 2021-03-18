@@ -68,7 +68,7 @@ public class Activity {
 
 	@Value
 	public static class ActivityId {
-		private final Long value;
+		private  Long value;
 	}
 
 }

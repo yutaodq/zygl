@@ -1,7 +1,6 @@
 rootProject.name = 'zygl'
-
 include 'common'
 include 'configuration'
 
-include 'application'
 include 'adapters:persistence'
+include 'application'
