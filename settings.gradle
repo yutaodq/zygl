@@ -1,3 +1,5 @@
 rootProject.name = 'zygl'
+
+include 'common'
+include 'configuration'
 include 'web'
-include 'demo'
