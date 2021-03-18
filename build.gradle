@@ -25,12 +25,12 @@ buildscript {
  * 所有项目公共资源
  */
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'maven-publish'
-    group = 'mike.wolf'
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+//    apply plugin: 'java'
+//    apply plugin: 'idea'
+//    apply plugin: 'maven-publish'
+//    group = 'mike.wolf'
+//    sourceCompatibility = JavaVersion.VERSION_1_8
+//    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 
@@ -38,8 +38,15 @@ allprojects {
  * 子项目通用配置
  */
 subprojects {
+
+    group = 'mike.wolf'
+    version = '0.0.1-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
 
     // java编译的时候缺省状态下会因为中文字符而失败
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
@@ -67,6 +74,12 @@ subprojects {
         imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
         //imports { mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}" }
     }
+
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
 
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
