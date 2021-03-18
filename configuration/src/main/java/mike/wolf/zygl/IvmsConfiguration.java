@@ -1,7 +1,6 @@
 package mike.wolf.zygl;
 
-//import io.reflectoring.buckpal.application.service.MoneyTransferProperties;
-//import io.reflectoring.buckpal.domain.Money;
+
 import mike.wolf.zygl.application.service.MoneyTransferProperties;
 import mike.wolf.zygl.domain.Money;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
