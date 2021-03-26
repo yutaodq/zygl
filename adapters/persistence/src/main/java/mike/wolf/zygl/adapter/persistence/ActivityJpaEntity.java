@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Table(name = "activity")
@@ -37,5 +38,4 @@ class ActivityJpaEntity {
 
 	@Column
 	private Long amount;
-
 }

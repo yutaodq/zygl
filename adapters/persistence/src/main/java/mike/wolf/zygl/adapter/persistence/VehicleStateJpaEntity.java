@@ -34,7 +34,7 @@ public class VehicleStateJpaEntity {
     private String description; // 备注
 
     public VehicleStateJpaEntity() {
-        log.info("新建：ProductEntity");
+        log.info("新建：VehicleStateJpaEntity");
     }
 
 //    @Override
