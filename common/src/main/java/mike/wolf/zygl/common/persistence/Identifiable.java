@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 
@@ -22,6 +23,9 @@ public abstract class Identifiable {
     public String getId() {
         return id;
     }
+//    public Optional<AccountId> getId(){
+//        return Optional.ofNullable(this.id);
+//    }
 
     /**
      * Can be overridden in the sub classes in order to allow them know about their dependencies

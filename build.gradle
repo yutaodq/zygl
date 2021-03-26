@@ -55,8 +55,8 @@ subprojects {
     }
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
-        implementation "org.axonframework:axon-spring-boot-starter:${axonVersion}"
-        implementation "org.axonframework.extensions.reactor:axon-reactor-spring-boot-starter:4.4.2"
+//        implementation "org.axonframework:axon-spring-boot-starter:${axonVersion}"
+//        implementation "org.axonframework.extensions.reactor:axon-reactor-spring-boot-starter:4.4.2"
         compileOnly 'org.projectlombok:lombok'
 //        developmentOnly 'org.springframework.boot:spring-boot-devtools'
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

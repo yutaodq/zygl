@@ -6,18 +6,24 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.common.persistence.AbstractEntity;
 import mike.wolf.zygl.common.persistence.Identifiable;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "account")
+@Table(name = "vehicle_state")
 @Data
 @AllArgsConstructor
 @Slf4j
-public class VehicleStateJpaEntity extends AbstractEntity {
+public class VehicleStateJpaEntity {
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(36)", nullable = false)
+    private String id;
+
     @Column(name = "identifier")
     private String identifier;
 
@@ -31,12 +37,16 @@ public class VehicleStateJpaEntity extends AbstractEntity {
         log.info("新建：ProductEntity");
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof VehicleStateJpaEntity)) return false;
-        AbstractEntity that = (VehicleStateJpaEntity) o;
-        return Objects.equals(getId(), that.getId());
-    }
-
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof VehicleStateJpaEntity)) return false;
+//        AbstractEntity that = (VehicleStateJpaEntity) o;
+//        return Objects.equals(getId(), that.getId());
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(getId());
+//    }
 }

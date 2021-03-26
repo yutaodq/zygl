@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/api")
 public class VehicleStateController {
-    @GetMapping(value = "/vehicleState", produces = MediaTypes.HAL_JSON_VALUE)
-    public List<VehicleStateJpaEntity> getAllProducts() {
-        log.info("所有的工具记录");
-//        return productService.findAllProduct();
+    @GetMapping(value = "/helloworld")
+    public String helloWorld(){
+        return "Hello, welcome to COLA world!";
     }
+
+//    @GetMapping(value = "/vehicleState", produces = MediaTypes.HAL_JSON_VALUE)
+//    public List<VehicleStateJpaEntity> getAllProducts() {
+//        log.info("所有的工具记录");
+////        return productService.findAllProduct();
+//    }
 
 }
