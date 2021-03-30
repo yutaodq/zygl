@@ -1,37 +1,32 @@
 package mike.wolf.zygl.application.service;
 
+import lombok.RequiredArgsConstructor;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
-import mike.wolf.zygl.application.port.in.GetVehicleStateQuery;
+import mike.wolf.zygl.application.port.in.GetVehicleStateUseCase;
 import mike.wolf.zygl.application.port.out.VehicleStateQueryAllPort;
+import mike.wolf.zygl.common.UseCase;
 
 import java.util.List;
-import java.util.Map;
 
-public class GetVehicleStateService implements GetVehicleStateQuery {
-    private VehicleStateQueryAllPort vehicleStateQueryAllPort;
+@UseCase
+@RequiredArgsConstructor
+public class GetVehicleStateService implements GetVehicleStateUseCase {
+    private final VehicleStateQueryAllPort vehicleStateQueryAllPort;
 
-    public GetVehicleStateService(VehicleStateQueryAllPort vehicleStateQueryAllPort) {
-        this.vehicleStateQueryAllPort = vehicleStateQueryAllPort;
-    }
+//    public GetVehicleStateService(VehicleStateQueryAllPort vehicleStateQueryAllPort) {
+//        this.vehicleStateQueryAllPort = vehicleStateQueryAllPort;
+//    }
 
     @Override
-    public Map<String, List<VehicleStateDTO>> findAll() {
+    public  List<VehicleStateDTO> findAll() {
         return this.findAll(true);
 
     }
-    public Map<String, List<VehicleStateDTO>> findAll(boolean removeUnavailableProducts) {
+    private List<VehicleStateDTO> findAll(boolean removeUnavailableProducts) {
 
         List<VehicleStateDTO> vehicleStates = vehicleStateQueryAllPort.findAllVehicleStates();
-return vehicleStates.stream().collect();
-//        List<ProductDTO> products = productRepository.findAllProducts();
-//        if(removeUnavailableProducts){
-//            return products.stream()
-//                    .filter(product -> product.getQuantityAvailable() > 0)
-//                    .collect(Collectors.groupingBy(p -> p.getCategory().getName()));
-//        }
-//        return products.stream()
-//                .collect(Collectors.groupingBy(p -> p.getCategory().getName()));
-    }// findAll()
+return vehicleStates;
+    }
 
 }
 
