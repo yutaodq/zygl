@@ -35,6 +35,7 @@ public class VehicleStateController {
 
     @GetMapping(value = "/vehicleState")
     public List<VehicleStateDTO>  getAllVehicleStates() {
+        log.info("aaaaaaaaaaaaaaaaaa");
         return getVehicleStateUseCase.findAll();
     }
 
