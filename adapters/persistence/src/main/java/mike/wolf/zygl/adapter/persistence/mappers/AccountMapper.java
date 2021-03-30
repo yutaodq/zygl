@@ -1,20 +1,21 @@
-package mike.wolf.zygl.adapter.persistence;
+package mike.wolf.zygl.adapter.persistence.mappers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import mike.wolf.zygl.adapter.persistence.entities.AccountJpaEntity;
+import mike.wolf.zygl.adapter.persistence.entities.ActivityJpaEntity;
 import mike.wolf.zygl.domain.Account;
 import mike.wolf.zygl.domain.Account.AccountId;
 import mike.wolf.zygl.domain.Activity;
-import mike.wolf.zygl.domain.Activity.ActivityId;
 import mike.wolf.zygl.domain.ActivityWindow;
 import mike.wolf.zygl.domain.Money;
 import org.springframework.stereotype.Component;
 
 @Component
-class AccountMapper {
+public class AccountMapper {
 
-	Account mapToDomainEntity(
+	public Account mapToDomainEntity(
 			AccountJpaEntity account,
 			List<ActivityJpaEntity> activities,
 			Long withdrawalBalance,
@@ -47,7 +48,7 @@ class AccountMapper {
 		return new ActivityWindow(mappedActivities);
 	}
 
-	ActivityJpaEntity mapToJpaEntity(Activity activity) {
+	public ActivityJpaEntity mapToJpaEntity(Activity activity) {
 		return new ActivityJpaEntity(
 				activity.getId() == null ? null : activity.getId().getValue(),
 				activity.getTimestamp(),

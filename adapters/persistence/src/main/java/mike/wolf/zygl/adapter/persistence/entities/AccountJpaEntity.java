@@ -1,4 +1,4 @@
-package mike.wolf.zygl.adapter.persistence;
+package mike.wolf.zygl.adapter.persistence.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class AccountJpaEntity {
+public class AccountJpaEntity {
 
 	@Id
 	@GeneratedValue

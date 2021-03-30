@@ -1,4 +1,4 @@
-package mike.wolf.zygl.adapter.persistence;
+package mike.wolf.zygl.adapter.persistence.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

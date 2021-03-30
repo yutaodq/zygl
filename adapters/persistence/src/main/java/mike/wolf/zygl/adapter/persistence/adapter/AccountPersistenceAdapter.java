@@ -1,4 +1,4 @@
-package mike.wolf.zygl.adapter.persistence;
+package mike.wolf.zygl.adapter.persistence.adapter;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -6,6 +6,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import mike.wolf.zygl.adapter.persistence.entities.AccountJpaEntity;
+import mike.wolf.zygl.adapter.persistence.entities.ActivityJpaEntity;
+import mike.wolf.zygl.adapter.persistence.mappers.AccountMapper;
+import mike.wolf.zygl.adapter.persistence.repositories.AccountRepository;
+import mike.wolf.zygl.adapter.persistence.repositories.ActivityRepository;
 import mike.wolf.zygl.application.port.out.LoadAccountPort;
 import mike.wolf.zygl.application.port.out.UpdateAccountStatePort;
 import mike.wolf.zygl.common.PersistenceAdapter;
@@ -13,7 +18,6 @@ import mike.wolf.zygl.domain.Account;
 import mike.wolf.zygl.domain.Account.AccountId;
 
 import mike.wolf.zygl.domain.Activity;
-import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @PersistenceAdapter

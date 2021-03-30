@@ -1,4 +1,4 @@
-package mike.wolf.zygl.adapter.persistence;
+package mike.wolf.zygl.adapter.persistence.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class ActivityJpaEntity {
+public class ActivityJpaEntity {
 
 	@Id
 	@GeneratedValue

@@ -4,7 +4,7 @@ import mike.wolf.zygl.application.model.VehicleStateDTO;
 
 import java.util.List;
 
-public interface VehicleStateRepositoryPort extends ManagementTransaction{
-    List<VehicleStateDTO> findAllProducts();
+public interface VehicleStateQueryAllPort extends ManagementTransaction{
+    List<VehicleStateDTO> findAllVehicleStates();
 
 }
