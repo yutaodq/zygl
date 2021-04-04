@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VehicleStateRepository extends JpaRepository<VehicleStateJpaEntity, String> {
 
+    boolean existsByName(String name);
+
 }

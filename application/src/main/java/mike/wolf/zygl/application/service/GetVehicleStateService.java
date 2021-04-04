@@ -27,7 +27,11 @@ public class GetVehicleStateService implements GetVehicleStateUseCase {
     @Override
     public Optional<VehicleStateDTO> findById(String id) {
         return vehicleStateQueryPort.findById(id);
-//        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return vehicleStateQueryPort.existsByName(name);
     }
 
 }

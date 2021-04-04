@@ -17,12 +17,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @PersistenceAdapter
 public class VehicleStatePersistenceAdapter implements VehicleStateQueryPort {
-    private final VehicleStateRepository vehicleStateRepository ;
+    private final VehicleStateRepository vehicleStateRepository;
+
     @Override
     public List<VehicleStateDTO> findAllVehicleStates() {
         return vehicleStateRepository.findAll().stream()
                 .map(vehicleStateJpaEntity ->
-                     VehicleStateMapper.INSTANCE.toDto(vehicleStateJpaEntity)
+                        VehicleStateMapper.INSTANCE.toDto(vehicleStateJpaEntity)
                 ).collect(Collectors.toList());
     }
 
@@ -30,37 +31,15 @@ public class VehicleStatePersistenceAdapter implements VehicleStateQueryPort {
     public Optional<VehicleStateDTO> findById(String id) {
         Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(id);
         return vehicleState.map(vehicleStateJpaEntity -> {
-              return VehicleStateMapper.INSTANCE.toDto(vehicleStateJpaEntity);
+                    return VehicleStateMapper.INSTANCE.toDto(vehicleStateJpaEntity);
                 }
-                );
-//                .orElse(Optional.empty()));
-//        if(vehicleState == null){
-//            return Optional.empty();
-//        }
-//        try {
-//            return Optional.of(VehicleStateMapper.INSTANCE.toDto(vehicleState));
-//        }catch(EntityNotFoundException e){
-//            return Optional.empty();
-//        }
-    }
-
-//    public List<VehicleStateJpaEntity> findAll() {
-//        return vehicleStateRepository.findAll();
-//    }
-
-
-    @Override
-    public void begin() {
-
+        );
     }
 
     @Override
-    public void commit() throws TransactionException {
-
+    public boolean existsByName(String name) {
+        return vehicleStateRepository.existsByName(name);
     }
 
-    @Override
-    public void rollback() {
 
-    }
 }

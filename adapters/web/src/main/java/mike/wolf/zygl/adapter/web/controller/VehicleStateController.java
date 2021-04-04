@@ -29,17 +29,33 @@ public class VehicleStateController {
         return "Hello, welcome to COLA world!";
     }
 
+//    @GetMapping(value = "/vehicleState")
+//    public List<VehicleStateDTO>  getAllVehicleStates() {
+//        log.info("REST request to get all VehicleStateDTO");
+//        return getVehicleStateUseCase.findAll();
+//    }
+
     @GetMapping(value = "/vehicleState")
-    public List<VehicleStateDTO>  getAllVehicleStates() {
+    public ResponseEntity<?> getAllVehicleStates() {
         log.info("REST request to get all VehicleStateDTO");
-        return getVehicleStateUseCase.findAll();
+        return ResponseEntity.ok(getVehicleStateUseCase.findAll());
     }
 
-    @GetMapping(value = "/vehicleState/{id}")
-    public ResponseEntity<VehicleStateDTO>  getVehicleState(@PathVariable("id") String id) {
-        log.debug("REST request to get VehicleStateDTO : {}", id);
+//    public List<VehicleStateDTO>  getAllVehicleStates() {
+//        log.info("REST request to get all VehicleStateDTO");
+//        return getVehicleStateUseCase.findAll();
+//    }
 
-        return ResponseUtil.wrapOrNotFound(getVehicleStateUseCase.findById(id));
+    @GetMapping(value = "/vehicleState/{id}")
+    public ResponseEntity<?>  getVehicleState(@PathVariable("id") String id) {
+        log.debug("REST request to get VehicleStateDTO : {}", id);
+        return ResponseEntity.ok(getVehicleStateUseCase.findById(id));
+    }
+
+    @GetMapping(value = "/vehicleState/existsByName/{name}")
+    public boolean  existsByName(@PathVariable("name") String name) {
+        log.debug("REST request to get VehicleState name : {}", name);
+        return getVehicleStateUseCase.existsByName(name);
     }
 
 }

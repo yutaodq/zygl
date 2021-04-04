@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface GetVehicleStateUseCase {
     public List<VehicleStateDTO> findAll();
+
     Optional<VehicleStateDTO> findById(String id);
 
+    boolean existsByName(String name);
 }
