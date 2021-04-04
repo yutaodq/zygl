@@ -26,6 +26,7 @@ public class VehicleStateController {
 
     @GetMapping(value = "/helloworld")
     public String helloWorld(){
+        log.info("REST request to get all VehicleStateDTO");
         return "Hello, welcome to COLA world!";
     }
 
