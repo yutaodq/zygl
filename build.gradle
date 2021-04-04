@@ -6,6 +6,7 @@ buildscript {
         springBootVersion = '2.4.3'
         axonVersion='4.4.8'
         springBootManagementVersion = '1.0.11.RELEASE'
+        jhipsterDependenciesVersion = '7.0.0'
         //springCloudVersion = 'Hoxton.SR6'
         REPOSITORY_HOME = "http://maven.aliyun.com"
     }
