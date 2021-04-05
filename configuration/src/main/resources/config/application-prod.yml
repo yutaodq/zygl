@@ -1,40 +1,48 @@
-# ===================================================================
-# Spring Boot configuration for the "prod" profile.
-#
-# This configuration overrides the application.yml file.
-# ===================================================================
-
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-# ===================================================================
-
-
 spring:
+    #  profiles:
+    #    active: dev
     devtools:
         restart:
-            enabled: false
+            enabled: true
+            additional-exclude: static/**,.h2.server.properties
         livereload:
-            enabled: false
+            enabled: false # we use Webpack dev server + BrowserSync for livereload
+    jackson:
+        serialization:
+            indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:oracle:thin:@10.64.160.91:1521:sjzxora
-        name:
+        url: jdbc:h2:mem:zyglDB
         username: yu
         password: yu
+        schema: classpath:/db/schema.sql
+        data: classpath:/db/data.sql
+        platform: h2
+        driverClassName: org.h2.Driver
         hikari:
-            data-source-properties:
-                cachePrepStmts: true
-                prepStmtCacheSize: 250
-                prepStmtCacheSqlLimit: 2048
-                useServerPrepStmts: true
+            poolName: Hikari
+            auto-commit: true
+        #      jdbc-url: jdbc:h2:file:c:/temp/zyglDB;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1
+        #      jdbc-url: jdbc:h2:file:c:/temp/zyglDB;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO
+        #        datasource 使用HikariDataSource 时，一定是 jdbc-url不能是url
+        #        加入AUTO_SERVER=TRUE 可以在web控制台中同时打开zygl,前题是当使用自动混合模式，所有客户端都需要使用同样的URL进行连接（不管它是一个本地还是一个远程连接。
+        #        jdbc-url: jdbc:h2:file:c:/temp/zyglWeb;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1
+
+    h2:
+        console:
+            enabled: true      # 开启 h2 web consloe，默认为 false
+            path: /h222   # #进行该配置，你就可以通过YOUR_URL/h2访问h2 web consloe。YOUR_URL是你程序的访问URl。
+            settings:
+                web-allow-others: true # 进行该配置后，h2 web consloe就可以在远程访问了。否则只能在本机访问。
     jpa:
-        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-        database: MYSQL
-        show-sql: false
-        properties:
-            hibernate.cache.use_second_level_cache: true
-            hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: false
-            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+        database-platform: org.hibernate.dialect.H2Dialect
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        #liquibase:
+        # Remove 'faker' if you do not want the sample data to be loaded automatically
+        #contexts: dev, faker
+    messages:
+        cache-duration: PT1S # 1 second, see the ISO 8601 standard
+server:
+    port: 8080
