@@ -2,7 +2,7 @@ package mike.wolf.zygl.application.service;
 
 import lombok.RequiredArgsConstructor;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
-import mike.wolf.zygl.application.port.in.GetVehicleStateUseCase;
+import mike.wolf.zygl.application.port.in.VehicleStateQueryUseCase;
 import mike.wolf.zygl.application.port.out.VehicleStateQueryPort;
 import mike.wolf.zygl.common.UseCase;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @UseCase
 @RequiredArgsConstructor
-public class GetVehicleStateService implements GetVehicleStateUseCase {
+public class GetVehicleStateService implements VehicleStateQueryUseCase {
     private final VehicleStateQueryPort vehicleStateQueryPort;
 
     @Override

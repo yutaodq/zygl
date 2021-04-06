@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface GetVehicleStateUseCase {
+public interface VehicleStateQueryUseCase {
     public List<VehicleStateDTO> findAll();
 
     Optional<VehicleStateDTO> findById(String id);

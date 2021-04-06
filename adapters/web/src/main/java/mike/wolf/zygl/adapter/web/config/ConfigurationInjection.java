@@ -15,9 +15,6 @@
  */
 package mike.wolf.zygl.adapter.web.config;
 
-import mike.wolf.zygl.application.port.in.GetVehicleStateUseCase;
-import mike.wolf.zygl.application.service.GetVehicleStateService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
