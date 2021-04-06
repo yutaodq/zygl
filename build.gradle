@@ -7,7 +7,6 @@ buildscript {
         axonVersion='4.4.8'
         springBootManagementVersion = '1.0.11.RELEASE'
         jhipsterDependenciesVersion = '7.0.0'
-        //springCloudVersion = 'Hoxton.SR6'
         REPOSITORY_HOME = "http://maven.aliyun.com"
     }
     repositories {
@@ -22,16 +21,7 @@ buildscript {
     }
 }
 
-
-/**
- * 所有项目公共资源
- */
-//allprojects {
-//    dependencies {
-////        developmentOnly("org.springframework.boot:spring-boot-devtools")
-//    }
-//}
-
+apply plugin: 'io.spring.dependency-management'
 
 /**
  * 子项目通用配置
@@ -83,59 +73,3 @@ subprojects {
         useJUnitPlatform()
     }
 }
-
-//subprojects {
-//
-//    group = 'mike.wolf'
-//    version = '0.0.1-SNAPSHOT'
-//
-//    apply plugin: 'java'
-//    apply plugin: 'idea'
-//    apply plugin: 'org.springframework.boot'
-//    apply plugin: 'io.spring.dependency-management'
-//    apply plugin: 'java-library'
-//
-//    // java编译的时候缺省状态下会因为中文字符而失败
-//    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
-//
-//    //仓库
-//    repositories {
-//        maven { url '${REPOSITORY_HOME}/nexus/content/groups/public/' }
-//        mavenCentral()
-//        maven { url 'https://repo.spring.io/snapshot' }
-//        maven { url 'https://repo.spring.io/milestone' }
-//    }
-//    dependencies {
-//        implementation 'org.springframework.boot:spring-boot-starter'
-////        implementation "org.axonframework:axon-spring-boot-starter:${axonVersion}"
-////        implementation "org.axonframework.extensions.reactor:axon-reactor-spring-boot-starter:4.4.2"
-//
-//        compileOnly 'org.projectlombok:lombok'
-//        developmentOnly 'org.springframework.boot:spring-boot-devtools'
-//
-//        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-//        annotationProcessor 'org.projectlombok:lombok'
-//        testImplementation('org.springframework.boot:spring-boot-starter-test') {
-//            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-//        }
-//    }
-//
-//    dependencyManagement {
-//        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
-//        //imports { mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}" }
-//    }
-//
-//    compileJava {
-//        sourceCompatibility = 1.8
-//        targetCompatibility = 1.8
-//    }
-//
-//
-//    tasks.withType(JavaCompile) {
-//        options.encoding = 'UTF-8'
-//    }
-//
-//    test {
-//        useJUnitPlatform()
-//    }
-//}

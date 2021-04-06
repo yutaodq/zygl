@@ -17,6 +17,7 @@ spring:
     password: yu
     schema: classpath:/db/schema.sql
     data: classpath:/db/data.sql
+    sql-script-encoding: utf-8
     platform: h2
     driverClassName: org.h2.Driver
     hikari:
