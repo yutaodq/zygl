@@ -1,4 +1,5 @@
 package mike.wolf.zygl.application.port.in;
 
-public class VehicleStateCommUseCase {
+public interface VehicleStateCommUseCase {
+    void save();
 }
