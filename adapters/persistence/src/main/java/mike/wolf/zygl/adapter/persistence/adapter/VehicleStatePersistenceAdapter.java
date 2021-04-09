@@ -12,7 +12,12 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommPort {
     private final VehicleStateRepository vehicleStateRepository;
 
     @Override
-    public void create(String vehicleStateId, String name, String description) {
-        VehicleStateJpaEntity entity = new VehicleStateJpaEntity()
+    public void create(
+            String vehicleStateId, String name, String description
+    ) {
+        VehicleStateJpaEntity entity = new VehicleStateJpaEntity(
+                null, vehicleStateId, name, description);
+
+        vehicleStateRepository.save(entity);
     }
 }

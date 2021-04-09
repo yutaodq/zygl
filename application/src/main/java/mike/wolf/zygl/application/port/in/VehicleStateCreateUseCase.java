@@ -26,10 +26,10 @@ public interface VehicleStateCreateUseCase {
         private final String description;
 
         public CreateVehicleStateCommand(
-                VehicleStateId vehicleStateId,
+                String vehicleStateId,
                 String name,
                 String description) {
-            this.vehicleStateId = vehicleStateId;
+            this.vehicleStateId = new VehicleStateId(vehicleStateId);
             this.name = name;
             this.description = description;
         }
