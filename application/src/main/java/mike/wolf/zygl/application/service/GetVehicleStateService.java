@@ -34,5 +34,10 @@ public class GetVehicleStateService implements VehicleStateQueryUseCase {
         return vehicleStateQueryPort.existsByName(name);
     }
 
+    @Override
+    public List<VehicleStateDTO> findByName(String name) {
+        return vehicleStateQueryPort.findByName(name);
+    }
+
 }
 

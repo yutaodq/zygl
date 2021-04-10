@@ -18,9 +18,9 @@ import javax.persistence.*;
 public class VehicleStateJpaEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(columnDefinition = "CHAR(36)", nullable = false)
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "uuid", strategy = "uuid")
+//    @Column(columnDefinition = "CHAR(36)", nullable = false)
     private String id;
 
     @Column(name = "identifier")

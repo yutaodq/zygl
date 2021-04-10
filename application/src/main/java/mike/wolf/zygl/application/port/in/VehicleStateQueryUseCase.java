@@ -12,4 +12,6 @@ public interface VehicleStateQueryUseCase {
     Optional<VehicleStateDTO> findById(String id);
 
     boolean existsByName(String name);
+
+    List<VehicleStateDTO> findByName(String name);
 }

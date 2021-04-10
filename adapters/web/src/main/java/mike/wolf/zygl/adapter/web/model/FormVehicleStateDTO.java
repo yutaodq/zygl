@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class FormVehicleStateDTO {
-    private Long id;
+    private String id;
     private String identifier;
 
     private String name;

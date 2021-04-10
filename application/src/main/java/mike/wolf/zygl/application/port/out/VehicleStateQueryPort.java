@@ -12,4 +12,5 @@ public interface VehicleStateQueryPort {
 
     boolean existsByName(String name);
 
+    List<VehicleStateDTO> findByName(String name);
 }

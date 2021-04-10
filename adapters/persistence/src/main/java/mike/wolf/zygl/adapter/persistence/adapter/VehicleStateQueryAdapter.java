@@ -41,5 +41,13 @@ public class VehicleStateQueryAdapter implements VehicleStateQueryPort {
         return vehicleStateRepository.existsByName(name);
     }
 
+    @Override
+    public List<VehicleStateDTO> findByName(String name) {
+        return vehicleStateRepository.findByName(name).stream()
+                .map(vehicleStateJpaEntity ->
+                        VehicleStateMapper.INSTANCE.toDto(vehicleStateJpaEntity)
+                ).collect(Collectors.toList());
+    }
+
 
 }

@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 public class VehicleStateDTO {
-    private Long id;
+    private String id;
     private String identifier;
 
     private String name;

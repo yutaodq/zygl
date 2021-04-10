@@ -21,6 +21,7 @@ import java.net.URISyntaxException;
 @Slf4j
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin
 public class VehicleStateController {
     private final VehicleStateQueryUseCase getVehicleStateUseCase ;
     private final VehicleStateCreateUseCase createVehicleStateUseCase ;
@@ -60,13 +61,21 @@ public class VehicleStateController {
         return getVehicleStateUseCase.existsByName(name);
     }
 
+    @GetMapping(value = "/vehicleStates/findByName/{name}")
+    public ResponseEntity<?>  findByName(@PathVariable("name") String name) {
+        log.debug("REST request to get VehicleState name : {}", name);
+        return ResponseEntity.ok(getVehicleStateUseCase.findByName(name));
+    }
+
     @PostMapping("/vehicleStates")
     public void createVehicleState(@Valid @RequestBody FormVehicleStateDTO vehicleState) throws URISyntaxException {
+        log.info("REST request to get VehicleState name : {}", vehicleState.getName());
 
         CreateVehicleStateCommand command = new CreateVehicleStateCommand(
+                vehicleState.getId(),
                 vehicleState.getIdentifier(),
                 vehicleState.getName(),
-                vehicleState.getName()
+                vehicleState.getDescription()
         ) ;
         createVehicleStateUseCase.create(command);
     }

@@ -12,6 +12,7 @@ public class VehicleStateService  implements VehicleStateCreateUseCase {
     @Override
     public void create(CreateVehicleStateCommand command) {
         vehicleStateCommPort.create(
+                command.getId(),
                 command.getVehicleStateId().getValue(),
                 command.getName(),
                 command.getDescription()
