@@ -3,6 +3,7 @@ package mike.wolf.zygl.adapter.web.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
+import mike.wolf.zygl.application.model.VehicleStateDTO;
 import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase;
 import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase.CreateVehicleStateCommand;
 import mike.wolf.zygl.application.port.in.VehicleStateQueryUseCase;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @WebAdapter
 
@@ -32,15 +34,9 @@ public class VehicleStateController {
         return "Hello, welcome to COLA world!";
     }
 
-//    @GetMapping(value = "/vehicleState")
-//    public List<VehicleStateDTO>  getAllVehicleStates() {
-//        log.info("REST request to get all VehicleStateDTO");
-//        return getVehicleStateUseCase.findAll();
-//    }
-
     @GetMapping(value = "/vehicleStates")
     public ResponseEntity<?> getAllVehicleStates() {
-        log.info("REST request to get all VehicleStateDTO");
+        log.info("REST getAllVehicleStates VehicleStateDTO");
         return ResponseEntity.ok(getVehicleStateUseCase.findAll());
     }
 
@@ -51,33 +47,45 @@ public class VehicleStateController {
 
     @GetMapping(value = "/vehicleStates/{id}")
     public ResponseEntity<?>  getVehicleState(@PathVariable("id") String id) {
-        log.debug("REST request to get VehicleStateDTO : {}", id);
+        log.debug("REST /vehicleStates/{id} : {}", id);
         return ResponseEntity.ok(getVehicleStateUseCase.findById(id));
     }
 
     @GetMapping(value = "/vehicleStates/existsByName/{name}")
     public boolean  existsByName(@PathVariable("name") String name) {
-        log.debug("REST request to get VehicleState name : {}", name);
+        log.debug("REST /vehicleStates/existsByName/ : {}", name);
         return getVehicleStateUseCase.existsByName(name);
     }
 
-    @GetMapping(value = "/vehicleStates/findByName/{name}")
-    public ResponseEntity<?>  findByName(@PathVariable("name") String name) {
-        log.debug("REST request to get VehicleState name : {}", name);
-        return ResponseEntity.ok(getVehicleStateUseCase.findByName(name));
-    }
+//    @GetMapping(value = "/vehicleStates/findByName/{name}")
+//    public ResponseEntity<?>  findByName(@PathVariable("name") String name) {
+//        log.info("REST /vehicleStates/findByName/ : {}", name);
+//        return ResponseEntity.ok(getVehicleStateUseCase.findByName(name));
+//    }
+@GetMapping(value = "/vehicleStates/findByName/{name}")
+public List<VehicleStateDTO> findByName(@PathVariable("name") String name) {
+    log.info("REST /vehicleStates/findByName/ : {}", name);
+    return getVehicleStateUseCase.findByName(name);
+}
 
-    @PostMapping("/vehicleStates")
-    public void createVehicleState(@Valid @RequestBody FormVehicleStateDTO vehicleState) throws URISyntaxException {
-        log.info("REST request to get VehicleState name : {}", vehicleState.getName());
+//    public List<VehicleStateDTO>  getAllVehicleStates() {
+//        log.info("REST request to get all VehicleStateDTO");
+//        return getVehicleStateUseCase.findAll();
+//    }
 
-        CreateVehicleStateCommand command = new CreateVehicleStateCommand(
-                vehicleState.getId(),
-                vehicleState.getIdentifier(),
-                vehicleState.getName(),
-                vehicleState.getDescription()
-        ) ;
-        createVehicleStateUseCase.create(command);
-    }
+@PostMapping("/vehicleStates")
+public ResponseEntity<?> createVehicleState(@Valid @RequestBody FormVehicleStateDTO vehicleState) throws URISyntaxException {
+    log.info("REST createVehicleState : {}", vehicleState.getName());
+
+    CreateVehicleStateCommand command = new CreateVehicleStateCommand(
+            vehicleState.getId(),
+            vehicleState.getIdentifier(),
+            vehicleState.getName(),
+            vehicleState.getDescription()
+    ) ;
+    createVehicleStateUseCase.create(command);
+
+    return ResponseEntity.ok(vehicleState);
+}
 
 }
