@@ -57,9 +57,9 @@ public class VehicleStateController {
         return getVehicleStateUseCase.existsByName(name);
     }
 
-//    @GetMapping(value = "/vehicleStates/findByName/{name}")
+//    @GetMapping(value = "/vehicleStates/{name}")
 //    public ResponseEntity<?>  findByName(@PathVariable("name") String name) {
-//        log.info("REST /vehicleStates/findByName/ : {}", name);
+//        log.info("REST /vehicleStates-------/findByName/ : {}", name);
 //        return ResponseEntity.ok(getVehicleStateUseCase.findByName(name));
 //    }
 @GetMapping(value = "/vehicleStates/findByName/{name}")
