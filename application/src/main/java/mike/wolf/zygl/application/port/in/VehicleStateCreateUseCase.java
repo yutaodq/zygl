@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 
 public interface VehicleStateCreateUseCase {
     void create(CreateVehicleStateCommand command);
+
     @Value
     @EqualsAndHashCode(callSuper = false)
     class CreateVehicleStateCommand  {
