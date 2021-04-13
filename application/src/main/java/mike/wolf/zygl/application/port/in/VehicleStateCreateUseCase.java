@@ -26,7 +26,6 @@ public interface VehicleStateCreateUseCase {
         @NotNull
         private final String name;
 
-        @NotNull
         private final String description;
 
         public CreateVehicleStateCommand(

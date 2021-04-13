@@ -11,5 +11,9 @@ public interface VehicleStateCommandPort {
     void delete(
             String id
     );
+    void update(
+            String id,
+            String description
+    );
 
 }

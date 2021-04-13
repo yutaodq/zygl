@@ -9,6 +9,9 @@ import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase.CreateVehicl
 import mike.wolf.zygl.application.port.in.VehicleStateDeleteUseCase;
 import mike.wolf.zygl.application.port.in.VehicleStateDeleteUseCase.DeleteVehicleStateCommand;
 import mike.wolf.zygl.application.port.in.VehicleStateQueryUseCase;
+import mike.wolf.zygl.application.port.in.VehicleStateUpdateUseCase;
+import mike.wolf.zygl.application.port.in.VehicleStateUpdateUseCase.UpdateVehicleStateCommand;
+
 import mike.wolf.zygl.common.WebAdapter;
 import mike.wolf.zygl.domain.VehicleState;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +34,7 @@ public class VehicleStateController {
     private final VehicleStateQueryUseCase getVehicleStateUseCase;
     private final VehicleStateCreateUseCase createVehicleStateUseCase;
     private final VehicleStateDeleteUseCase vehicleStateDeleteUseCase;
+    private final VehicleStateUpdateUseCase vehicleStateUpdateUseCase;
 
     @GetMapping(value = "/helloworld")
     public String helloWorld() {
@@ -78,7 +82,10 @@ public class VehicleStateController {
 //    }
 
     @PostMapping("/vehicleStates")
-    public ResponseEntity<?> createVehicleState(@Valid @RequestBody FormVehicleStateDTO vehicleState) throws URISyntaxException {
+    public ResponseEntity<?> createVehicleState(
+            @Valid @RequestBody FormVehicleStateDTO vehicleState)
+            throws URISyntaxException {
+
         log.info("REST createVehicleState : {}", vehicleState.getName());
 
         CreateVehicleStateCommand command = new CreateVehicleStateCommand(
@@ -91,6 +98,28 @@ public class VehicleStateController {
 
         return ResponseEntity.ok(vehicleState);
     }
+
+    @PutMapping("/vehicleStates")
+    public ResponseEntity<FormVehicleStateDTO> updateLabel(@Valid @RequestBody FormVehicleStateDTO vehicleState) throws URISyntaxException {
+        log.info("REST request to update vehicleStates : {}", vehicleState);
+//        if (vehicleState.getId() == null) {
+////            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+//        }
+//        UpdateVehicleStateCommand command = new UpdateVehicleStateCommand(
+//                vehicleState.getId(),
+//                vehicleState.getIdentifier(),
+//                vehicleState.getName(),
+//                vehicleState.getDescription()
+//        );
+//
+//        vehicleStateUpdateUseCase.update();
+//        Label result = labelRepository.save(label);
+        return ResponseEntity
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert("zygl", true, "vehicleStates", vehicleState.getId().toString()))
+                .body(vehicleState);
+    }
+
     @DeleteMapping("/vehicleStates/{id}")
     public ResponseEntity<Void> deleteVehicleState(@PathVariable String id) {
         log.info("REST request to delete vehicleStates : {}", id);

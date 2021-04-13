@@ -25,4 +25,11 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
     public void delete(String id) {
         vehicleStateRepository.deleteById(id);
     }
+
+    @Override
+    public void update(String id, String description) {
+//        VehicleStateJpaEntity entity = new VehicleStateJpaEntity(
+//                id, description);
+//        vehicleStateRepository.
+    }
 }
