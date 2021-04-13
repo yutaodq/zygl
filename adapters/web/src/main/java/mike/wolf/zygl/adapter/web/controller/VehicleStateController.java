@@ -30,6 +30,7 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin
+//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class VehicleStateController {
     private final VehicleStateQueryUseCase getVehicleStateUseCase;
     private final VehicleStateCreateUseCase createVehicleStateUseCase;
@@ -99,21 +100,21 @@ public class VehicleStateController {
         return ResponseEntity.ok(vehicleState);
     }
 
-    @PutMapping("/vehicleStates")
-    public ResponseEntity<FormVehicleStateDTO> updateLabel(@Valid @RequestBody FormVehicleStateDTO vehicleState) throws URISyntaxException {
+    @PutMapping("/vehicleStates/{id}")
+    public ResponseEntity<FormVehicleStateDTO> updateLabel(
+            @PathVariable String id,
+            @Valid @RequestBody FormVehicleStateDTO vehicleState)
+            throws URISyntaxException {
         log.info("REST request to update vehicleStates : {}", vehicleState);
 //        if (vehicleState.getId() == null) {
 ////            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
 //        }
-//        UpdateVehicleStateCommand command = new UpdateVehicleStateCommand(
-//                vehicleState.getId(),
-//                vehicleState.getIdentifier(),
-//                vehicleState.getName(),
-//                vehicleState.getDescription()
-//        );
+        UpdateVehicleStateCommand command = new UpdateVehicleStateCommand(
+                vehicleState.getId(),
+                vehicleState.getDescription()
+        );
 //
-//        vehicleStateUpdateUseCase.update();
-//        Label result = labelRepository.save(label);
+        vehicleStateUpdateUseCase.update(command);
         return ResponseEntity
                 .ok()
                 .headers(HeaderUtil.createEntityUpdateAlert("zygl", true, "vehicleStates", vehicleState.getId().toString()))
