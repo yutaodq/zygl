@@ -6,6 +6,8 @@ import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
 import mike.wolf.zygl.application.port.out.VehicleStateCommandPort;
 import mike.wolf.zygl.common.PersistenceAdapter;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @PersistenceAdapter
 public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
@@ -28,8 +30,10 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
 
     @Override
     public void update(String id, String description) {
+                Optional<VehicleStateJpaEntity> entity = vehicleStateRepository.findById(id);
+
 //        VehicleStateJpaEntity entity = new VehicleStateJpaEntity(
 //                id, description);
-//        vehicleStateRepository.
+        vehicleStateRepository.save(entity.);
     }
 }
