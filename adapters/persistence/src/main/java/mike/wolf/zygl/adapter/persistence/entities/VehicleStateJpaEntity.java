@@ -1,6 +1,7 @@
 package mike.wolf.zygl.adapter.persistence.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder(toBuilder = true)
 
 @Slf4j
 public class VehicleStateJpaEntity {
@@ -32,7 +34,14 @@ public class VehicleStateJpaEntity {
     @Column(name = "description")
     private String description; // 备注
 
-//    public VehicleStateJpaEntity() {
+//    https://github.com/wfercosta/camunda-spring-boot-js-react-microservices-aws-example
+//    @CreatedDate
+//    @EqualsAndHashCode.Exclude
+//    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+//    @JsonSerialize(using = LocalDateTimeSerializer.class)
+//    private LocalDateTime createdAt;
+
+    //    public VehicleStateJpaEntity() {
 //        log.info("新建：VehicleStateJpaEntity");
 //    }
 

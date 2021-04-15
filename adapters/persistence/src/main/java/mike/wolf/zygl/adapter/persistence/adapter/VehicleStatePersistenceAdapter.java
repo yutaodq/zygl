@@ -16,10 +16,14 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
 
     @Override
     public void create(
-           String id, String identifier, String name, String description
+            String id, String identifier, String name, String description
     ) {
-        VehicleStateJpaEntity entity = new VehicleStateJpaEntity(
-                id, identifier, name, description);
+        VehicleStateJpaEntity entity = VehicleStateJpaEntity.builder()
+                .id(id)
+                .identifier(identifier)
+                .name(name)
+                .description(description)
+                .build();
         try {
             vehicleStateRepository.save(entity);
         } catch (DataIntegrityViolationException e) {
@@ -32,32 +36,34 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
 
     @Override
     public void delete(String id) {
-        findById(id);
-        vehicleStateRepository.deleteById(id);
+        if (!findById(id).getId().isEmpty()) {
+            vehicleStateRepository.deleteById(id);
+        }
     }
 
-private VehicleStateJpaEntity findById(String id) {
+    private VehicleStateJpaEntity findById(String id) {
         return vehicleStateRepository.findById(id)
-                .orElseThrow(() -> NotFoundException.from("车辆状态为："+ id));
+                .orElseThrow(() -> NotFoundException.from("车辆状态为：" + id));
+    }
 
-}
     @Override
     public void update(String id, String description) {
-//        vehicleStateRepository.findByUsername(username).ifPresent(user -> {
-//            throw new IllegalArgumentException("User with that name already exists!");
-//        });
-//        final Order order = useCase.execute(id)
-//                .orElseThrow(() -> OrderNotFoundException.from(id));
+
+         VehicleStateJpaEntity entity = findById(id);
+        entity = entity.toBuilder().description(description).build();
+        vehicleStateRepository.save(entity);
+    }
+
+    public void updateName(String id, String name) {
 
         VehicleStateJpaEntity entity = findById(id);
-
-//        vehicleStateRepository.findById(id).ifPresent(vehicleState -> {
-//            entity = vehicleState;
-//        }).orElseThrow(() -> NotFoundException.from(id));;
-
-        entity.setDescription(description);
-//        VehicleStateJpaEntity entity = new VehicleStateJpaEntity(
-//                id, description);
-        vehicleStateRepository.save(entity);
+        entity = entity.toBuilder().description(name).build();
+        
+        try {
+            vehicleStateRepository.save(entity);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            throw new DuplicatedNameException(entity.getName());
+        }
     }
 }
