@@ -43,7 +43,7 @@ public class VehicleStateController {
         return "Hello, welcome to COLA world!";
     }
 
-    @GetMapping(value = "/vehicleStates")
+    @GetMapping(value = "/vehicleUseStates")
     public ResponseEntity<?> getAllVehicleStates() {
         log.info("REST getAllVehicleStates VehicleStateDTO");
         return ResponseEntity.ok(getVehicleStateUseCase.findAll());
@@ -54,13 +54,13 @@ public class VehicleStateController {
 //        return getVehicleStateUseCase.findAll();
 //    }
 
-    @GetMapping(value = "/vehicleStates/{id}")
+    @GetMapping(value = "/vehicleUseStates/{id}")
     public ResponseEntity<?> getVehicleState(@PathVariable("id") String id) {
         log.debug("REST /vehicleStates/{id} : {}", id);
         return ResponseEntity.ok(getVehicleStateUseCase.findById(id));
     }
 
-    @GetMapping(value = "/vehicleStates/existsByName/{name}")
+    @GetMapping(value = "/vehicleUseStates/existsByName/{name}")
     public boolean existsByName(@PathVariable("name") String name) {
         log.info("REST /vehicleStates/existsByName/ : {}", name);
         return getVehicleStateUseCase.existsByName(name);
@@ -71,7 +71,7 @@ public class VehicleStateController {
 //        log.info("REST /vehicleStates-------/findByName/ : {}", name);
 //        return ResponseEntity.ok(getVehicleStateUseCase.findByName(name));
 //    }
-    @GetMapping(value = "/vehicleStates/findByName/{name}")
+    @GetMapping(value = "/vehicleUseStates/findByName/{name}")
     public List<VehicleStateDTO> findByName(@PathVariable("name") String name) {
         log.info("REST /vehicleStates/findByName/ : {}", name);
         return getVehicleStateUseCase.findByName(name);
@@ -82,25 +82,26 @@ public class VehicleStateController {
 //        return getVehicleStateUseCase.findAll();
 //    }
 
-    @PostMapping("/vehicleStates")
+    @PostMapping("/vehicleUseStates")
     public ResponseEntity<?> createVehicleState(
             @Valid @RequestBody FormVehicleStateDTO vehicleState)
             throws URISyntaxException {
 
         log.info("REST createVehicleState : {}", vehicleState.getName());
+        String identifier = vehicleState.getIdentifier();
 
         CreateVehicleStateCommand command = new CreateVehicleStateCommand(
-                vehicleState.getId(),
-                vehicleState.getIdentifier(),
+                identifier,
                 vehicleState.getName(),
                 vehicleState.getDescription()
         );
+
         createVehicleStateUseCase.create(command);
 
         return ResponseEntity.ok(vehicleState);
     }
 
-    @PutMapping("/vehicleStates/{id}")
+    @PutMapping("/vehicleUseStates/{id}")
     public ResponseEntity<FormVehicleStateDTO> updateLabel(
             @PathVariable String id,
             @Valid @RequestBody FormVehicleStateDTO vehicleState)
@@ -121,7 +122,7 @@ public class VehicleStateController {
                 .body(vehicleState);
     }
 
-    @DeleteMapping("/vehicleStates/{id}")
+    @DeleteMapping("/vehicleUseStates/{id}")
     public ResponseEntity<Void> deleteVehicleState(@PathVariable String id) {
         log.info("REST request to delete vehicleStates : {}", id);
         DeleteVehicleStateCommand command = new DeleteVehicleStateCommand(id);

@@ -18,9 +18,6 @@ public interface VehicleStateCreateUseCase {
     class CreateVehicleStateCommand  {
 
         @NotNull
-        private final String id;
-
-        @NotNull
         private final VehicleStateId vehicleStateId;
 
         @NotNull
@@ -29,11 +26,9 @@ public interface VehicleStateCreateUseCase {
         private final String description;
 
         public CreateVehicleStateCommand(
-                String id,
                 String vehicleStateId,
                 String name,
                 String description) {
-            this.id = id;
             this.vehicleStateId = new VehicleStateId(vehicleStateId);
             this.name = name;
             this.description = description;

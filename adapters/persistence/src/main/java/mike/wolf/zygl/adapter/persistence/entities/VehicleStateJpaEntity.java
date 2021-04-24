@@ -18,11 +18,10 @@ import javax.persistence.*;
 
 @Slf4j
 public class VehicleStateJpaEntity {
-
     @Id
-//    @GeneratedValue(generator = "uuid")
-//    @GenericGenerator(name = "uuid", strategy = "uuid")
-//    @Column(columnDefinition = "CHAR(36)", nullable = false)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(columnDefinition = "CHAR(36)", nullable = false)
     private String id;
 
     @Column(name = "identifier")

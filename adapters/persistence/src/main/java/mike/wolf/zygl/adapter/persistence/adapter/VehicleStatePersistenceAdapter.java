@@ -16,16 +16,16 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
 
     @Override
     public void create(
-            String id, String identifier, String name, String description
+            String identifier, String name, String description
     ) {
         VehicleStateJpaEntity entity = VehicleStateJpaEntity.builder()
-                .id(id)
                 .identifier(identifier)
                 .name(name)
                 .description(description)
                 .build();
         try {
-            vehicleStateRepository.save(entity);
+            vehicleStateRepository.save(entity).getId();
+
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             throw new DuplicatedNameException(entity.getName());
