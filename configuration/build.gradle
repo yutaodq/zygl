@@ -6,7 +6,7 @@ dependencies {
     implementation project(':adapters:persistence')
     implementation project(':adapters:web')
 
-        implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.axonframework:axon-spring-boot-starter:" + "${axonVersion}"
 
