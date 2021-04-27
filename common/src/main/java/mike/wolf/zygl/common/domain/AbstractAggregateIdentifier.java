@@ -8,12 +8,10 @@ import java.io.Serializable;
 
 @EqualsAndHashCode
 public abstract class AbstractAggregateIdentifier implements AggregateIdentifier, Serializable {
-  private String identifier;
+  private final String identifier;
 
   public AbstractAggregateIdentifier() {
-    super("fdsfdsad");
-
-    String id = IdentifierFactory.getInstance().generateIdentifier();
+    this(IdentifierFactory.getInstance().generateIdentifier());
   }
 
   public AbstractAggregateIdentifier(String identifier) {
