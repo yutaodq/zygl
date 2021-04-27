@@ -11,6 +11,7 @@ public abstract class AbstractAggregateIdentifier implements AggregateIdentifier
   private final String identifier;
 
   public AbstractAggregateIdentifier() {
+
     this(IdentifierFactory.getInstance().generateIdentifier());
   }
 
