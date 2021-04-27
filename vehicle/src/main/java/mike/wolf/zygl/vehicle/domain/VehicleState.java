@@ -28,7 +28,7 @@ public class VehicleState {
     @CommandHandler
     public VehicleState(CreateVehicleStateCommand cmd) {
         log.debug("handling {}", cmd);
-         apply(new VehicleStateCreateEvent(cmd.getId(), cmd.getAmount()));
+         apply(VehicleStateCreateEvent.create(cmd.getVehicleStateId(), cmd.getStateName(), cmd.getDescription()));
     }
 
 
