@@ -2,9 +2,7 @@ package mike.wolf.zygl.application.port.in;
 
 import lombok.EqualsAndHashCode;
 import lombok.Value;
-import mike.wolf.zygl.common.SelfValidating;
-import mike.wolf.zygl.domain.Account;
-import mike.wolf.zygl.domain.Money;
+
 import mike.wolf.zygl.domain.VehicleState;
 import mike.wolf.zygl.domain.VehicleState.VehicleStateId;
 
@@ -18,6 +16,7 @@ public interface VehicleStateCreateUseCase {
     class CreateVehicleStateCommand  {
 
         @NotNull
+        @TargetAggregateIdentifier
         private final VehicleStateId vehicleStateId;
 
         @NotNull

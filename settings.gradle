@@ -1,8 +1,10 @@
 rootProject.name = 'zygl'
 include 'common'
 include 'configuration'
+include 'core-api'
 
 include 'adapters:persistence'
 include 'adapters:web'
 
 include 'application'
+
