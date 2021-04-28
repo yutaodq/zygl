@@ -19,7 +19,7 @@ public class VehicleStateService  implements
     @Override
     public void create(CreateVehicleStateCommand command) {
         vehicleStateCommandPort.create(
-                command.getVehicleStateId().getValue(),
+                command.getVehicleStateId().getIdentifier(),
                 command.getName(),
                 command.getDescription()
         );

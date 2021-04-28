@@ -3,6 +3,8 @@ package mike.wolf.zygl.api.vehicle.state;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.common.domain.AbstractAggregateIdentifier;
 
+import java.util.Objects;
+
 @Slf4j
 public final class VehicleStateId extends AbstractAggregateIdentifier {
 
@@ -28,4 +30,17 @@ public final class VehicleStateId extends AbstractAggregateIdentifier {
     public String toString() {
         return "ProductId{" + "identifier='" + getIdentifier() + '\'' + '}';
     }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null || getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final VehicleStateId other = (VehicleStateId) obj;
+//        return Objects.equals(this.getIdentifier(), other.getIdentifier());
+//    }
+
 }

@@ -3,6 +3,7 @@ package mike.wolf.zygl.adapter.web.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
+import mike.wolf.zygl.adapter.web.service.VehicleStateFacade;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
 import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase;
 import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase.CreateVehicleStateCommand;
@@ -13,15 +14,14 @@ import mike.wolf.zygl.application.port.in.VehicleStateUpdateUseCase;
 import mike.wolf.zygl.application.port.in.VehicleStateUpdateUseCase.UpdateVehicleStateCommand;
 
 import mike.wolf.zygl.common.WebAdapter;
-import mike.wolf.zygl.domain.VehicleState;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @WebAdapter
 
@@ -30,12 +30,12 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin
-//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class VehicleStateController {
     private final VehicleStateQueryUseCase getVehicleStateUseCase;
     private final VehicleStateCreateUseCase createVehicleStateUseCase;
     private final VehicleStateDeleteUseCase vehicleStateDeleteUseCase;
     private final VehicleStateUpdateUseCase vehicleStateUpdateUseCase;
+    private final VehicleStateFacade vehicleStateFacade;
 
     @GetMapping(value = "/helloworld")
     public String helloWorld() {
@@ -43,10 +43,15 @@ public class VehicleStateController {
         return "Hello, welcome to COLA world!";
     }
 
+    //    @GetMapping(value = "/vehicleUseStates")
+//    public ResponseEntity<?> getAllVehicleStates() {
+//        log.info("REST getAllVehicleStates VehicleStateDTO");
+//        return ResponseEntity.ok(getVehicleStateUseCase.findAll());
+//    }
     @GetMapping(value = "/vehicleUseStates")
-    public ResponseEntity<?> getAllVehicleStates() {
+    public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> getAllVehicleStates() {
         log.info("REST getAllVehicleStates VehicleStateDTO");
-        return ResponseEntity.ok(getVehicleStateUseCase.findAll());
+        return vehicleStateFacade.findAllVehicleStates();
     }
 
 //    public List<VehicleStateDTO>  getAllVehicleStates() {

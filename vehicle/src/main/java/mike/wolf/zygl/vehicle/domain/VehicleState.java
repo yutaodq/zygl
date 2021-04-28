@@ -39,7 +39,7 @@ public class VehicleState {
                 .build()
         );
     }
-    
+
     @EventSourcingHandler
     public void on(VehicleStateCreateEvent evt) {
         log.debug("applying {}", evt);

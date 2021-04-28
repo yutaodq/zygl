@@ -7,7 +7,7 @@ import lombok.Value;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import javax.validation.constraints.NotNull;
 
-@Builder(toBuilder = true)
+@Builder()
 @Value
 public class CreateVehicleStateCommand {
 

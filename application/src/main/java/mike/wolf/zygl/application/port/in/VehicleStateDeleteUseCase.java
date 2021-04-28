@@ -2,7 +2,6 @@ package mike.wolf.zygl.application.port.in;
 
 import lombok.EqualsAndHashCode;
 import lombok.Value;
-import mike.wolf.zygl.domain.VehicleState;
 
 import javax.validation.constraints.NotNull;
 

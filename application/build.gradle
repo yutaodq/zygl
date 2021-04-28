@@ -1,7 +1,9 @@
 dependencies {
     implementation project(':common')
+    implementation project(':core-api')
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'javax.transaction:javax.transaction-api'
-    implementation "org.axonframework:axon-core:" + "${axonVersion}"
+    implementation "org.axonframework:axon-spring:" + "${axonVersion}"
+
 }

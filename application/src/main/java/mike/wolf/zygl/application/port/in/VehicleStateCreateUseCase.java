@@ -2,9 +2,8 @@ package mike.wolf.zygl.application.port.in;
 
 import lombok.EqualsAndHashCode;
 import lombok.Value;
-
-import mike.wolf.zygl.domain.VehicleState;
-import mike.wolf.zygl.domain.VehicleState.VehicleStateId;
+import mike.wolf.zygl.api.vehicle.state.VehicleStateId;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +27,7 @@ public interface VehicleStateCreateUseCase {
                 String vehicleStateId,
                 String name,
                 String description) {
-            this.vehicleStateId = new VehicleStateId(vehicleStateId);
+            this.vehicleStateId = VehicleStateId.create(vehicleStateId);
             this.name = name;
             this.description = description;
         }

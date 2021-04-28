@@ -5,8 +5,9 @@ import org.axonframework.common.IdentifierFactory;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-@EqualsAndHashCode
+//@EqualsAndHashCode
 public abstract class AbstractAggregateIdentifier implements AggregateIdentifier, Serializable {
   private final String identifier;
 
@@ -16,11 +17,11 @@ public abstract class AbstractAggregateIdentifier implements AggregateIdentifier
   }
 
   public AbstractAggregateIdentifier(String identifier) {
+    this.checkIdentifier(identifier);
     this.identifier = identifier;
-    this.checkIdentifier();
   }
 
-  private void checkIdentifier() {
+  private void checkIdentifier(String identifier) {
     Assert.hasLength(identifier, "标识不能为空或null");
   }
 
@@ -32,6 +33,11 @@ public abstract class AbstractAggregateIdentifier implements AggregateIdentifier
   @Override
   public String toString() {
     return "identifier=" + getIdentifier();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(identifier);
   }
 
 }

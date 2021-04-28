@@ -2,7 +2,10 @@ dependencies {
     implementation project(':common')
     implementation project(':application')
     implementation project(':adapters:persistence')
+    implementation project(':core-api')
 
     implementation "tech.jhipster:jhipster-framework:${jhipsterDependenciesVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation "org.axonframework:axon-spring:" + "${axonVersion}"
+
 }

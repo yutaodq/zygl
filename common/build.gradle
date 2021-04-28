@@ -1,7 +1,6 @@
 dependencies {
     implementation 'org.springframework:spring-context'
     implementation 'javax.validation:validation-api'
-    implementation "org.axonframework:axon-core:4.5"
     implementation "org.axonframework:axon-spring:" + "${axonVersion}"
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
