@@ -59,11 +59,17 @@ public class VehicleStateController {
 //        return getVehicleStateUseCase.findAll();
 //    }
 
+
     @GetMapping(value = "/vehicleUseStates/{id}")
-    public ResponseEntity<?> getVehicleState(@PathVariable("id") String id) {
+    public ResponseEntity<?> findById(@PathVariable("id") String id) {
         log.debug("REST /vehicleStates/{id} : {}", id);
-        return ResponseEntity.ok(getVehicleStateUseCase.findById(id));
+        return vehicleStateFacade.findById(id));
     }
+
+//    public ResponseEntity<?> getVehicleState(@PathVariable("id") String id) {
+//        log.debug("REST /vehicleStates/{id} : {}", id);
+//        return ResponseEntity.ok(getVehicleStateUseCase.findById(id));
+//    }
 
     @GetMapping(value = "/vehicleUseStates/existsByName/{name}")
     public boolean existsByName(@PathVariable("name") String name) {

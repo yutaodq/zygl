@@ -1,9 +1,11 @@
 package mike.wolf.zygl.adapter.persistence.adapter;
 
 import lombok.extern.slf4j.Slf4j;
+import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleStateMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
 import mike.wolf.zygl.api.vehicle.state.FindAllVehicleStateQuery;
+import mike.wolf.zygl.api.vehicle.state.VehicleStateByIdQuery;
 import mike.wolf.zygl.api.vehicle.state.VehicleStateCreateEvent;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
 import org.axonframework.eventhandling.EventHandler;
@@ -11,6 +13,7 @@ import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -25,10 +28,15 @@ public class VehicleStateEventHandler {
     @QueryHandler
     public List<VehicleStateDTO> find(FindAllVehicleStateQuery query) {
         return vehicleStateRepository.findAll().stream()
-                .map(vehicleStateJpaEntity ->
-                        VehicleStateMapper.INSTANCE.toDto(vehicleStateJpaEntity)
-                ).collect(Collectors.toList());
+                .map(VehicleStateMapper.INSTANCE::toDto)
+                .collect(Collectors.toList());
      }
+
+    @QueryHandler
+    public Optional<VehicleStateDTO> findById(VehicleStateByIdQuery query) {
+        Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());
+        return vehicleState.map(VehicleStateMapper.INSTANCE::toDto);
+    }
 
     @EventHandler
     public void on(VehicleStateCreateEvent event) {
