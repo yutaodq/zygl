@@ -1,15 +1,13 @@
 package mike.wolf.zygl.adapter.web.service;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mike.wolf.zygl.api.vehicle.state.*;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -18,12 +16,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
 import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
-import mike.wolf.zygl.api.vehicle.state.FindAllVehicleStateQuery;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateByIdQuery;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateId;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
-import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase;
-import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase.CreateVehicleStateCommand;
 
 @Slf4j
 //@RequiredArgsConstructor
@@ -31,7 +24,6 @@ import mike.wolf.zygl.application.port.in.VehicleStateCreateUseCase.CreateVehicl
 
 @Service
 public class VehicleStateFacade {
-    private final VehicleStateCreateUseCase createVehicleStateUseCase;
     private final QueryGateway queryGateway;
 
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAllVehicleStates() {
@@ -41,10 +33,6 @@ public class VehicleStateFacade {
     }
 
     public CompletableFuture<ResponseEntity<VehicleStateDTO>> findById(String id) {
-//        VehicleStateByIdQuery a = new VehicleStateByIdQuery(VehicleStateId.create(id));
-//        VehicleStateByIdQuery a = VehicleStateByIdQuery.builder().vehicleStateId(VehicleStateId.create(id)).build();
-//        new VehicleStateByIdQuery(VehicleStateId.create(id)),
-
         return queryGateway.query(
                 VehicleStateByIdQuery
                         .builder()
@@ -54,23 +42,37 @@ public class VehicleStateFacade {
                 .thenApply(this::wrapResult);
     }
 
-    public ResponseEntity<?> createVehicleState( FormVehicleStateDTO vehicleState)
+    public CompletableFuture<Boolean> existsByName(String name) {
+        return queryGateway.query(
+                VehicleStataeExistesByNameQuery
+                        .builder()
+                        .stateName(StateName.create(name))
+                        .build(),
+                ResponseTypes.instanceOf(Boolean.class))
+                ;
+    }
+
+
+    public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
             throws URISyntaxException {
 
         log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getName());
         String identifier = vehicleState.getIdentifier();
 
-        CreateVehicleStateCommand command = new CreateVehicleStateCommand(
-                identifier,
-                vehicleState.getName(),
-                vehicleState.getDescription()
-        );
+        CreateVehicleStateCommand command = CreateVehicleStateCommand
+                .builder()
+                .vehicleStateId(VehicleStateId.create(vehicleState.getIdentifier()))
+                .stateName(StateName.create(vehicleState.getName()))
+                .description(vehicleState.getDescription())
+                .build();
 
-        createVehicleStateUseCase.create(command);
 
         return ResponseEntity.ok(vehicleState);
     }
 
+    /*
+
+     */
     @NotNull
     private <T> ResponseEntity<T> wrapResult(T result) {
         return wrapResult(Objects::isNull, result);
@@ -86,5 +88,4 @@ public class VehicleStateFacade {
     private <T> ResponseEntity<T> wrapResult(Predicate<T> assertResult, T result) {
         return assertResult.test(result) ? ResponseEntity.notFound().build() : ResponseEntity.ok(result);
     }
-
 }

@@ -5,6 +5,7 @@ import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleStateMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
 import mike.wolf.zygl.api.vehicle.state.FindAllVehicleStateQuery;
+import mike.wolf.zygl.api.vehicle.state.VehicleStataeExistesByNameQuery;
 import mike.wolf.zygl.api.vehicle.state.VehicleStateByIdQuery;
 import mike.wolf.zygl.api.vehicle.state.VehicleStateCreateEvent;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
@@ -37,6 +38,23 @@ public class VehicleStateEventHandler {
         Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());
         return vehicleState.map(VehicleStateMapper.INSTANCE::toDto);
     }
+    @QueryHandler
+    public Optional<Boolean> existsByName(VehicleStataeExistesByNameQuery query) {
+        return vehicleStateRepository.existsByName(query.getStateName().getName());
+//        vehicleStateRepository.existsByName(query.getStateName().getName())
+//                .flatMap(Mono.just(false) )
+//        return vehicleStateRepository.existsByName(query.getStateName().getName())
+//                .flatMap { Mono.just(false) }
+//                .switchIfEmpty(Mono.just(true))
+//                .toFuture()
+
+    }
+//    @QueryHandler
+//    fun handleIsEmailUniqueQuery(query: IsEmailUniqueQuery): CompletableFuture<Boolean> =
+//            accountRepository.findAccountByEmail(query.email)
+//            .flatMap { Mono.just(false) }
+//                .switchIfEmpty(Mono.just(true))
+//            .toFuture()
 
     @EventHandler
     public void on(VehicleStateCreateEvent event) {
