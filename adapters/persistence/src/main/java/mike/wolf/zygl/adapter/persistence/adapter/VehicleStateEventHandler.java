@@ -2,6 +2,7 @@ package mike.wolf.zygl.adapter.persistence.adapter;
 
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
+import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleStateMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
 import mike.wolf.zygl.api.vehicle.state.FindAllVehicleStateQuery;
@@ -11,6 +12,7 @@ import mike.wolf.zygl.api.vehicle.state.VehicleStateCreateEvent;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +41,7 @@ public class VehicleStateEventHandler {
         return vehicleState.map(VehicleStateMapper.INSTANCE::toDto);
     }
     @QueryHandler
-    public Optional<Boolean> existsByName(VehicleStataeExistesByNameQuery query) {
+    public boolean existsByName(VehicleStataeExistesByNameQuery query) {
         return vehicleStateRepository.existsByName(query.getStateName().getName());
 //        vehicleStateRepository.existsByName(query.getStateName().getName())
 //                .flatMap(Mono.just(false) )
@@ -58,6 +60,18 @@ public class VehicleStateEventHandler {
 
     @EventHandler
     public void on(VehicleStateCreateEvent event) {
+        VehicleStateJpaEntity entity = VehicleStateJpaEntity.builder()
+                .id(event.getVehicleStateId().getIdentifier())
+                .name(event.getStateName().getName())
+                .description(event.getDescription())
+                .build();
+        try {
+            vehicleStateRepository.save(entity).getId();
+
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            throw new DuplicatedNameException(entity.getName());
+        }
 //        CompanyView companyView = new CompanyView();
 //
 //        companyView.setIdentifier(event.getCompanyId().getIdentifier());

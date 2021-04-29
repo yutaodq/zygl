@@ -1,8 +1,10 @@
 package mike.wolf.zygl.adapter.web.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.api.vehicle.state.*;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,13 @@ import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
 
 @Slf4j
-//@RequiredArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
+//@AllArgsConstructor
 
 @Service
 public class VehicleStateFacade {
     private final QueryGateway queryGateway;
+//    private final CommandGateway commandGateway;
 
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAllVehicleStates() {
         return queryGateway.query(new FindAllVehicleStateQuery(),
@@ -56,17 +59,17 @@ public class VehicleStateFacade {
     public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
             throws URISyntaxException {
 
-        log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getName());
-        String identifier = vehicleState.getIdentifier();
-
-        CreateVehicleStateCommand command = CreateVehicleStateCommand
-                .builder()
-                .vehicleStateId(VehicleStateId.create(vehicleState.getIdentifier()))
-                .stateName(StateName.create(vehicleState.getName()))
-                .description(vehicleState.getDescription())
-                .build();
-
-
+//        log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getName());
+//        String identifier = vehicleState.getIdentifier();
+//
+//        CreateVehicleStateCommand command = CreateVehicleStateCommand
+//                .builder()
+//                .vehicleStateId(VehicleStateId.create(vehicleState.getIdentifier()))
+//                .stateName(StateName.create(vehicleState.getName()))
+//                .description(vehicleState.getDescription())
+//                .build();
+//
+//        commandGateway.send(command);
         return ResponseEntity.ok(vehicleState);
     }
 

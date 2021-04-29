@@ -9,7 +9,6 @@ import lombok.*;
 @EqualsAndHashCode(of = {"id"})
 public class VehicleStateDTO {
     private String id;
-    private String identifier;
 
     private String name;
 

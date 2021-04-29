@@ -19,7 +19,7 @@ public class VehicleStatePersistenceAdapter implements VehicleStateCommandPort {
             String identifier, String name, String description
     ) {
         VehicleStateJpaEntity entity = VehicleStateJpaEntity.builder()
-                .identifier(identifier)
+                .id(identifier)
                 .name(name)
                 .description(description)
                 .build();
