@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 
 @RestController
 @Slf4j
-@RequestMapping("/api/vehicleUseStates")
+@RequestMapping("/vehicleUseStates")
 @RequiredArgsConstructor
 @CrossOrigin
 public class VehicleStateCommandController {

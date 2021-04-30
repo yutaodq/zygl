@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/hello")
 @RequiredArgsConstructor
 @CrossOrigin
 public class testController {
-    @GetMapping(value = "/helloworld")
+    @GetMapping()
     public String helloWorld() {
         log.info("REST request to get all VehicleStateDTO");
         return "Hello, welcome to COLA world!";

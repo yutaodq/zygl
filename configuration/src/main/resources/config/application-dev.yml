@@ -45,5 +45,5 @@ spring:
     #contexts: dev, faker
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
-server:
-  port: 8088
+#server:
+#  port: 8080

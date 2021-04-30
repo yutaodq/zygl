@@ -56,7 +56,7 @@ spring:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
     # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
-    active: prod  #spring.profiles.active= dev prod #
+    active: dev  #spring.profiles.active= dev prod #
     group:
       dev:
         - dev
@@ -111,9 +111,10 @@ spring:
       console-available: true
 
 server:
+  port: 9088
   servlet:
-#指定下项目名
-#    context-path: /api
+    #指定下项目名
+    context-path: /ivms
     session:
       cookie:
         http-only: true

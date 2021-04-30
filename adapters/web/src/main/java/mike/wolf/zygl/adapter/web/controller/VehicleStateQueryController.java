@@ -27,7 +27,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/vehicleUseStates")
 @RequiredArgsConstructor
 @CrossOrigin
 public class VehicleStateQueryController {
@@ -43,19 +43,19 @@ public class VehicleStateQueryController {
 //        log.info("REST getAllVehicleStates VehicleStateDTO");
 //        return ResponseEntity.ok(getVehicleStateUseCase.findAll());
 //    }
-    @GetMapping(value = "/vehicleUseStates")
+    @GetMapping()
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> getAllVehicleStates() {
         log.info("REST getAllVehicleStates VehicleStateDTO");
         return vehicleStateFacade.findAllVehicleStates();
     }
 
-    @GetMapping(value = "/vehicleUseStates/{id}")
+    @GetMapping(value = "/{id}")
     public CompletableFuture<ResponseEntity<VehicleStateDTO>> findById(@PathVariable("id") String id) {
         log.info("REST /vehicleStates/{id} : {}", id);
         return vehicleStateFacade.findById(id);
     }
 
-    @GetMapping(value = "/vehicleUseStates/existsByName/{name}")
+    @GetMapping(value = "/existsByName/{name}")
     public CompletableFuture<Boolean> existsByName(@PathVariable("name") String name) {
         log.info("REST /vehicleStates/existsByName/ : {}", name);
         return vehicleStateFacade.existsByName(name);
@@ -71,7 +71,8 @@ public class VehicleStateQueryController {
 //        log.info("REST /vehicleStates-------/findByName/ : {}", name);
 //        return ResponseEntity.ok(getVehicleStateUseCase.findByName(name));
 //    }
-    @GetMapping(value = "/vehicleUseStates/findByName/{name}")
+    
+    @GetMapping(value = "/findByName/{name}")
     public List<VehicleStateDTO> findByName(@PathVariable("name") String name) {
         log.info("REST /vehicleStates/findByName/ : {}", name);
         return getVehicleStateUseCase.findByName(name);
