@@ -2,8 +2,9 @@ package mike.wolf.zygl.api.vehicle.state;
 
 import lombok.NoArgsConstructor;
 import lombok.Builder;
+import lombok.Value;
 
 @Builder()
-@NoArgsConstructor
+@Value
 public class FindAllVehicleStateQuery {
 }

@@ -30,7 +30,8 @@ public class VehicleStateFacade {
     private final CommandGateway commandGateway;
 
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAllVehicleStates() {
-        return queryGateway.query(new FindAllVehicleStateQuery(),
+        return queryGateway.query(FindAllVehicleStateQuery.builder().build(),
+//                new FindAllVehicleStateQuery(),
                 ResponseTypes.multipleInstancesOf(VehicleStateDTO.class))
                 .thenApply(this::wrapResultList);
     }
@@ -60,7 +61,6 @@ public class VehicleStateFacade {
             throws URISyntaxException {
 
         log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getDescription());
-//        String identifier = vehicleState.getIdentifier();
 
         CreateVehicleStateCommand command = CreateVehicleStateCommand
                 .builder()
@@ -71,6 +71,15 @@ public class VehicleStateFacade {
 
         commandGateway.sendAndWait(command);
         return ResponseEntity.ok(vehicleState);
+    }
+
+    public void deleteVehicleState(String id) {
+        DeleteVehicleStateCommand command = DeleteVehicleStateCommand
+                .builder()
+                .vehicleStateId(VehicleStateId.create(id))
+                .build();
+        commandGateway.send(command);
+
     }
 
     /*
@@ -91,4 +100,5 @@ public class VehicleStateFacade {
     private <T> ResponseEntity<T> wrapResult(Predicate<T> assertResult, T result) {
         return assertResult.test(result) ? ResponseEntity.notFound().build() : ResponseEntity.ok(result);
     }
+
 }

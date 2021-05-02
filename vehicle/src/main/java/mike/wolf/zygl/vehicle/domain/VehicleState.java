@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import mike.wolf.zygl.api.vehicle.state.CreateVehicleStateCommand;
-import mike.wolf.zygl.api.vehicle.state.StateName;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateCreateEvent;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateId;
+import mike.wolf.zygl.api.vehicle.state.*;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -47,5 +44,14 @@ public class VehicleState {
         name = event.getStateName();
         description =  event.getDescription();
     }
+    @CommandHandler
+    public void handle(DeleteVehicleStateCommand cmd) {
+        log.info("VehicleState @Aggregate VehicleState(CreateVehicleStateCommand cmd) : {}", cmd.getVehicleStateId());
+        apply(VehicleStateDeleteEvent.builder()
+                .vehicleStateId(cmd.getVehicleStateId())
+                .build()
+        );
+    }
+
 
 }

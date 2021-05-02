@@ -5,10 +5,7 @@ import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
 import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleStateMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
-import mike.wolf.zygl.api.vehicle.state.FindAllVehicleStateQuery;
-import mike.wolf.zygl.api.vehicle.state.VehicleStataeExistesByNameQuery;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateByIdQuery;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateCreateEvent;
+import mike.wolf.zygl.api.vehicle.state.*;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
@@ -43,20 +40,7 @@ public class VehicleStateEventHandler {
     @QueryHandler
     public boolean existsByName(VehicleStataeExistesByNameQuery query) {
         return vehicleStateRepository.existsByName(query.getStateName().getName());
-//        vehicleStateRepository.existsByName(query.getStateName().getName())
-//                .flatMap(Mono.just(false) )
-//        return vehicleStateRepository.existsByName(query.getStateName().getName())
-//                .flatMap { Mono.just(false) }
-//                .switchIfEmpty(Mono.just(true))
-//                .toFuture()
-
     }
-//    @QueryHandler
-//    fun handleIsEmailUniqueQuery(query: IsEmailUniqueQuery): CompletableFuture<Boolean> =
-//            accountRepository.findAccountByEmail(query.email)
-//            .flatMap { Mono.just(false) }
-//                .switchIfEmpty(Mono.just(true))
-//            .toFuture()
 
     @EventHandler
     public void on(VehicleStateCreateEvent event) {
@@ -67,21 +51,19 @@ public class VehicleStateEventHandler {
                 .description(event.getDescription())
                 .build();
         try {
-            vehicleStateRepository.save(entity).getId();
+//            vehicleStateRepository.save(entity).getId();
+            vehicleStateRepository.save(entity);
 
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             throw new DuplicatedNameException(entity.getName());
         }
-//        CompanyView companyView = new CompanyView();
-//
-//        companyView.setIdentifier(event.getCompanyId().getIdentifier());
-//        companyView.setValue(event.getCompanyValue());
-//        companyView.setAmountOfShares(event.getAmountOfShares());
-//        companyView.setTradeStarted(true);
-//        companyView.setName(event.getCompanyName());
-//
-//        companyRepository.save(companyView);
+
+    }
+
+    @EventHandler
+    public void on(VehicleStateDeleteEvent event) {
+        vehicleStateRepository.deleteById(event.getVehicleStateId().getIdentifier());
     }
 
 
