@@ -5,6 +5,7 @@ dependencies {
     implementation project(':application')
     implementation project(':adapters:persistence')
     implementation project(':adapters:web')
+    implementation project(':vehicle')
 
 //    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'

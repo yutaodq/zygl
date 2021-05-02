@@ -17,15 +17,15 @@ import java.net.URISyntaxException;
 @RequiredArgsConstructor
 @CrossOrigin
 public class VehicleStateCommandController {
-//    private final VehicleStateFacade vehicleStateFacade;
-//
-//    @PostMapping("/vehicleUseStates")
-//    public ResponseEntity<?> createVehicleState(
-//            @Valid @RequestBody FormVehicleStateDTO formVehicleStateDTO)
-//            throws URISyntaxException {
-//
-//        log.info("REST createVehicleState : {}", formVehicleStateDTO.getName());
-//        return vehicleStateFacade.createVehicleState(formVehicleStateDTO);
-//    }
+    private final VehicleStateFacade vehicleStateFacade;
+
+    @PostMapping()
+    public ResponseEntity<?> createVehicleState(
+            @Valid @RequestBody FormVehicleStateDTO formVehicleStateDTO)
+            throws URISyntaxException {
+
+        log.info("REST createVehicleState : {}", formVehicleStateDTO.getName());
+        return vehicleStateFacade.createVehicleState(formVehicleStateDTO);
+    }
 
 }

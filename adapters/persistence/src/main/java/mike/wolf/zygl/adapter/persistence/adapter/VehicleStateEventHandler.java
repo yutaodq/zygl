@@ -60,6 +60,7 @@ public class VehicleStateEventHandler {
 
     @EventHandler
     public void on(VehicleStateCreateEvent event) {
+        log.info("VehicleStateEventHandler on(VehicleStateCreateEvent event) : {}", event.getVehicleStateId().getIdentifier());
         VehicleStateJpaEntity entity = VehicleStateJpaEntity.builder()
                 .id(event.getVehicleStateId().getIdentifier())
                 .name(event.getStateName().getName())

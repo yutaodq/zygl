@@ -29,16 +29,7 @@ public class VehicleStateCreateEvent {
         log.info("新建：ProductCreatedEvent");
         this.vehicleStateId = checkNotNull(vehicleStateId, "没有车辆状态聚合标识符！");
         this.stateName = checkNotNull(stateName, "没有车辆状态名称！");
+        this.description = description;
     }
-
-//    public static VehicleStateCreateEvent create(
-//            VehicleStateId vehicleStateId,
-//            StateName stateName,
-//            String description) {
-//        return new VehicleStateCreateEvent(
-//                vehicleStateId,
-//                stateName,
-//                description);
-//    }
 
 }

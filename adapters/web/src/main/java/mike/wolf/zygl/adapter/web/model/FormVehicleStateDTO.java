@@ -12,10 +12,7 @@ import lombok.Setter;
 
 public class FormVehicleStateDTO {
     private String id;
-    private String identifier;
-
     private String name;
-
     private String description;
 
 }

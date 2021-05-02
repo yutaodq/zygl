@@ -21,7 +21,7 @@ import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Aggregate
-@Profile("command")
+//@Profile("command")
 public class VehicleState {
 
     @AggregateIdentifier
@@ -31,7 +31,7 @@ public class VehicleState {
 
     @CommandHandler
     public VehicleState(CreateVehicleStateCommand cmd) {
-        log.debug("handling {}", cmd);
+        log.info("VehicleState @Aggregate VehicleState(CreateVehicleStateCommand cmd) : {}", cmd.getStateName());
         apply(VehicleStateCreateEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
                 .stateName(cmd.getStateName())
@@ -41,11 +41,11 @@ public class VehicleState {
     }
 
     @EventSourcingHandler
-    public void on(VehicleStateCreateEvent evt) {
-        log.debug("applying {}", evt);
-        vehicleStateId = evt.getVehicleStateId();
-        name = evt.getStateName();
-        description =  evt.getDescription();
+    public void on(VehicleStateCreateEvent event) {
+        log.info("VehicleState @Aggregate void on(VehicleStateCreateEvent evt) : {}", event.getStateName());
+        vehicleStateId = event.getVehicleStateId();
+        name = event.getStateName();
+        description =  event.getDescription();
     }
 
 }

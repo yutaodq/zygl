@@ -59,17 +59,17 @@ public class VehicleStateFacade {
     public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
             throws URISyntaxException {
 
-        log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getName());
-        String identifier = vehicleState.getIdentifier();
+        log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getDescription());
+//        String identifier = vehicleState.getIdentifier();
 
         CreateVehicleStateCommand command = CreateVehicleStateCommand
                 .builder()
-                .vehicleStateId(VehicleStateId.create(vehicleState.getIdentifier()))
+                .vehicleStateId(VehicleStateId.create(vehicleState.getId()))
                 .stateName(StateName.create(vehicleState.getName()))
                 .description(vehicleState.getDescription())
                 .build();
 
-        commandGateway.send(command);
+        commandGateway.sendAndWait(command);
         return ResponseEntity.ok(vehicleState);
     }
 
