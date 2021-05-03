@@ -1,13 +1,12 @@
 package mike.wolf.zygl.adapter.web.service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mike.wolf.zygl.api.vehicle.state.*;
+
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +17,9 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
-import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
+import mike.wolf.zygl.api.vehicle.state.*;
 import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -31,12 +31,15 @@ public class VehicleStateFacade {
 
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAllVehicleStates() {
         return queryGateway.query(FindAllVehicleStateQuery.builder().build(),
-//                new FindAllVehicleStateQuery(),
                 ResponseTypes.multipleInstancesOf(VehicleStateDTO.class))
                 .thenApply(this::wrapResultList);
     }
 
     public CompletableFuture<ResponseEntity<VehicleStateDTO>> findById(String id) {
+        VehicleStateByIdQuery query = VehicleStateByIdQuery.builder()
+                .vehicleStateId(VehicleStateId.create(id))
+                .build();
+
         return queryGateway.query(
                 VehicleStateByIdQuery
                         .builder()
@@ -59,7 +62,6 @@ public class VehicleStateFacade {
 
     public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
             throws URISyntaxException {
-
         log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getDescription());
 
         CreateVehicleStateCommand command = CreateVehicleStateCommand

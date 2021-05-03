@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 @Builder()
 @Value
 public class DeleteVehicleStateCommand {
+
     @NotNull(message = "工具标识对象不能为空")
     @TargetAggregateIdentifier
-    VehicleStateId vehicleStateId;
+    private VehicleStateId vehicleStateId;
 }

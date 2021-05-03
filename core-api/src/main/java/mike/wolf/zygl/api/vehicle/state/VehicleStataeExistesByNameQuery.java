@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 @Value
 public class VehicleStataeExistesByNameQuery {
-    StateName stateName;
+   StateName stateName;
 }
