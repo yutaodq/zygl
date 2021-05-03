@@ -1,9 +1,8 @@
 package mike.wolf.zygl.application.port.in;
 
-import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public interface VehicleStateQueryUseCase {

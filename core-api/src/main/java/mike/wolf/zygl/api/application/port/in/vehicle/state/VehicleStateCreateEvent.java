@@ -1,9 +1,9 @@
-package mike.wolf.zygl.api.vehicle.state;
+package mike.wolf.zygl.api.application.port.in.vehicle.state;
 
 import lombok.Builder;
-import lombok.Getter;
 import lombok.Value;
-import lombok.extern.slf4j.Slf4j;
+import mike.wolf.zygl.api.domain.vehicle.state.StateName;
+import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import javax.validation.constraints.NotNull;

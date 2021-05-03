@@ -4,8 +4,8 @@
 package mike.wolf.zygl.application.port.out;
 
 
-import mike.wolf.zygl.application.exceptions.TransactionException;
-import mike.wolf.zygl.application.exceptions.DatabaseException;
+import mike.wolf.zygl.api.application.exceptions.DatabaseException;
+import mike.wolf.zygl.api.application.exceptions.TransactionException;
 
 public interface ManagementTransaction {
 

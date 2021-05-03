@@ -17,9 +17,8 @@ package mike.wolf.zygl.adapter.persistence.mappers;
 
 
 import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
-import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

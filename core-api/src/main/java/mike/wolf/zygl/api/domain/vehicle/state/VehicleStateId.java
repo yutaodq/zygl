@@ -1,9 +1,7 @@
-package mike.wolf.zygl.api.vehicle.state;
+package mike.wolf.zygl.api.domain.vehicle.state;
 
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.common.domain.AbstractAggregateIdentifier;
-
-import java.util.Objects;
 
 @Slf4j
 public final class VehicleStateId extends AbstractAggregateIdentifier {

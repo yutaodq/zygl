@@ -1,9 +1,10 @@
-package mike.wolf.zygl.application.exceptions;
-
-public class TransactionException extends Exception{
-
-    public TransactionException(String message) {
-        super(message);
-    }// TransactionException()
-
-}// TransactionException
+//package mike.wolf.zygl.application.exceptions;
+//
+//public class TransactionException extends Exception{
+//
+//    public TransactionException(String message) {
+//        super(message);
+//    }// TransactionException()
+//
+//}// TransactionException
+////

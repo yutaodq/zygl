@@ -1,7 +1,7 @@
 package mike.wolf.zygl.application.service;
 
 import lombok.RequiredArgsConstructor;
-import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.application.port.in.VehicleStateQueryUseCase;
 import mike.wolf.zygl.application.port.out.VehicleStateQueryPort;
 import mike.wolf.zygl.common.UseCase;

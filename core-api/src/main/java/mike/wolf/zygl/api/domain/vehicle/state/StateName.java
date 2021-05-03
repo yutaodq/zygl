@@ -1,4 +1,4 @@
-package mike.wolf.zygl.api.vehicle.state;
+package mike.wolf.zygl.api.domain.vehicle.state;
 
 import com.google.common.base.MoreObjects;
 import lombok.EqualsAndHashCode;

@@ -2,7 +2,7 @@ package mike.wolf.zygl.application.port.in;
 
 import lombok.EqualsAndHashCode;
 import lombok.Value;
-import mike.wolf.zygl.api.vehicle.state.VehicleStateId;
+import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import javax.validation.constraints.NotNull;

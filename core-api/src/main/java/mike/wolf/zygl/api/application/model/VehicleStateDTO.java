@@ -1,4 +1,4 @@
-package mike.wolf.zygl.application.model;
+package mike.wolf.zygl.api.application.model;
 
 import lombok.*;
 

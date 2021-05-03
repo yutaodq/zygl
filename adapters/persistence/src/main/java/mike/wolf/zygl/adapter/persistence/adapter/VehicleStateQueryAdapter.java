@@ -5,12 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleStateMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
-import mike.wolf.zygl.application.exceptions.TransactionException;
-import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.application.port.out.VehicleStateQueryPort;
 import mike.wolf.zygl.common.PersistenceAdapter;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

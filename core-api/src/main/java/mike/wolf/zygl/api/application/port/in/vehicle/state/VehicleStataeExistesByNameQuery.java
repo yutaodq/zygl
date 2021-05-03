@@ -1,9 +1,8 @@
-package mike.wolf.zygl.api.vehicle.state;
+package mike.wolf.zygl.api.application.port.in.vehicle.state;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.Value;
+import mike.wolf.zygl.api.domain.vehicle.state.StateName;
 
 @Builder
 @Value

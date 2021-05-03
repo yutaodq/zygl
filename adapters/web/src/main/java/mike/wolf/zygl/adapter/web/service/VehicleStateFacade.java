@@ -3,6 +3,9 @@ package mike.wolf.zygl.adapter.web.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import mike.wolf.zygl.api.application.port.in.vehicle.state.*;
+import mike.wolf.zygl.api.domain.vehicle.state.StateName;
+import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -17,8 +20,7 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
-import mike.wolf.zygl.api.vehicle.state.*;
-import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
 
 @Slf4j

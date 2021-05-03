@@ -5,8 +5,8 @@ import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
 import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleStateMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleStateRepository;
-import mike.wolf.zygl.api.vehicle.state.*;
-import mike.wolf.zygl.application.model.VehicleStateDTO;
+import mike.wolf.zygl.api.application.port.in.vehicle.state.*;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,6 +31,16 @@ public class VehicleStateEventHandler {
                 .map(VehicleStateMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
      }
+//    @QueryHandler
+//    public List<BookBean> getBooks(GetBooksQuery query) {
+//        return bookRepository.findByLibraryId(query.getLibraryId()).stream()
+//                .map(e -> {
+//                    BookBean book = new BookBean();
+//                    book.setIsbn(e.getIsbn());
+//                    book.setTitle(e.getTitle());
+//                    return book;
+//                }).collect(Collectors.toList());
+//    }
 
     @QueryHandler
     public Optional<VehicleStateDTO> findById(VehicleStateByIdQuery query) {
