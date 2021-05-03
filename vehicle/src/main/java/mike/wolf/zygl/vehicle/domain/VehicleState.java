@@ -10,15 +10,14 @@ import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
-import org.springframework.context.annotation.Profile;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
+import static org.axonframework.modelling.command.AggregateLifecycle.markDeleted;
 
 @Slf4j
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Aggregate
-//@Profile("command")
 public class VehicleState {
 
     @AggregateIdentifier
@@ -53,5 +52,10 @@ public class VehicleState {
         );
     }
 
+    @EventSourcingHandler
+    public void on(VehicleStateDeleteEvent event) {
+        log.info("VehicleState @Aggregate void on(VehicleStateDeleteEvent evt) : {}", event.getVehicleStateId());
+        markDeleted();
+    }
 
 }

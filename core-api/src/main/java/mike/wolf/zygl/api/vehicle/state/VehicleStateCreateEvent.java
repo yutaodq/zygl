@@ -9,17 +9,16 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 import javax.validation.constraints.NotNull;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Slf4j
 @Value
 @Builder()
 public class VehicleStateCreateEvent {
 
     @NotNull(message = "车辆状态聚合标识对象不能为空")
     @TargetAggregateIdentifier
-    VehicleStateId vehicleStateId;
+   private VehicleStateId vehicleStateId;
 
     @NotNull(message = "车辆状态名称对象不能为空")
-    StateName stateName;
+    private StateName stateName;
 
     String description; // 备注
 
