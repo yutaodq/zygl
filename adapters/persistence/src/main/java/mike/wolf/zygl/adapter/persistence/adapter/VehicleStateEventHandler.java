@@ -44,8 +44,13 @@ public class VehicleStateEventHandler {
 
     @QueryHandler
     public Optional<VehicleStateDTO> findById(VehicleStateByIdQuery query) {
-        Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());
-        return vehicleState.map(VehicleStateMapper.INSTANCE::toDto);
+        String id = query.getVehicleStateId().getIdentifier();
+       return  findById(id).map(VehicleStateMapper.INSTANCE::toDto);
+//        Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());
+//        return vehicleState.map(VehicleStateMapper.INSTANCE::toDto);
+    }
+    private Optional<VehicleStateJpaEntity> findById(String id) {
+        return  vehicleStateRepository.findById(id);
     }
     @QueryHandler
     public boolean existsByName(VehicleStataeExistesByNameQuery query) {
@@ -74,6 +79,17 @@ public class VehicleStateEventHandler {
     @EventHandler
     public void on(VehicleStateDeleteEvent event) {
         vehicleStateRepository.deleteById(event.getVehicleStateId().getIdentifier());
+    }
+
+    @EventHandler
+    public void on(VehicleStateUpdateEvent event) {
+        String id = event.getVehicleStateId().getIdentifier();
+        VehicleStateJpaEntity vehicleState = findById(id).map(data -> {
+            VehicleStateJpaEntity entity = data;
+            entity.setDescription(event.getDescription());
+            return entity;
+        }).get();
+        vehicleStateRepository.save(vehicleState);
     }
 
 

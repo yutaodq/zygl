@@ -2,10 +2,7 @@ package mike.wolf.zygl.api.domain.vehicle.state;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.CreateVehicleStateCommand;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.DeleteVehicleStateCommand;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.VehicleStateCreateEvent;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.VehicleStateDeleteEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.state.*;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -55,6 +52,22 @@ public class VehicleState {
     public void on(VehicleStateDeleteEvent event) {
         log.info("VehicleState @Aggregate void on(VehicleStateDeleteEvent evt) : {}", event.getVehicleStateId());
         markDeleted();
+    }
+
+    @CommandHandler
+    public void handle(UpdateVehicleStateCommand cmd) {
+        log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateCommand cmd) : {}", cmd.getVehicleStateId());
+        apply(VehicleStateUpdateEvent.builder()
+                .vehicleStateId(cmd.getVehicleStateId())
+                .description(cmd.getDescription())
+                .build()
+        );
+    }
+
+    @EventSourcingHandler
+    public void on(VehicleStateUpdateEvent event) {
+        log.info("VehicleState @Aggregate void on(VehicleStateUpdateEvent evt) : {}", event.getVehicleStateId());
+        this.description= event.getDescription();
     }
 
 }

@@ -3,6 +3,7 @@ package mike.wolf.zygl.adapter.web.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import mike.wolf.zygl.adapter.web.model.FormVehicleStateUpdateDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.state.*;
 import mike.wolf.zygl.api.domain.vehicle.state.StateName;
 import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
@@ -81,6 +82,24 @@ public class VehicleStateFacade {
         DeleteVehicleStateCommand command = DeleteVehicleStateCommand
                 .builder()
                 .vehicleStateId(VehicleStateId.create(id))
+                .build();
+        commandGateway.send(command);
+
+    }
+//    public void updateVehicleState(FormVehicleStateUpdateDTO dto) {
+//        UpdateVehicleStateCommand command = UpdateVehicleStateCommand
+//                .builder()
+//                .vehicleStateId(VehicleStateId.create(dto.getId()))
+//                .description(dto.getDescription())
+//                .build();
+//        commandGateway.send(command);
+//
+//    }
+    public void updateVehicleState(FormVehicleStateDTO dto) {
+        UpdateVehicleStateCommand command = UpdateVehicleStateCommand
+                .builder()
+                .vehicleStateId(VehicleStateId.create(dto.getId()))
+                .description(dto.getDescription())
                 .build();
         commandGateway.send(command);
 
