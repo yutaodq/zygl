@@ -7,5 +7,6 @@ public class FormVehicleStateDTO {
     private String id;
     private String name;
     private String description;
+    private String updateType;
 
 }

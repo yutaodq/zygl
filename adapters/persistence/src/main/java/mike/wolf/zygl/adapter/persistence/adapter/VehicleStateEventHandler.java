@@ -92,5 +92,15 @@ public class VehicleStateEventHandler {
         vehicleStateRepository.save(vehicleState);
     }
 
+    @EventHandler
+    public void on(VehicleStateUpdateNameEvent event) {
+        String id = event.getVehicleStateId().getIdentifier();
+        VehicleStateJpaEntity vehicleState = findById(id).map(data -> {
+            VehicleStateJpaEntity entity = data;
+            entity.setName(event.getStateName().getName());
+            return entity;
+        }).get();
+        vehicleStateRepository.save(vehicleState);
+    }
 
 }

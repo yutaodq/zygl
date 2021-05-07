@@ -86,20 +86,32 @@ public class VehicleStateFacade {
         commandGateway.send(command);
 
     }
-//    public void updateVehicleState(FormVehicleStateUpdateDTO dto) {
-//        UpdateVehicleStateCommand command = UpdateVehicleStateCommand
-//                .builder()
-//                .vehicleStateId(VehicleStateId.create(dto.getId()))
-//                .description(dto.getDescription())
-//                .build();
-//        commandGateway.send(command);
-//
-//    }
     public void updateVehicleState(FormVehicleStateDTO dto) {
+        String updateType = dto.getUpdateType();
+        switch (updateType) {
+            case "updateName":
+                this.updateDefault(dto);
+                break;
+            default:
+                this.updateName(dto);
+
+        }
+    }
+
+    private void updateDefault(FormVehicleStateDTO dto) {
         UpdateVehicleStateCommand command = UpdateVehicleStateCommand
                 .builder()
                 .vehicleStateId(VehicleStateId.create(dto.getId()))
                 .description(dto.getDescription())
+                .build();
+        commandGateway.send(command);
+    }
+
+    private void updateName(FormVehicleStateDTO dto) {
+        UpdateVehicleStateNameCommand command = UpdateVehicleStateNameCommand
+                .builder()
+                .vehicleStateId(VehicleStateId.create(dto.getId()))
+                .stateName(StateName.create(dto.getName()))
                 .build();
         commandGateway.send(command);
 

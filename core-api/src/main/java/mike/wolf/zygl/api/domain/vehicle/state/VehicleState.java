@@ -70,4 +70,20 @@ public class VehicleState {
         this.description= event.getDescription();
     }
 
+    @CommandHandler
+    public void handle(UpdateVehicleStateNameCommand cmd) {
+        log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateNameCommand cmd) : 修改名称命令");
+        apply(VehicleStateUpdateNameEvent.builder()
+                .vehicleStateId(cmd.getVehicleStateId())
+                .stateName(cmd.getStateName())
+                .build()
+        );
+    }
+
+    @EventSourcingHandler
+    public void on(VehicleStateUpdateNameEvent event) {
+        log.info("VehicleState @Aggregate void on(VehicleStateUpdateNameEvent evt) : 修改名称事件");
+        this.name= event.getStateName();
+    }
+
 }
