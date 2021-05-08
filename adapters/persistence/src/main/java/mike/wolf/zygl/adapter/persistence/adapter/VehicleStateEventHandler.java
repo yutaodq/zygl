@@ -26,7 +26,7 @@ public class VehicleStateEventHandler {
     }
 
     @QueryHandler
-    public List<VehicleStateDTO> find(FindAllVehicleStateQuery query) {
+    public List<VehicleStateDTO> find(final FindAllVehicleStateQuery query) {
         return vehicleStateRepository.findAll().stream()
                 .map(VehicleStateMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
@@ -43,7 +43,7 @@ public class VehicleStateEventHandler {
 //    }
 
     @QueryHandler
-    public Optional<VehicleStateDTO> findById(VehicleStateByIdQuery query) {
+    public Optional<VehicleStateDTO> findById(final VehicleStateByIdQuery query) {
         String id = query.getVehicleStateId().getIdentifier();
        return  findById(id).map(VehicleStateMapper.INSTANCE::toDto);
 //        Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());
@@ -53,12 +53,12 @@ public class VehicleStateEventHandler {
         return  vehicleStateRepository.findById(id);
     }
     @QueryHandler
-    public boolean existsByName(VehicleStataeExistesByNameQuery query) {
+    public boolean existsByName( final VehicleStataeExistesByNameQuery query) {
         return vehicleStateRepository.existsByName(query.getStateName().getName());
     }
 
     @EventHandler
-    public void on(VehicleStateCreateEvent event) {
+    public void on(final VehicleStateCreateEvent event) {
         log.info("VehicleStateEventHandler on(VehicleStateCreateEvent event) : {}", event.getVehicleStateId().getIdentifier());
         VehicleStateJpaEntity entity = VehicleStateJpaEntity.builder()
                 .id(event.getVehicleStateId().getIdentifier())
@@ -77,12 +77,12 @@ public class VehicleStateEventHandler {
     }
 
     @EventHandler
-    public void on(VehicleStateDeleteEvent event) {
+    public void on(final VehicleStateDeleteEvent event) {
         vehicleStateRepository.deleteById(event.getVehicleStateId().getIdentifier());
     }
 
     @EventHandler
-    public void on(VehicleStateUpdateEvent event) {
+    public void on(final VehicleStateUpdateEvent event) {
         String id = event.getVehicleStateId().getIdentifier();
         VehicleStateJpaEntity vehicleState = findById(id).map(data -> {
             VehicleStateJpaEntity entity = data;
@@ -93,7 +93,7 @@ public class VehicleStateEventHandler {
     }
 
     @EventHandler
-    public void on(VehicleStateUpdateNameEvent event) {
+    public void on(final VehicleStateUpdateNameEvent event) {
         String id = event.getVehicleStateId().getIdentifier();
         VehicleStateJpaEntity vehicleState = findById(id).map(data -> {
             VehicleStateJpaEntity entity = data;
