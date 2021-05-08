@@ -25,7 +25,9 @@ public class VehicleStateCommandController {
             throws URISyntaxException {
 
         log.info("REST createVehicleState : {}", formVehicleStateDTO.getName());
-        return vehicleStateFacade.createVehicleState(formVehicleStateDTO);
+         vehicleStateFacade.createVehicleState(formVehicleStateDTO);
+
+        return ResponseEntity.ok(formVehicleStateDTO);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVehicleState(@PathVariable String id) {
@@ -49,18 +51,18 @@ public class VehicleStateCommandController {
                 .headers(HeaderUtil.createEntityUpdateAlert("zygl", true, "vehicleStates", vehicleState.getId().toString()))
                 .body(vehicleState);
     }
-    @PutMapping("/updateName/{id}")
-    public ResponseEntity<FormVehicleStateDTO> updateVehicleStateName(
-            @PathVariable String id,
-            @Valid @RequestBody FormVehicleStateDTO vehicleState)
-            throws URISyntaxException {
-        log.info("REST request to update vehicleStates : {}", vehicleState);
-        vehicleStateFacade.updateVehicleState(vehicleState);
-
-        return ResponseEntity
-                .ok()
-                .headers(HeaderUtil.createEntityUpdateAlert("zygl", true, "vehicleStates", vehicleState.getId().toString()))
-                .body(vehicleState);
-    }
+//    @PutMapping("/updateName/{id}")
+//    public ResponseEntity<FormVehicleStateDTO> updateVehicleStateName(
+//            @PathVariable String id,
+//            @Valid @RequestBody FormVehicleStateDTO vehicleState)
+//            throws URISyntaxException {
+//        log.info("REST request to update vehicleStates : {}", vehicleState);
+//        vehicleStateFacade.updateVehicleState(vehicleState);
+//
+//        return ResponseEntity
+//                .ok()
+//                .headers(HeaderUtil.createEntityUpdateAlert("zygl", true, "vehicleStates", vehicleState.getId().toString()))
+//                .body(vehicleState);
+//    }
 
 }

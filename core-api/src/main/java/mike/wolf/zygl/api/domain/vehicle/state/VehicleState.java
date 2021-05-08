@@ -56,7 +56,7 @@ public class VehicleState {
 
     @CommandHandler
     public void handle(UpdateVehicleStateCommand cmd) {
-        log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateCommand cmd) : {}", cmd.getVehicleStateId());
+        log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateCommand cmd) : 修改命令");
         apply(VehicleStateUpdateEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
                 .description(cmd.getDescription())

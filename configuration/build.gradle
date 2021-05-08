@@ -2,10 +2,10 @@ apply plugin: 'org.springframework.boot'
 
 dependencies {
     implementation project(':common')
+    implementation project(':core-api')
     implementation project(':application')
     implementation project(':adapters:persistence')
     implementation project(':adapters:web')
-    implementation project(':vehicle')
 
 //    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'

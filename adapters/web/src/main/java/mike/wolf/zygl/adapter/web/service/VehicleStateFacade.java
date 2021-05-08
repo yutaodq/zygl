@@ -3,7 +3,6 @@ package mike.wolf.zygl.adapter.web.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import mike.wolf.zygl.adapter.web.model.FormVehicleStateUpdateDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.state.*;
 import mike.wolf.zygl.api.domain.vehicle.state.StateName;
 import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
@@ -63,7 +62,8 @@ public class VehicleStateFacade {
     }
 
 
-    public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
+    public void createVehicleState(FormVehicleStateDTO vehicleState)
+//    public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
             throws URISyntaxException {
         log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getDescription());
 
@@ -75,7 +75,6 @@ public class VehicleStateFacade {
                 .build();
 
         commandGateway.sendAndWait(command);
-        return ResponseEntity.ok(vehicleState);
     }
 
     public void deleteVehicleState(String id) {
@@ -90,10 +89,10 @@ public class VehicleStateFacade {
         String updateType = dto.getUpdateType();
         switch (updateType) {
             case "updateName":
-                this.updateDefault(dto);
+                this.updateName(dto);
                 break;
             default:
-                this.updateName(dto);
+                this.updateDefault(dto);
 
         }
     }
