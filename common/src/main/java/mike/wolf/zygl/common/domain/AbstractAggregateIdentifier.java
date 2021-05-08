@@ -6,7 +6,12 @@ import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+/*
+一个AggregateIdentifier必须：
+   实现equal和hashCode方法，因为它会被拿来与其他标识对比
+   实现toString方法，其结果也应该是全局唯一的
+   实现Serializable接口以表明可序列化
+ */
 //@EqualsAndHashCode
 public abstract class AbstractAggregateIdentifier implements AggregateIdentifier, Serializable {
   private final String identifier;

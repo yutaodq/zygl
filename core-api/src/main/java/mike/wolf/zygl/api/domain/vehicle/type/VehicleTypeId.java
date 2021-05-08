@@ -1,4 +1,5 @@
-package mike.wolf.zygl.api.domain.vehicle.state;
+package mike.wolf.zygl.api.domain.vehicle.type;
+
 
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.common.domain.AbstractAggregateIdentifier;
@@ -6,29 +7,29 @@ import mike.wolf.zygl.common.domain.AbstractAggregateIdentifier;
 import java.util.Objects;
 
 @Slf4j
-public final class VehicleStateId extends AbstractAggregateIdentifier {
+public final class VehicleTypeId extends AbstractAggregateIdentifier {
 
-    private VehicleStateId() {
+    private VehicleTypeId() {
         super();
         log.info("新建：ProductId");
     }
 
-    private VehicleStateId(String identifier) {
+    private VehicleTypeId(String identifier) {
         super(identifier);
         log.info("新建：ProductId");
     }
 
-    public static VehicleStateId create() {
-        return new VehicleStateId();
+    public static VehicleTypeId create() {
+        return new VehicleTypeId();
     }
 
-    public static VehicleStateId create(String identifier) {
-        return new VehicleStateId(identifier);
+    public static VehicleTypeId create(String identifier) {
+        return new VehicleTypeId(identifier);
     }
 
     @Override
     public String toString() {
-        return "VehicleStateId {" + "identifier='" + getIdentifier() + '\'' + '}';
+        return "VehicleTypeId {" + "identifier='" + getIdentifier() + '\'' + '}';
     }
 
     @Override
@@ -39,7 +40,7 @@ public final class VehicleStateId extends AbstractAggregateIdentifier {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        final VehicleStateId other = (VehicleStateId) obj;
+        final VehicleTypeId other = (VehicleTypeId) obj;
         return Objects.equals(this.getIdentifier(), other.getIdentifier());
     }
 
