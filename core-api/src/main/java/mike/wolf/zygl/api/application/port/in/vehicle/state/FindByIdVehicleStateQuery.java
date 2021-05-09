@@ -5,6 +5,6 @@ import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
 
 @Builder
 @Value
-public class VehicleStateByIdQuery {
+public class FindByIdVehicleStateQuery {
     VehicleStateId vehicleStateId;
 }

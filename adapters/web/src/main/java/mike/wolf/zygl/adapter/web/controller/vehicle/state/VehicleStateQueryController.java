@@ -1,4 +1,4 @@
-package mike.wolf.zygl.adapter.web.controller;
+package mike.wolf.zygl.adapter.web.controller.vehicle.state;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

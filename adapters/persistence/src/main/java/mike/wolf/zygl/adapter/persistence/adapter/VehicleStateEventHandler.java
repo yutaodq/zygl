@@ -43,7 +43,7 @@ public class VehicleStateEventHandler {
 //    }
 
     @QueryHandler
-    public Optional<VehicleStateDTO> findById(final VehicleStateByIdQuery query) {
+    public Optional<VehicleStateDTO> findById(final FindByIdVehicleStateQuery query) {
         String id = query.getVehicleStateId().getIdentifier();
        return  findById(id).map(VehicleStateMapper.INSTANCE::toDto);
 //        Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());

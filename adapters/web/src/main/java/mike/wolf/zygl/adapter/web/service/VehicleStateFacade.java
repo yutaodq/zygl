@@ -25,7 +25,6 @@ import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
 
 @Slf4j
 @RequiredArgsConstructor
-
 @Service
 public class VehicleStateFacade {
     private final QueryGateway queryGateway;
@@ -38,12 +37,12 @@ public class VehicleStateFacade {
     }
 
     public CompletableFuture<ResponseEntity<VehicleStateDTO>> findById(String id) {
-        VehicleStateByIdQuery query = VehicleStateByIdQuery.builder()
+        FindByIdVehicleStateQuery query = FindByIdVehicleStateQuery.builder()
                 .vehicleStateId(VehicleStateId.create(id))
                 .build();
 
         return queryGateway.query(
-                VehicleStateByIdQuery
+                FindByIdVehicleStateQuery
                         .builder()
                         .vehicleStateId(VehicleStateId.create(id))
                         .build(),
