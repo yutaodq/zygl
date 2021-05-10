@@ -4,3 +4,10 @@ create table vehicle_state(
  name varchar(40),
  description varchar(200) DEFAULT NULL
  );
+
+ DROP TABLE IF EXISTS `vehicle_type`;
+create table vehicle_type(
+ id  varchar(40) PRIMARY KEY ,
+ name varchar(40),
+ description varchar(200) DEFAULT NULL
+ );
