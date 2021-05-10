@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
-import mike.wolf.zygl.application.port.in.SendMoneyUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,14 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class VehicleTypeFacade {
     private final FindAllVehicleTypeUseCase findAllVehicleTypeUseCase;
+    private final FindByIdVehicleTypeUseCase findByIdVehicleTypeUseCase;
 
     public CompletableFuture<ResponseEntity<List<VehicleTypeDTO>>> findAllVehicleTypes() {
         return findAllVehicleTypeUseCase.findAll();
+    }
+
+    public CompletableFuture<ResponseEntity<VehicleTypeDTO>> findById(String id) {
+        return findByIdVehicleTypeUseCase.findById(id);
+
     }
 }

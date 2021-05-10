@@ -1,9 +1,12 @@
 package mike.wolf.zygl.api.application.service;
 
 import lombok.RequiredArgsConstructor;
+import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
 
+import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
+import mike.wolf.zygl.api.domain.vehicle.type.VehicleTypeId;
 import mike.wolf.zygl.common.UseCase;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -19,16 +22,30 @@ import java.util.function.Predicate;
 @UseCase
 
 public class VehicleTypeService
-        implements FindAllVehicleTypeUseCase {
+        implements FindAllVehicleTypeUseCase,
+        FindByIdVehicleTypeUseCase {
     private final QueryGateway queryGateway;
+
     @Override
     public CompletableFuture<ResponseEntity<List<VehicleTypeDTO>>> findAll() {
 
-        return queryGateway.query(FindAllVehicleTypeQuery.builder().build(),
+        return queryGateway.query(
+                FindAllVehicleTypeQuery.builder().build(),
                 ResponseTypes.multipleInstancesOf(VehicleTypeDTO.class))
                 .thenApply(this::wrapResultList);
 
     }
+
+    @Override
+    public CompletableFuture<ResponseEntity<VehicleTypeDTO>> findById(String id) {
+        return queryGateway.query(
+                FindByIdVehicleTypeQuery.builder()
+                        .vehicleTypeId(VehicleTypeId.create(id))
+                        .build(),
+                ResponseTypes.instanceOf(VehicleTypeDTO.class)
+        ).thenApply(this::wrapResult);
+    }
+
     /*
 
      */
