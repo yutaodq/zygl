@@ -1,5 +1,6 @@
 package mike.wolf.zygl.adapter.persistence.adapter;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.persistence.entities.VehicleStateJpaEntity;
 import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
@@ -17,13 +18,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class VehicleStateEventHandler {
     private final VehicleStateRepository vehicleStateRepository;
 
-    public VehicleStateEventHandler(VehicleStateRepository vehicleStateRepository) {
-        this.vehicleStateRepository = vehicleStateRepository;
-    }
+//    public VehicleStateEventHandler(VehicleStateRepository vehicleStateRepository) {
+//        this.vehicleStateRepository = vehicleStateRepository;
+//    }
 
     @QueryHandler
     public List<VehicleStateDTO> find(final FindAllVehicleStateQuery query) {

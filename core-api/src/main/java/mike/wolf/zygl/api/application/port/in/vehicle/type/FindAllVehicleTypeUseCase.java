@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Value;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
-import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -12,6 +11,10 @@ import java.util.concurrent.CompletableFuture;
 
 public interface FindAllVehicleTypeUseCase {
     CompletableFuture<ResponseEntity<List<VehicleTypeDTO>>> findAll();
+
+    /*
+命令
+ */
     @Builder()
     @Getter
     public class FindAllVehicleTypeQuery {

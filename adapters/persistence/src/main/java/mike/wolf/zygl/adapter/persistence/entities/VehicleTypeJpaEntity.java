@@ -4,19 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "vehicle_state")
+@Table(name = "vehicle_type")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true) //如果加true，可以修改这个对象属性值
-
-@Slf4j
-public class VehicleStateJpaEntity {
+@Builder(toBuilder = true)
+public class VehicleTypeJpaEntity {
     @Id
     private String id;
 
