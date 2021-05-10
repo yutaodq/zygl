@@ -3,9 +3,13 @@ package mike.wolf.zygl.api.application.service;
 import lombok.RequiredArgsConstructor;
 import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
+import mike.wolf.zygl.api.application.port.in.vehicle.state.VehicleStataeExistesByNameQuery;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
 
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
+import mike.wolf.zygl.api.domain.vehicle.state.StateName;
+import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
 import mike.wolf.zygl.api.domain.vehicle.type.VehicleTypeId;
 import mike.wolf.zygl.common.UseCase;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
@@ -21,9 +25,11 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 @UseCase
 
-public class VehicleTypeService
-        implements FindAllVehicleTypeUseCase,
-        FindByIdVehicleTypeUseCase {
+public class VehicleTypeService implements
+        FindAllVehicleTypeUseCase,
+        FindByIdVehicleTypeUseCase,
+        ExistsByNameVehicleTypeUseCase
+{
     private final QueryGateway queryGateway;
 
     @Override
@@ -44,6 +50,16 @@ public class VehicleTypeService
                         .build(),
                 ResponseTypes.instanceOf(VehicleTypeDTO.class)
         ).thenApply(this::wrapResult);
+    }
+
+    @Override
+    public CompletableFuture<Boolean> existsByName(String name) {
+        return queryGateway.query(
+                ExistsByNameVehicleTypeQuery.builder()
+                        .typeName(TypeName.create(name))
+                        .build(),
+                ResponseTypes.instanceOf(Boolean.class)
+        );
     }
 
     /*

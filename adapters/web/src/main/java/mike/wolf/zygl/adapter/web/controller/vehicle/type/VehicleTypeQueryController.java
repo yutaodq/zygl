@@ -3,7 +3,6 @@ package mike.wolf.zygl.adapter.web.controller.vehicle.type;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.web.service.VehicleTypeFacade;
-import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +28,12 @@ public class VehicleTypeQueryController {
     public CompletableFuture<ResponseEntity<VehicleTypeDTO>> findById(@PathVariable("id") String id) {
         log.info("REST /vehicleTypes/{id} : {}", id);
         return vehicleTypeFacade.findById(id);
+    }
+
+    @GetMapping(value = "/existsByName/{name}")
+    public CompletableFuture<Boolean> existsByName(@PathVariable("name") String name) {
+        log.info("REST /vehicleStates/existsByName/ : {}", name);
+        return vehicleTypeFacade.existsByName(name);
     }
 
 }

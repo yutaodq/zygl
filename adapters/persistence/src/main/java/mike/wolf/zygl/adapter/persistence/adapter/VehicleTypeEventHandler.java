@@ -6,6 +6,7 @@ import mike.wolf.zygl.adapter.persistence.entities.VehicleTypeJpaEntity;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleTypeMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleTypeRepository;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase.ExistsByNameVehicleTypeQuery;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase.FindAllVehicleTypeQuery;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase.FindByIdVehicleTypeQuery;
 import org.axonframework.queryhandling.QueryHandler;
@@ -33,8 +34,14 @@ public class VehicleTypeEventHandler {
         String id = query.getVehicleTypeId().getIdentifier();
         return  findById(id).map(VehicleTypeMapper.INSTANCE::toDto);
     }
+
     private Optional<VehicleTypeJpaEntity> findById(String id) {
         return  vehicleTypeRepository.findById(id);
+    }
+
+    @QueryHandler
+    public boolean existsByName( final ExistsByNameVehicleTypeQuery query) {
+        return vehicleTypeRepository.existsByName(query.getTypeName().getName());
     }
 
 }
