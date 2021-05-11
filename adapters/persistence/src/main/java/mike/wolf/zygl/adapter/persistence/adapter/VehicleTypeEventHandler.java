@@ -22,6 +22,9 @@ import java.util.stream.Collectors;
 public class VehicleTypeEventHandler {
     private final VehicleTypeRepository vehicleTypeRepository;
 
+    /*
+    Query
+     */
     @QueryHandler
     public List<VehicleTypeDTO> find(final FindAllVehicleTypeQuery query) {
         return vehicleTypeRepository.findAll().stream()
@@ -32,16 +35,20 @@ public class VehicleTypeEventHandler {
     @QueryHandler
     public Optional<VehicleTypeDTO> findById(final FindByIdVehicleTypeQuery query) {
         String id = query.getVehicleTypeId().getIdentifier();
-        return  findById(id).map(VehicleTypeMapper.INSTANCE::toDto);
+        return findById(id).map(VehicleTypeMapper.INSTANCE::toDto);
     }
 
     private Optional<VehicleTypeJpaEntity> findById(String id) {
-        return  vehicleTypeRepository.findById(id);
+        return vehicleTypeRepository.findById(id);
     }
 
     @QueryHandler
-    public boolean existsByName( final ExistsByNameVehicleTypeQuery query) {
+    public boolean existsByName(final ExistsByNameVehicleTypeQuery query) {
         return vehicleTypeRepository.existsByName(query.getTypeName().getName());
     }
+
+    /*
+      Command
+    */
 
 }
