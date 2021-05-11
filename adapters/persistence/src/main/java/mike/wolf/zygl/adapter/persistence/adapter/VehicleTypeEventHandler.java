@@ -3,14 +3,19 @@ package mike.wolf.zygl.adapter.persistence.adapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.persistence.entities.VehicleTypeJpaEntity;
+import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleTypeMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleTypeRepository;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase.ExistsByNameVehicleTypeQuery;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase.FindAllVehicleTypeQuery;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase.FindByIdVehicleTypeQuery;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeCreateEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeDeleteEvent;
+import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,5 +55,27 @@ public class VehicleTypeEventHandler {
     /*
       Command
     */
+    @EventHandler
+    public void on(final VehicleTypeCreateEvent event) {
+        log.info("VehicleTypeEventHandler on(VehicleTypeCreateEvent event) : {}", event.getVehicleTypeId().getIdentifier());
+        VehicleTypeJpaEntity entity = VehicleTypeJpaEntity.builder()
+                .id(event.getVehicleTypeId().getIdentifier())
+                .name(event.getTypeName().getName())
+                .description(event.getDescription())
+                .build();
+        try {
+            vehicleTypeRepository.save(entity);
+
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            throw new DuplicatedNameException(entity.getName());
+        }
+
+    }
+
+    @EventHandler
+    public void on(final VehicleTypeDeleteEvent event) {
+        vehicleTypeRepository.deleteById(event.getVehicleTypeId().getIdentifier());
+    }
 
 }
