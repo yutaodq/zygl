@@ -1,4 +1,4 @@
-package mike.wolf.zygl.api.application.service;
+package mike.wolf.zygl.api.application.service.vehicle.type;
 
 import lombok.RequiredArgsConstructor;
 import mike.wolf.zygl.api.application.model.VehicleStateDTO;

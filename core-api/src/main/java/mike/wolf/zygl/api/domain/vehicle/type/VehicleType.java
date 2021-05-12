@@ -4,8 +4,12 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.CreateVehicleTypeUseCase.CreateVehicleTypeCommand;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.DeleteVehicleTypeUseCase.DeleteVehicleTypeCommand;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.UpdateVehicleTypeNameUseCase.UpdateVehicleTypeNameCommand;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.UpdateVehicleTypeUseCase.UpdateVehicleTypeCommand;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeCreateEvent;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeDeleteEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeUpdateEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeUpdateNameEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -57,36 +61,36 @@ public class VehicleType {
         markDeleted();
     }
 
-//    @CommandHandler
-//    public void handle(UpdateVehicleTypeCommand cmd) {
-//        log.info("VehicleType @Aggregate VehicleType(UpdateVehicleTypeCommand cmd) : 修改命令");
-//        apply(VehicleTypeUpdateEvent.builder()
-//                .vehicleStateId(cmd.getVehicleTypeId())
-//                .description(cmd.getDescription())
-//                .build()
-//        );
-//    }
-//
-//    @EventSourcingHandler
-//    public void on(VehicleTypeUpdateEvent event) {
-//        log.info("VehicleType @Aggregate void on(VehicleTypeUpdateEvent evt) : {}", event.getVehicleTypeId());
-//        this.description= event.getDescription();
-//    }
-//
-//    @CommandHandler
-//    public void handle(UpdateVehicleTypeNameCommand cmd) {
-//        log.info("VehicleType @Aggregate VehicleType(UpdateVehicleTypeNameCommand cmd) : 修改名称命令");
-//        apply(VehicleTypeUpdateNameEvent.builder()
-//                .vehicleStateId(cmd.getVehicleTypeId())
-//                .stateName(cmd.getStateName())
-//                .build()
-//        );
-//    }
-//
-//    @EventSourcingHandler
-//    public void on(VehicleTypeUpdateNameEvent event) {
-//        log.info("VehicleType @Aggregate void on(VehicleTypeUpdateNameEvent evt) : 修改名称事件");
-//        this.name= event.getStateName();
-//    }
+    @CommandHandler
+    public void handle(UpdateVehicleTypeCommand cmd) {
+        log.info("VehicleType @Aggregate VehicleType(UpdateVehicleTypeCommand cmd) : 修改命令");
+        apply(VehicleTypeUpdateEvent.builder()
+                .vehicleTypeId(cmd.getVehicleTypeId())
+                .description(cmd.getDescription())
+                .build()
+        );
+    }
+
+    @EventSourcingHandler
+    public void on(VehicleTypeUpdateEvent event) {
+        log.info("VehicleType @Aggregate void on(VehicleTypeUpdateEvent evt) : {}", event.getVehicleTypeId());
+        this.description= event.getDescription();
+    }
+
+    @CommandHandler
+    public void handle(UpdateVehicleTypeNameCommand cmd) {
+        log.info("VehicleType @Aggregate VehicleType(UpdateVehicleTypeNameCommand cmd) : 修改名称命令");
+        apply(VehicleTypeUpdateNameEvent.builder()
+                .vehicleTypeId(cmd.getVehicleTypeId())
+                .typeName(cmd.getTypeName())
+                .build()
+        );
+    }
+
+    @EventSourcingHandler
+    public void on(VehicleTypeUpdateNameEvent event) {
+        log.info("VehicleType @Aggregate void on(VehicleTypeUpdateNameEvent evt) : 修改名称事件");
+        this.name= event.getTypeName();
+    }
 
 }

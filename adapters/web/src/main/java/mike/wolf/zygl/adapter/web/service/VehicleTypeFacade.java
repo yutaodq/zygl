@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.web.model.FormVehicleTypeDTO;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.DeleteVehicleTypeUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.CreateVehicleTypeUseCase;
+
+import mike.wolf.zygl.api.application.port.in.vehicle.type.*;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.UpdateVehicleTypeUseCase.UpdateVehicleTypeCommand;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.UpdateVehicleTypeNameUseCase.UpdateVehicleTypeNameCommand;
+
 import mike.wolf.zygl.api.application.port.in.vehicle.type.CreateVehicleTypeUseCase.CreateVehicleTypeCommand;
 
 import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
@@ -30,6 +30,8 @@ public class VehicleTypeFacade {
     private final ExistsByNameVehicleTypeUseCase existsByNameVehicleTypeUseCase;
     private final DeleteVehicleTypeUseCase deleteVehicleTypeUseCase;
     private final CreateVehicleTypeUseCase createVehicleTypeUseCase;
+    private final UpdateVehicleTypeUseCase updateVehicleTypeUseCase;
+    private final UpdateVehicleTypeNameUseCase updateVehicleTypeNameUseCase;
 
     /*
     query
@@ -67,6 +69,34 @@ command
         createVehicleTypeUseCase.createVehicleType(command);
     }
 
-    public void updateVehicleType(FormVehicleTypeDTO formVehicleTypeDTO) {
+    public void updateVehicleType(FormVehicleTypeDTO dto) {
+        String updateType = dto.getUpdateType();
+        switch (updateType) {
+            case "updateName":
+                this.updateName(dto);
+                break;
+            default:
+                this.updateDefault(dto);
+
+        }
+    }
+
+    private void updateDefault(FormVehicleTypeDTO dto) {
+        UpdateVehicleTypeCommand command = UpdateVehicleTypeCommand
+                .builder()
+                .vehicleTypeId(VehicleTypeId.create(dto.getId()))
+                .description(dto.getDescription())
+                .build();
+        updateVehicleTypeUseCase.update(command);
+    }
+
+    private void updateName(FormVehicleTypeDTO dto) {
+        UpdateVehicleTypeNameCommand command = UpdateVehicleTypeNameCommand
+                .builder()
+                .vehicleTypeId(VehicleTypeId.create(dto.getId()))
+                .typeName(TypeName.create(dto.getName()))
+                .build();
+        updateVehicleTypeNameUseCase.updateName(command);
+
     }
 }

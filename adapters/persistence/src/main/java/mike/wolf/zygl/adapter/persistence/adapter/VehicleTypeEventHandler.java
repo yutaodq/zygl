@@ -12,6 +12,8 @@ import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUse
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase.FindByIdVehicleTypeQuery;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeCreateEvent;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeDeleteEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeUpdateEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.VehicleTypeUpdateNameEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Service;
@@ -76,6 +78,27 @@ public class VehicleTypeEventHandler {
     @EventHandler
     public void on(final VehicleTypeDeleteEvent event) {
         vehicleTypeRepository.deleteById(event.getVehicleTypeId().getIdentifier());
+    }
+    @EventHandler
+    public void on(final VehicleTypeUpdateEvent event) {
+        String id = event.getVehicleTypeId().getIdentifier();
+        VehicleTypeJpaEntity vehicleType = findById(id).map(data -> {
+            VehicleTypeJpaEntity entity = data;
+            entity.setDescription(event.getDescription());
+            return entity;
+        }).get();
+        vehicleTypeRepository.save(vehicleType);
+    }
+
+    @EventHandler
+    public void on(final VehicleTypeUpdateNameEvent event) {
+        String id = event.getVehicleTypeId().getIdentifier();
+        VehicleTypeJpaEntity vehicleType = findById(id).map(data -> {
+            VehicleTypeJpaEntity entity = data;
+            entity.setName(event.getTypeName().getName());
+            return entity;
+        }).get();
+        vehicleTypeRepository.save(vehicleType);
     }
 
 }
