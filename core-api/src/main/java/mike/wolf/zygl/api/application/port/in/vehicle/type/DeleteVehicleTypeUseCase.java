@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.util.concurrent.CompletableFuture;
 
 public interface DeleteVehicleTypeUseCase {
-    public void DeleteVehicleType(String id);
+    public void deleteVehicleType(String id);
 
     /*
 命令

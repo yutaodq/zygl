@@ -29,7 +29,9 @@ import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
 public class VehicleStateFacade {
     private final QueryGateway queryGateway;
     private final CommandGateway commandGateway;
-
+/*
+query
+ */
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAllVehicleStates() {
         return queryGateway.query(FindAllVehicleStateQuery.builder().build(),
                 ResponseTypes.multipleInstancesOf(VehicleStateDTO.class))
@@ -59,7 +61,9 @@ public class VehicleStateFacade {
                 ResponseTypes.instanceOf(Boolean.class))
                 ;
     }
-
+/*
+command
+ */
 
     public void createVehicleState(FormVehicleStateDTO vehicleState)
 //    public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)

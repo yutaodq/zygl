@@ -12,7 +12,7 @@ public class DeleteVehicleTypeService implements DeleteVehicleTypeUseCase {
     private final CommandGateway commandGateway;
 
     @Override
-    public void DeleteVehicleType(String id) {
+    public void deleteVehicleType(String id) {
         DeleteVehicleTypeCommand command = DeleteVehicleTypeCommand
                 .builder()
                 .vehicleTypeId(VehicleTypeId.create(id))
