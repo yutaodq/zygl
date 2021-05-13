@@ -39,9 +39,10 @@ public class VehicleState {
         name = event.getStateName();
         description =  event.getDescription();
     }
+    //删除记录
     @CommandHandler
     public void handle(DeleteVehicleStateCommand cmd) {
-        log.info("VehicleState @Aggregate VehicleState(CreateVehicleStateCommand cmd) : {}", cmd.getVehicleStateId());
+        log.info("删除车辆状态命令 @Aggregate: {}", cmd.getVehicleStateId());
         apply(VehicleStateDeleteEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
                 .build()
@@ -50,10 +51,10 @@ public class VehicleState {
 
     @EventSourcingHandler
     public void on(VehicleStateDeleteEvent event) {
-        log.info("VehicleState @Aggregate void on(VehicleStateDeleteEvent evt) : {}", event.getVehicleStateId());
+        log.info("删除车辆状态事件 @Aggregate void on(VehicleStateDeleteEvent evt) : {}", event.getVehicleStateId());
         markDeleted();
     }
-
+//修改
     @CommandHandler
     public void handle(UpdateVehicleStateCommand cmd) {
         log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateCommand cmd) : 修改命令");
@@ -69,7 +70,7 @@ public class VehicleState {
         log.info("VehicleState @Aggregate void on(VehicleStateUpdateEvent evt) : {}", event.getVehicleStateId());
         this.description= event.getDescription();
     }
-
+//修改名称
     @CommandHandler
     public void handle(UpdateVehicleStateNameCommand cmd) {
         log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateNameCommand cmd) : 修改名称命令");

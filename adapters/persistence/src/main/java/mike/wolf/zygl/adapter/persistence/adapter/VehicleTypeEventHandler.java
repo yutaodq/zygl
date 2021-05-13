@@ -77,6 +77,8 @@ public class VehicleTypeEventHandler {
 
     @EventHandler
     public void on(final VehicleTypeDeleteEvent event) {
+        log.info("VehicleTypeEventHandler on(VehicleTypeDeleteEvent event) : {}", event.getVehicleTypeId().getIdentifier());
+
         vehicleTypeRepository.deleteById(event.getVehicleTypeId().getIdentifier());
     }
     @EventHandler

@@ -80,6 +80,7 @@ public class VehicleStateEventHandler {
 
     @EventHandler
     public void on(final VehicleStateDeleteEvent event) {
+        log.info("删除车辆状态 : {}", event.getVehicleStateId().getIdentifier());
         vehicleStateRepository.deleteById(event.getVehicleStateId().getIdentifier());
     }
 

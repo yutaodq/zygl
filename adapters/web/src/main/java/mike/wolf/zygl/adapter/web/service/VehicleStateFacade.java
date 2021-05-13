@@ -81,6 +81,7 @@ command
     }
 
     public void deleteVehicleState(String id) {
+        log.info("VehicleStateFacade 删除车辆状态: ");
         DeleteVehicleStateCommand command = DeleteVehicleStateCommand
                 .builder()
                 .vehicleStateId(VehicleStateId.create(id))
