@@ -1,12 +1,12 @@
-package mike.wolf.zygl.api.application.service.vehicle.state;
+package mike.wolf.zygl.api.application.service.vehicle.type;
 
 import lombok.RequiredArgsConstructor;
-import mike.wolf.zygl.api.application.model.VehicleStateDTO;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.ExistsByNameVehicleStateUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.FindAllVehicleStateUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.FindByIdVehicleStateUseCase;
-import mike.wolf.zygl.api.domain.vehicle.state.StateName;
-import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
+import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
+import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
+import mike.wolf.zygl.api.domain.vehicle.type.VehicleTypeId;
 import mike.wolf.zygl.common.UseCase;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -21,38 +21,38 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 @UseCase
 
-public class VehicleStateQueryService implements
-        FindAllVehicleStateUseCase,
-        FindByIdVehicleStateUseCase,
-        ExistsByNameVehicleStateUseCase
+public class QueryVehicleTypeService implements
+        FindAllVehicleTypeUseCase,
+        FindByIdVehicleTypeUseCase,
+        ExistsByNameVehicleTypeUseCase
 {
     private final QueryGateway queryGateway;
 
     @Override
-    public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAll() {
+    public CompletableFuture<ResponseEntity<List<VehicleTypeDTO>>> findAll() {
 
         return queryGateway.query(
-                FindAllVehicleStateQuery.builder().build(),
-                ResponseTypes.multipleInstancesOf(VehicleStateDTO.class))
+                FindAllVehicleTypeQuery.builder().build(),
+                ResponseTypes.multipleInstancesOf(VehicleTypeDTO.class))
                 .thenApply(this::wrapResultList);
 
     }
 
     @Override
-    public CompletableFuture<ResponseEntity<VehicleStateDTO>> findById(String id) {
+    public CompletableFuture<ResponseEntity<VehicleTypeDTO>> findById(String id) {
         return queryGateway.query(
-                FindByIdVehicleStateQuery.builder()
-                        .vehicleStateId(VehicleStateId.create(id))
+                FindByIdVehicleTypeQuery.builder()
+                        .vehicleTypeId(VehicleTypeId.create(id))
                         .build(),
-                ResponseTypes.instanceOf(VehicleStateDTO.class)
+                ResponseTypes.instanceOf(VehicleTypeDTO.class)
         ).thenApply(this::wrapResult);
     }
 
     @Override
     public CompletableFuture<Boolean> existsByName(String name) {
         return queryGateway.query(
-                ExistsByNameVehicleStateQuery.builder()
-                        .stateName(StateName.create(name))
+                ExistsByNameVehicleTypeQuery.builder()
+                        .typeName(TypeName.create(name))
                         .build(),
                 ResponseTypes.instanceOf(Boolean.class)
         );

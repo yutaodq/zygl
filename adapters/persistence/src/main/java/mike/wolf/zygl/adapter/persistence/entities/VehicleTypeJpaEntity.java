@@ -20,7 +20,7 @@ public class VehicleTypeJpaEntity {
     @Id
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique=true)
     private String name;  //状态名称
 
     @Column(name = "description")

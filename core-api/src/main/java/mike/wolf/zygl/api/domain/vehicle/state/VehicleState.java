@@ -72,7 +72,7 @@ public class VehicleState {
     }
 //修改名称
     @CommandHandler
-    public void handle(UpdateVehicleStateNameCommand cmd) {
+    public void handle(UpdateVehicleStateNameUseCase.UpdateVehicleStateNameCommand cmd) {
         log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateNameCommand cmd) : 修改名称命令");
         apply(VehicleStateUpdateNameEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
