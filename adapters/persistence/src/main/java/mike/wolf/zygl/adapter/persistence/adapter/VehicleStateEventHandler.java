@@ -23,12 +23,8 @@ import java.util.stream.Collectors;
 public class VehicleStateEventHandler {
     private final VehicleStateRepository vehicleStateRepository;
 
-//    public VehicleStateEventHandler(VehicleStateRepository vehicleStateRepository) {
-//        this.vehicleStateRepository = vehicleStateRepository;
-//    }
-
     @QueryHandler
-    public List<VehicleStateDTO> find(final FindAllVehicleStateQuery query) {
+    public List<VehicleStateDTO> find(final FindAllVehicleStateUseCase.FindAllVehicleStateQuery query) {
         return vehicleStateRepository.findAll().stream()
                 .map(VehicleStateMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
@@ -45,17 +41,19 @@ public class VehicleStateEventHandler {
 //    }
 
     @QueryHandler
-    public Optional<VehicleStateDTO> findById(final FindByIdVehicleStateQuery query) {
+    public Optional<VehicleStateDTO> findById(final FindByIdVehicleStateUseCase.FindByIdVehicleStateQuery query) {
         String id = query.getVehicleStateId().getIdentifier();
        return  findById(id).map(VehicleStateMapper.INSTANCE::toDto);
 //        Optional<VehicleStateJpaEntity> vehicleState = vehicleStateRepository.findById(query.getVehicleStateId().getIdentifier());
 //        return vehicleState.map(VehicleStateMapper.INSTANCE::toDto);
     }
+
     private Optional<VehicleStateJpaEntity> findById(String id) {
         return  vehicleStateRepository.findById(id);
     }
+
     @QueryHandler
-    public boolean existsByName( final VehicleStataeExistesByNameQuery query) {
+    public boolean existsByName( final ExistsByNameVehicleStateUseCase.ExistsByNameVehicleStateQuery query) {
         return vehicleStateRepository.existsByName(query.getStateName().getName());
     }
 

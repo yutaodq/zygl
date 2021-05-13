@@ -14,7 +14,7 @@ public interface ExistsByNameVehicleStateUseCase {
 */
     @Builder()
     @Value
-    public class VehicleStataeExistesByNameQuery {
+    public class ExistsByNameVehicleStateQuery {
         StateName stateName;
     }
 

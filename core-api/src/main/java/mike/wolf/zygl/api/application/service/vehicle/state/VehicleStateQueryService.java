@@ -5,11 +5,8 @@ import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.state.ExistsByNameVehicleStateUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.state.FindAllVehicleStateUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.state.FindByIdVehicleStateUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
+import mike.wolf.zygl.api.domain.vehicle.state.StateName;
 import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
-import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
 import mike.wolf.zygl.common.UseCase;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
@@ -55,7 +52,7 @@ public class VehicleStateQueryService implements
     public CompletableFuture<Boolean> existsByName(String name) {
         return queryGateway.query(
                 ExistsByNameVehicleStateQuery.builder()
-                        .typeName(TypeName.create(name))
+                        .stateName(StateName.create(name))
                         .build(),
                 ResponseTypes.instanceOf(Boolean.class)
         );

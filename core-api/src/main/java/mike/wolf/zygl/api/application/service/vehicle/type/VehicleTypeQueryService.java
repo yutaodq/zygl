@@ -1,14 +1,10 @@
 package mike.wolf.zygl.api.application.service.vehicle.type;
 
 import lombok.RequiredArgsConstructor;
-import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.api.application.model.VehicleTypeDTO;
-import mike.wolf.zygl.api.application.port.in.vehicle.state.VehicleStataeExistesByNameQuery;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindAllVehicleTypeUseCase;
-
 import mike.wolf.zygl.api.application.port.in.vehicle.type.FindByIdVehicleTypeUseCase;
-import mike.wolf.zygl.api.domain.vehicle.state.StateName;
 import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
 import mike.wolf.zygl.api.domain.vehicle.type.VehicleTypeId;
 import mike.wolf.zygl.common.UseCase;

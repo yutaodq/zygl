@@ -6,19 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.api.application.port.in.vehicle.state.*;
 import mike.wolf.zygl.api.domain.vehicle.state.StateName;
 import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
-import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.messaging.responsetypes.ResponseTypes;
-import org.axonframework.queryhandling.QueryGateway;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Predicate;
 
 import mike.wolf.zygl.api.application.model.VehicleStateDTO;
 import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
@@ -27,68 +21,50 @@ import mike.wolf.zygl.adapter.web.model.FormVehicleStateDTO;
 @RequiredArgsConstructor
 @Service
 public class VehicleStateFacade {
-    private final QueryGateway queryGateway;
-    private final CommandGateway commandGateway;
-/*
-query
- */
+    private final FindAllVehicleStateUseCase findAllVehicleStateUseCase;
+    private final FindByIdVehicleStateUseCase findByIdVehicleStateUseCase;
+    private final ExistsByNameVehicleStateUseCase existsByNameVehicleStateUseCase;
+    private final DeleteVehicleStateUseCase deleteVehicleStateUseCase;
+    private final CreateVehicleStateUseCase createVehicleStateUseCase;
+    private final UpdateVehicleStateUseCase updateVehicleStateUseCase;
+    private final UpdateVehicleStateNameUseCase updateVehicleStateNameUseCase;
+
+    /*
+    query
+     */
     public CompletableFuture<ResponseEntity<List<VehicleStateDTO>>> findAllVehicleStates() {
-        return queryGateway.query(FindAllVehicleStateQuery.builder().build(),
-                ResponseTypes.multipleInstancesOf(VehicleStateDTO.class))
-                .thenApply(this::wrapResultList);
+        return findAllVehicleStateUseCase.findAll();
     }
 
     public CompletableFuture<ResponseEntity<VehicleStateDTO>> findById(String id) {
-        FindByIdVehicleStateQuery query = FindByIdVehicleStateQuery.builder()
-                .vehicleStateId(VehicleStateId.create(id))
-                .build();
+        return findByIdVehicleStateUseCase.findById(id);
 
-        return queryGateway.query(
-                FindByIdVehicleStateQuery
-                        .builder()
-                        .vehicleStateId(VehicleStateId.create(id))
-                        .build(),
-                ResponseTypes.instanceOf(VehicleStateDTO.class))
-                .thenApply(this::wrapResult);
     }
 
     public CompletableFuture<Boolean> existsByName(String name) {
-        return queryGateway.query(
-                VehicleStataeExistesByNameQuery
-                        .builder()
-                        .stateName(StateName.create(name))
-                        .build(),
-                ResponseTypes.instanceOf(Boolean.class))
-                ;
-    }
-/*
-command
- */
-
-    public void createVehicleState(FormVehicleStateDTO vehicleState)
-//    public ResponseEntity<?> createVehicleState(FormVehicleStateDTO vehicleState)
-            throws URISyntaxException {
-        log.info("VehicleStateFacade REST createVehicleState : {}", vehicleState.getDescription());
-
-        CreateVehicleStateCommand command = CreateVehicleStateCommand
-                .builder()
-                .vehicleStateId(VehicleStateId.create(vehicleState.getId()))
-                .stateName(StateName.create(vehicleState.getName()))
-                .description(vehicleState.getDescription())
-                .build();
-
-        commandGateway.sendAndWait(command);
+        return existsByNameVehicleStateUseCase.existsByName(name);
     }
 
+    /*
+    command
+     */
     public void deleteVehicleState(String id) {
-        log.info("VehicleStateFacade 删除车辆状态: ");
-        DeleteVehicleStateCommand command = DeleteVehicleStateCommand
-                .builder()
-                .vehicleStateId(VehicleStateId.create(id))
-                .build();
-        commandGateway.send(command);
-
+        deleteVehicleStateUseCase.deleteVehicleState(id);
     }
+
+    public void createVehicleState(FormVehicleStateDTO formVehicleState)
+            throws URISyntaxException {
+        log.info("VehicleStateFacade REST createVehicleState : {}", formVehicleState.getDescription());
+
+        CreateVehicleStateUseCase.CreateVehicleStateCommand command = CreateVehicleStateUseCase.CreateVehicleStateCommand
+                .builder()
+                .vehicleStateId(VehicleStateId.create(formVehicleState.getId()))
+                .stateName(StateName.create(formVehicleState.getName()))
+                .description(formVehicleState.getDescription())
+                .build();
+        createVehicleStateUseCase.createVehicleState(command);
+    }
+
     public void updateVehicleState(FormVehicleStateDTO dto) {
         String updateType = dto.getUpdateType();
         switch (updateType) {
@@ -102,41 +78,22 @@ command
     }
 
     private void updateDefault(FormVehicleStateDTO dto) {
-        UpdateVehicleStateCommand command = UpdateVehicleStateCommand
+        UpdateVehicleStateUseCase.UpdateVehicleStateCommand command = UpdateVehicleStateUseCase.UpdateVehicleStateCommand
                 .builder()
                 .vehicleStateId(VehicleStateId.create(dto.getId()))
                 .description(dto.getDescription())
                 .build();
-        commandGateway.send(command);
+        updateVehicleStateUseCase.update(command);
     }
 
     private void updateName(FormVehicleStateDTO dto) {
-        UpdateVehicleStateNameCommand command = UpdateVehicleStateNameCommand
+        UpdateVehicleStateNameUseCase.UpdateVehicleStateNameCommand command = UpdateVehicleStateNameUseCase.UpdateVehicleStateNameCommand
                 .builder()
                 .vehicleStateId(VehicleStateId.create(dto.getId()))
                 .stateName(StateName.create(dto.getName()))
                 .build();
-        commandGateway.send(command);
+        updateVehicleStateNameUseCase.updateName(command);
 
-    }
-
-    /*
-
-     */
-    @NotNull
-    private <T> ResponseEntity<T> wrapResult(T result) {
-        return wrapResult(Objects::isNull, result);
-    }
-
-    @NotNull
-    private <T> ResponseEntity<List<T>> wrapResultList(List<T> result) {
-        return wrapResult(resultList -> Objects.isNull(resultList) || resultList.isEmpty(), result);
-    }
-
-
-    @NotNull
-    private <T> ResponseEntity<T> wrapResult(Predicate<T> assertResult, T result) {
-        return assertResult.test(result) ? ResponseEntity.notFound().build() : ResponseEntity.ok(result);
     }
 
 }

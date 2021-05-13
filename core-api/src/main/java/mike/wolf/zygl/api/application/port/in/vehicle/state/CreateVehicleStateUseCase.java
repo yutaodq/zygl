@@ -8,8 +8,8 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import javax.validation.constraints.NotNull;
 
-public interface CreateStateTypeUseCase {
-    public void createVehicleType(CreateVehicleStateCommand command);
+public interface CreateVehicleStateUseCase {
+    public void createVehicleState(CreateVehicleStateCommand command);
 
     @Builder()
     @Value

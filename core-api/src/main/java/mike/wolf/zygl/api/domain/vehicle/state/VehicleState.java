@@ -22,7 +22,7 @@ public class VehicleState {
     private String description; // 备注
 
     @CommandHandler
-    public VehicleState(CreateVehicleStateCommand cmd) {
+    public VehicleState(CreateVehicleStateUseCase.CreateVehicleStateCommand cmd) {
         log.info("VehicleState @Aggregate VehicleState(CreateVehicleStateCommand cmd) : {}", cmd.getStateName());
         apply(VehicleStateCreateEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
@@ -41,7 +41,7 @@ public class VehicleState {
     }
     //删除记录
     @CommandHandler
-    public void handle(DeleteVehicleStateCommand cmd) {
+    public void handle(DeleteVehicleStateUseCase.DeleteVehicleStateCommand cmd) {
         log.info("删除车辆状态命令 @Aggregate: {}", cmd.getVehicleStateId());
         apply(VehicleStateDeleteEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
@@ -56,7 +56,7 @@ public class VehicleState {
     }
 //修改
     @CommandHandler
-    public void handle(UpdateVehicleStateCommand cmd) {
+    public void handle(UpdateVehicleStateUseCase.UpdateVehicleStateCommand cmd) {
         log.info("VehicleState @Aggregate VehicleState(UpdateVehicleStateCommand cmd) : 修改命令");
         apply(VehicleStateUpdateEvent.builder()
                 .vehicleStateId(cmd.getVehicleStateId())
