@@ -30,9 +30,9 @@ public class VehicleFacade {
     /*
     query
      */
-//    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findAllVehicles() {
-//        return findAllVehicleUseCase.findAll();
-//    }
+    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findAllVehicles() {
+        return findAllVehicleUseCase.findAll();
+    }
 
 //    public CompletableFuture<ResponseEntity<VehicleDTO>> findById(String id) {
 //        return findByIdVehicleUseCase.findById(id);
