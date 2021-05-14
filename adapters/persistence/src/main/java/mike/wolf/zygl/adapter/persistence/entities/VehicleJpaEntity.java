@@ -6,13 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "vehicle_state")
+@Table(name = "vehicle")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,10 +30,12 @@ public class VehicleJpaEntity {
     private String nbpz;  //状态名称
 
 
-    @Column(name = "vehicle_state_id")
+    @ManyToOne(targetEntity=VehicleStateJpaEntity.class)
+    @JoinColumn(name = "vehicle_state_id",referencedColumnName="id")
     private VehicleStateJpaEntity vehicleState; // 备注
 
-    @Column(name = "vehicle_type_id")
+    @ManyToOne(targetEntity=VehicleTypeJpaEntity.class)
+    @JoinColumn(name = "vehicle_type_id",referencedColumnName="id")
     private VehicleTypeJpaEntity vehicleType; // 备注
 
 }

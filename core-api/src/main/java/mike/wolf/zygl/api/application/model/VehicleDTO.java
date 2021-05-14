@@ -12,7 +12,7 @@ public class VehicleDTO {
     private String name;
     private String pz;
     private String nbpz;
-    private String useType;
-    private String useState;
+    private String typeName;
+    private String stateName;
 
 }

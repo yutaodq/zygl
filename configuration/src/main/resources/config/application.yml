@@ -111,7 +111,7 @@ spring:
       console-available: true
 
 server:
-  port: 9088
+  port: 8088
   servlet:
     #指定下项目名
     context-path: /ivms
