@@ -2,7 +2,6 @@ package mike.wolf.zygl.api.application.service.vehicle.vehicle;
 
 import lombok.RequiredArgsConstructor;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
-import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.ExistsByNameVehicleUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindAllVehicleUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindByIdVehicleUseCase;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
@@ -30,7 +29,7 @@ public class QueryVehicleService implements
     public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findAll() {
 
         return queryGateway.query(
-                FindAllVehicleQuery.builder().build(),
+                FindAllQuery.builder().build(),
                 ResponseTypes.multipleInstancesOf(VehicleDTO.class))
                 .thenApply(this::wrapResultList);
 
@@ -39,7 +38,7 @@ public class QueryVehicleService implements
     @Override
     public CompletableFuture<ResponseEntity<VehicleDTO>> findById(String id) {
         return queryGateway.query(
-                FindByIdVehicleQuery.builder()
+                FindByIdQuery.builder()
                         .vehicleId(VehicleId.create(id))
                         .build(),
                 ResponseTypes.instanceOf(VehicleDTO.class)

@@ -21,6 +21,7 @@ public interface VehicleRepository extends JpaRepository<VehicleJpaEntity, Strin
             " from VehicleJpaEntity vehicle "
     )
     List<VehicleDTO> findAlld();
+//    List<VehicleJpaEntity> findAlld();
 
 //    @Query("select vehicle.id as id," +
 //            "vehicle.name as name," +

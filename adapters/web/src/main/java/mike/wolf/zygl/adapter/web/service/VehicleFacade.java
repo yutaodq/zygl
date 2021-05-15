@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 public class VehicleFacade {
 
     private final FindAllVehicleUseCase findAllVehicleUseCase;
-//    private final FindByIdVehicleUseCase findByIdVehicleUseCase;
+    private final FindByIdVehicleUseCase findByIdVehicleUseCase;
 //    private final ExistsByNameVehicleUseCase existsByNameVehicleUseCase;
 //    private final DeleteVehicleUseCase deleteVehicleUseCase;
 //    private final CreateVehicleUseCase createVehicleUseCase;
@@ -34,10 +34,10 @@ public class VehicleFacade {
         return findAllVehicleUseCase.findAll();
     }
 
-//    public CompletableFuture<ResponseEntity<VehicleDTO>> findById(String id) {
-//        return findByIdVehicleUseCase.findById(id);
-//
-//    }
+    public CompletableFuture<ResponseEntity<VehicleDTO>> findById(String id) {
+        return findByIdVehicleUseCase.findById(id);
+
+    }
 
 //    public CompletableFuture<Boolean> existsByName(String name) {
 //        return existsByNameVehicleUseCase.existsByName(name);

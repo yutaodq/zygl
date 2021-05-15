@@ -29,6 +29,8 @@ public class VehicleJpaEntity {
     @Column(name = "nbpz")
     private String nbpz;  //状态名称
 
+    @Column(name = "description")
+    private String description; // 备注
 
     @ManyToOne(targetEntity=VehicleStateJpaEntity.class)
     @JoinColumn(name = "vehicle_state_id",referencedColumnName="id")

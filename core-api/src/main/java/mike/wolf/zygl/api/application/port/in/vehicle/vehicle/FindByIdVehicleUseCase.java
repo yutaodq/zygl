@@ -18,7 +18,7 @@ public interface FindByIdVehicleUseCase {
  */
     @Builder()
     @Value
-    public class FindByIdVehicleQuery {
+    public class FindByIdQuery {
         @NotNull(message = "车辆状态标识对象不能为�?")
         @TargetAggregateIdentifier
         VehicleId vehicleId;

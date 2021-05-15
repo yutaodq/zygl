@@ -17,7 +17,7 @@ public interface FindAllVehicleUseCase {
  */
     @Builder()
     @Getter
-    public class FindAllVehicleQuery {
+    public class FindAllQuery {
     }
 
 }

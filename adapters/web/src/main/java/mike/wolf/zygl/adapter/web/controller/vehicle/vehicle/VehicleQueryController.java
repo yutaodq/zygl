@@ -12,23 +12,23 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @Slf4j
-@RequestMapping("/vehicleUseTypes")
+@RequestMapping("/vehicles")
 @RequiredArgsConstructor
 @CrossOrigin
 public class VehicleQueryController {
     private final VehicleFacade vehicleFacade;
 
-//    @GetMapping()
-//    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> getAllVehicleStates() {
-//        log.info("REST getAllVehicleStates VehicleStateDTO");
-//        return vehicleFacade.findAllVehicles();
-//    }
+    @GetMapping()
+    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> getAllVehicles() {
+        log.info("REST getAllVehicleStates VehicleStateDTO");
+        return vehicleFacade.findAllVehicles();
+    }
 
-//    @GetMapping(value = "/{id}")
-//    public CompletableFuture<ResponseEntity<VehicleDTO>> findById(@PathVariable("id") String id) {
-//        log.info("REST /vehicles/{id} : {}", id);
-//        return vehicleFacade.findById(id);
-//    }
+    @GetMapping(value = "/{id}")
+    public CompletableFuture<ResponseEntity<VehicleDTO>> findById(@PathVariable("id") String id) {
+        log.info("REST /vehicles/{id} : {}", id);
+        return vehicleFacade.findById(id);
+    }
 
 //    @GetMapping(value = "/existsByName/{name}")
 //    public CompletableFuture<Boolean> existsByName(@PathVariable("name") String name) {
