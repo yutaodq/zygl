@@ -22,7 +22,7 @@ public class VehicleJpaEntity {
     private String id;
 
     @Column(name = "name_tx")
-    private String name;  //状态名称
+    private String name;  //车辆名称
 
     @Column(name = "ggxh_tx")
     private String ggxh;  //规格型号
@@ -70,5 +70,17 @@ public class VehicleJpaEntity {
     @ManyToOne(targetEntity=VehicleTypeJpaEntity.class)
     @JoinColumn(name = "vehicle_type_id",referencedColumnName="id")
     private VehicleTypeJpaEntity vehicleType; // 备注
+
+    @ManyToOne(targetEntity=VehicleStructureJpaEntity.class)
+    @JoinColumn(name = "vehicle_structure_id",referencedColumnName="id")
+    private VehicleStructureJpaEntity vehicleStructure; // 备注
+
+    @ManyToOne(targetEntity=VehicleParameterJpaEntity.class)
+    @JoinColumn(name = "vehicle_parametere_id",referencedColumnName="id")
+    private VehicleParameterJpaEntity vehicleParameter; // 备注
+
+    @ManyToOne(targetEntity=VehicleSpecialJpaEntity.class)
+    @JoinColumn(name = "vehicle_special_id",referencedColumnName="id")
+    private VehicleSpecialJpaEntity vehicleSpecial; // 备注
 
 }

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 @Slf4j
 
-public class VehicleSpecial {
+public class VehicleSpecialJpaEntity {
     @Id
     private String id;
 

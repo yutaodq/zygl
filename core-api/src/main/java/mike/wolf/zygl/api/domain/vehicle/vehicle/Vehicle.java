@@ -2,8 +2,12 @@ package mike.wolf.zygl.api.domain.vehicle.vehicle;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.CreateVehicleUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.VehicleCreateEvent;
 import mike.wolf.zygl.api.domain.vehicle.state.VehicleStateId;
 import mike.wolf.zygl.api.domain.vehicle.type.VehicleTypeId;
+import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
@@ -20,25 +24,37 @@ public class Vehicle {
     private VehicleNbpz bnpz; // 内部牌照
     private VehicleTypeId typeId;
     private VehicleStateId stateId;
+    private String name;
 
-//    @CommandHandler
-//    public Vehicle(CreateVehicleCommand cmd) {
-//        log.info("Vehicle @Aggregate Vehicle(CreateVehicleCommand cmd) : {}", cmd.getTypeName());
-//        apply(VehicleCreateEvent.builder()
-//                .vehicleId(cmd.getVehicleId())
-//                .typeName(cmd.getTypeName())
-//                .description(cmd.getDescription())
-//                .build()
-//        );
-//    }
-//
-//    @EventSourcingHandler
-//    public void on(VehicleCreateEvent event) {
-//        log.info("Vehicle @Aggregate void on(VehicleCreateEvent evt) : {}", event.getTypeName());
-//        vehicleId = event.getVehicleId();
-//        name = event.getTypeName();
-//        description =  event.getDescription();
-//    }
+    @CommandHandler
+    public Vehicle(CreateVehicleUseCase.CreateVehicleCommand cmd) {
+        log.info("Vehicle @Aggregate Vehicle(CreateVehicleCommand cmd) : {}", cmd.getName());
+        apply(VehicleCreateEvent.builder()
+                .vehicleId(cmd.getVehicleId())
+                .name(cmd.getName())
+                .ggxh(cmd.getGgxh())  //规格型号
+                .pz(cmd.getPz())  //牌照号
+                .nbpz(cmd.getNbpz())  //内部牌照号
+                .sccj(cmd.getSccj())  //生产厂家
+                .ccrq(cmd.getCcrq())  //出厂日期
+                .tcrq(cmd.getTcrq())  //投产日期
+                .yz(cmd.getYz())  //车辆原值
+                .csys(cmd.getCsys())  //车身颜色
+                .fdjxh(cmd.getFdjxh())  //发动机型号
+                .fdjbh(cmd.getFdjbh())  //发动机编号
+                .dpxh(cmd.getDpxh())  //底盘型号
+                .dpbh(cmd.getDpbh())  //底盘编号
+                .description(cmd.getDescription())
+                .build()
+        );
+    }
+
+    @EventSourcingHandler
+    public void on(VehicleCreateEvent event) {
+        log.info("Vehicle @Aggregate void on(VehicleCreateEvent evt) : {}", event.getName());
+        vehicleId = event.getVehicleId();
+        name = event.getName();
+    }
 //    @CommandHandler
 //    public void handle(DeleteVehicleCommand cmd) {
 //        log.info("Vehicle @Aggregate Vehicle(DeleteVehicleCommand cmd) : {}", cmd.getVehicleId());

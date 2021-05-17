@@ -10,7 +10,9 @@ import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -21,16 +23,16 @@ public class VehicleFacade {
 
     private final FindAllVehicleUseCase findAllVehicleUseCase;
     private final FindByIdVehicleUseCase findByIdVehicleUseCase;
-//    private final ExistsByNameVehicleUseCase existsByNameVehicleUseCase;
+    //    private final ExistsByNameVehicleUseCase existsByNameVehicleUseCase;
 //    private final DeleteVehicleUseCase deleteVehicleUseCase;
-//    private final CreateVehicleUseCase createVehicleUseCase;
+    private final CreateVehicleUseCase createVehicleUseCase;
 //    private final UpdateVehicleUseCase updateVehicleUseCase;
 //    private final UpdateVehicleNameUseCase updateVehicleNameUseCase;
 
     /*
     query
      */
-    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findAllVehicles() {
+    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findAll() {
         return findAllVehicleUseCase.findAll();
     }
 
@@ -50,19 +52,31 @@ command
 //         deleteVehicleUseCase.deleteVehicle(id);
 //    }
 
-//    public void createVehicleState(FormVehicleDTO formVehicle)
-//            throws URISyntaxException {
-//        log.info("VehicleFacade REST createVehicle : {}", formVehicle.getDescription());
-//
-//        CreateVehicleCommand command = CreateVehicleCommand
-//                .builder()
-//                .vehicleId(VehicleId.create(formVehicle.getId()))
-//                .typeName(TypeName.create(formVehicle.getName()))
-//                .description(formVehicle.getDescription())
-//                .build();
-//        createVehicleUseCase.createVehicle(command);
-//    }
-//
+    public void create(VehicleDTO vehicleDTO)
+            throws URISyntaxException {
+        log.info("VehicleFacade REST createVehicle : {}", vehicleDTO.getName());
+
+        CreateVehicleUseCase.CreateVehicleCommand command = CreateVehicleUseCase.CreateVehicleCommand
+                .builder()
+                .vehicleId(VehicleId.create(vehicleDTO.getId()))
+                .name(vehicleDTO.getName())
+                .ggxh(vehicleDTO.getGgxh())  //规格型号
+                .pz(vehicleDTO.getPz())  //牌照号
+                .nbpz(vehicleDTO.getNbpz())  //内部牌照号
+                .sccj(vehicleDTO.getSccj())  //生产厂家
+                .ccrq(vehicleDTO.getCcrq())  //出厂日期
+                .tcrq(vehicleDTO.getTcrq())  //投产日期
+                .yz(vehicleDTO.getYz())  //车辆原值
+                .csys(vehicleDTO.getCsys())  //车身颜色
+                .fdjxh(vehicleDTO.getFdjxh())  //发动机型号
+                .fdjbh(vehicleDTO.getFdjbh())  //发动机编号
+                .dpxh(vehicleDTO.getDpxh())  //底盘型号
+                .dpbh(vehicleDTO.getDpbh())  //底盘编号
+                .description(vehicleDTO.getDescription())
+                .build();
+        createVehicleUseCase.createVehicle(command);
+    }
+
 //    public void updateVehicle(FormVehicleDTO dto) {
 //        String updateType = dto.getUpdateType();
 //        switch (updateType) {

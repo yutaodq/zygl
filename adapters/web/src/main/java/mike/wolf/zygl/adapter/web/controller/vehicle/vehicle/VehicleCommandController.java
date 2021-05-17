@@ -2,8 +2,8 @@ package mike.wolf.zygl.adapter.web.controller.vehicle.vehicle;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mike.wolf.zygl.adapter.web.model.FormVehicleDTO;
 import mike.wolf.zygl.adapter.web.service.VehicleFacade;
+import mike.wolf.zygl.api.application.model.VehicleDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -13,22 +13,22 @@ import java.net.URISyntaxException;
 
 @RestController
 @Slf4j
-@RequestMapping("/vehicleUseTypes")
+@RequestMapping("/vehicles")
 @RequiredArgsConstructor
 @CrossOrigin
 public class VehicleCommandController {
     private final VehicleFacade vehicleFacade;
 
-//    @PostMapping()
-//    public ResponseEntity<?> createVehicleState(
-//            @Valid @RequestBody FormVehicleDTO formVehicleDTO)
-//            throws URISyntaxException {
-//
-//        log.info("REST createVehicleState : {}", formVehicleDTO.getName());
-//        vehicleFacade.createVehicleState(formVehicleDTO);
-//
-//        return ResponseEntity.ok(formVehicleDTO);
-//    }
+    @PostMapping()
+    public ResponseEntity<?> createVehicle(
+            @Valid @RequestBody VehicleDTO vehicleDTO)
+            throws URISyntaxException {
+
+        log.info("REST createVehicle : {}", vehicleDTO.getName());
+        vehicleFacade.create(vehicleDTO);
+
+        return ResponseEntity.ok(vehicleDTO);
+    }
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteVehicleState(@PathVariable String id) {
 //        log.info("REST request to delete vehicleStates : {}", id);

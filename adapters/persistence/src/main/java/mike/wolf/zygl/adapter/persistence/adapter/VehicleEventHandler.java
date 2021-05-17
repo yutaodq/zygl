@@ -3,12 +3,16 @@ package mike.wolf.zygl.adapter.persistence.adapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.persistence.entities.VehicleJpaEntity;
+import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleRepository;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindAllVehicleUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindByIdVehicleUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.VehicleCreateEvent;
+import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,27 +50,39 @@ public class VehicleEventHandler {
 //        return vehicleRepository.existsByName(query.getTypeName().getName());
 //    }
 //
-//    /*
-//      Command
-//    */
-//    @EventHandler
-//    public void on(final VehicleCreateEvent event) {
-//        log.info("VehicleEventHandler on(VehicleCreateEvent event) : {}", event.getVehicleId().getIdentifier());
-//        VehicleJpaEntity entity = VehicleJpaEntity.builder()
-//                .id(event.getVehicleId().getIdentifier())
-//                .name(event.getTypeName().getName())
-//                .description(event.getDescription())
-//                .build();
-//        try {
-//            vehicleRepository.save(entity);
-//
-//        } catch (DataIntegrityViolationException e) {
-//            e.printStackTrace();
-//            throw new DuplicatedNameException(entity.getName());
-//        }
-//
-//    }
-//
+    /*
+      Command
+    */
+    @EventHandler
+    public void on(final VehicleCreateEvent event) {
+        log.info("VehicleEventHandler on(VehicleCreateEvent event) : {}", event.getVehicleId().getIdentifier());
+        VehicleJpaEntity entity = VehicleJpaEntity.builder()
+                .id(event.getVehicleId().getIdentifier())
+                .name(event.getName())
+                .ggxh(event.getGgxh())  //规格型号
+                .pz(event.getPz())  //牌照号
+                .nbpz(event.getNbpz())  //内部牌照号
+                .sccj(event.getSccj())  //生产厂家
+                .ccrq(event.getCcrq())  //出厂日期
+                .tcrq(event.getTcrq())  //投产日期
+                .yz(event.getYz())  //车辆原值
+                .csys(event.getCsys())  //车身颜色
+                .fdjxh(event.getFdjxh())  //发动机型号
+                .fdjbh(event.getFdjbh())  //发动机编号
+                .dpxh(event.getDpxh())  //底盘型号
+                .dpbh(event.getDpbh())  //底盘编号
+                .description(event.getDescription())
+                .build();
+        try {
+            vehicleRepository.save(entity);
+
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            throw new DuplicatedNameException(entity.getName());
+        }
+
+    }
+
 //    @EventHandler
 //    public void on(final VehicleDeleteEvent event) {
 //        log.info("VehicleEventHandler on(VehicleDeleteEvent event) : {}", event.getVehicleId().getIdentifier());

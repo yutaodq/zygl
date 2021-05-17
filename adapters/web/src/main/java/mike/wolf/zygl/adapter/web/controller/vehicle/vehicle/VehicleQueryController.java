@@ -21,7 +21,7 @@ public class VehicleQueryController {
     @GetMapping()
     public CompletableFuture<ResponseEntity<List<VehicleDTO>>> getAllVehicles() {
         log.info("REST getAllVehicleStates VehicleStateDTO");
-        return vehicleFacade.findAllVehicles();
+        return vehicleFacade.findAll();
     }
 
     @GetMapping(value = "/{id}")
