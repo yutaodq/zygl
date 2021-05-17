@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "vehicle")
@@ -20,16 +21,46 @@ public class VehicleJpaEntity {
     @Id
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "name_tx")
     private String name;  //状态名称
 
-    @Column(name = "pz")
-    private String pz;  //状态名称
+    @Column(name = "ggxh_tx")
+    private String ggxh;  //规格型号
 
-    @Column(name = "nbpz")
-    private String nbpz;  //状态名称
+    @Column(name = "pz_tx")
+    private String pz;  //牌照号
 
-    @Column(name = "description")
+    @Column(name = "nbpz_tx")
+    private String nbpz;  //内部牌照号
+
+    @Column(name = "sccj_tx")
+    private String sccj;  //生产厂家
+
+    @Column(name = "ccrq_dt")
+    private Date ccrq;  //出厂日期
+
+    @Column(name = "tcrq_dt")
+    private Date tcrq;  //投产日期
+
+    @Column(name = "yz_nb")
+    private Number yz;  //车辆原值
+
+    @Column(name = "csys_tx")
+    private String csys;  //车身颜色
+
+    @Column(name = "fdjxh_tx")
+    private String fdjxh;  //发动机型号
+
+    @Column(name = "fdjbh_tx")
+    private String fdjbh;  //发动机编号
+
+    @Column(name = "dpxh_tx")
+    private String dpxh;  //底盘型号
+
+    @Column(name = "dpbh_tx")
+    private String dpbh;  //底盘编号
+
+    @Column(name = "description_tx")
     private String description; // 备注
 
     @ManyToOne(targetEntity=VehicleStateJpaEntity.class)
