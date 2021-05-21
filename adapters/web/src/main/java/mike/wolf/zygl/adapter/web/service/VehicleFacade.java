@@ -22,8 +22,9 @@ import java.util.concurrent.CompletableFuture;
 public class VehicleFacade {
 
     private final FindAllVehicleUseCase findAllVehicleUseCase;
+//    private final FindByNameVehicleUseCase findByNameVehicleUseCase;
     private final FindByIdVehicleUseCase findByIdVehicleUseCase;
-        private final ExistsByPzVehicleUseCase existsByPzVehicleUseCase;
+    private final ExistsByPzVehicleUseCase existsByPzVehicleUseCase;
     private final ExistsByNbpzVehicleUseCase existsByNbpzVehicleUseCase;
 
     private final CreateVehicleUseCase createVehicleUseCase;
@@ -42,6 +43,9 @@ public class VehicleFacade {
         return findByIdVehicleUseCase.findById(id);
 
     }
+//    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findByName() {
+//        return findByNameVehicleUseCase.findAll();
+//    }
 
     public CompletableFuture<Boolean> existsByPz(String pz) {
         return existsByPzVehicleUseCase.existsByPz(pz);

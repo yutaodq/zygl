@@ -41,4 +41,9 @@ public class VehicleQueryController {
         return vehicleFacade.existsByNbpz(nbpz);
     }
 
+//    @GetMapping(value = "/findByName/{name}")
+//    public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findByName(@PathVariable("name") String name) {
+//        return vehicleFacade.findByName(name);
+//    }
+
 }
