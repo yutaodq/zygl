@@ -6,16 +6,16 @@ import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface ExistsByNameVehicleUseCase {
-    public CompletableFuture<Boolean> existsByName(String name);
+public interface ExistsByPzVehicleUseCase {
+    public CompletableFuture<Boolean> existsByPz(String pz);
 
     /*
 命令
 */
     @Builder()
     @Value
-    public class ExistsByNameVehicleQuery {
-        TypeName typeName;
+    public class ExistsByPzQuery {
+        String pz;
     }
 
 }

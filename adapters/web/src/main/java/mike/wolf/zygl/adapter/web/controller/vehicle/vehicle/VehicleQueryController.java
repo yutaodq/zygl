@@ -30,10 +30,15 @@ public class VehicleQueryController {
         return vehicleFacade.findById(id);
     }
 
-//    @GetMapping(value = "/existsByName/{name}")
-//    public CompletableFuture<Boolean> existsByName(@PathVariable("name") String name) {
-//        log.info("REST /vehicleStates/existsByName/ : {}", name);
-//        return vehicleFacade.existsByName(name);
-//    }
+    @GetMapping(value = "/existsByPz/{pz}")
+        public CompletableFuture<Boolean> existsByPz(@PathVariable("pz") String pz) {
+        log.info("REST /vehicleStates/existsByName/ : {}", pz);
+        return vehicleFacade.existsByPz(pz);
+    }
+    @GetMapping(value = "/existsByNbpz/{nbpz}")
+    public CompletableFuture<Boolean> existsByNbpz(@PathVariable("nbpz") String nbpz) {
+        log.info("REST /vehicleStates/existsByName/ : {}", nbpz);
+        return vehicleFacade.existsByNbpz(nbpz);
+    }
 
 }

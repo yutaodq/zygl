@@ -2,8 +2,12 @@ package mike.wolf.zygl.api.application.service.vehicle.vehicle;
 
 import lombok.RequiredArgsConstructor;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.ExistsByNbpzVehicleUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.ExistsByPzVehicleUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindAllVehicleUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindByIdVehicleUseCase;
+import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
 import mike.wolf.zygl.common.UseCase;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
@@ -21,7 +25,11 @@ import java.util.function.Predicate;
 
 public class QueryVehicleService implements
         FindAllVehicleUseCase,
-        FindByIdVehicleUseCase
+        FindByIdVehicleUseCase,
+        ExistsByPzVehicleUseCase,
+        ExistsByNbpzVehicleUseCase
+
+
 {
     private final QueryGateway queryGateway;
 
@@ -45,6 +53,25 @@ public class QueryVehicleService implements
         ).thenApply(this::wrapResult);
     }
 
+    @Override
+    public CompletableFuture<Boolean> existsByPz(String pz) {
+        return queryGateway.query(
+                ExistsByPzVehicleUseCase.ExistsByPzQuery.builder()
+                        .pz(pz)
+                        .build(),
+                ResponseTypes.instanceOf(Boolean.class)
+        );
+    }
+
+    @Override
+    public CompletableFuture<Boolean> existsByNbpz(String nbpz) {
+        return queryGateway.query(
+                ExistsByNbpzVehicleUseCase.ExistsByNbpzQuery.builder()
+                        .nbpz(nbpz)
+                        .build(),
+                ResponseTypes.instanceOf(Boolean.class)
+        );
+    }
 
     /*
 

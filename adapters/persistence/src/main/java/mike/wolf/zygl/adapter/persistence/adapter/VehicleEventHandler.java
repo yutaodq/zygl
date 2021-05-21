@@ -7,9 +7,8 @@ import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleRepository;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
-import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindAllVehicleUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.FindByIdVehicleUseCase;
-import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.VehicleCreateEvent;
+import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.*;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -45,7 +44,17 @@ public class VehicleEventHandler {
         return vehicleRepository.findById(id);
     }
 
-//    @QueryHandler
+    @QueryHandler
+    public boolean existsByPz(final ExistsByPzVehicleUseCase.ExistsByPzQuery query) {
+        return vehicleRepository.existsByPz(query.getPz());
+    }
+
+    @QueryHandler
+    public boolean existsByNbpz(final ExistsByNbpzVehicleUseCase.ExistsByNbpzQuery query) {
+        return vehicleRepository.existsByNbpz(query.getNbpz());
+    }
+
+    //    @QueryHandler
 //    public boolean existsByName(final ExistsByNameVehicleQuery query) {
 //        return vehicleRepository.existsByName(query.getTypeName().getName());
 //    }

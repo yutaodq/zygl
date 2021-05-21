@@ -21,5 +21,5 @@ insert into vehicle_structure(id, fxpwz_tx) values('1','方向盘位置-1');
 insert into vehicle_structure (id, fxpwz_tx) values('2','方向盘位置-12');
 
 delete from vehicle;
-insert into vehicle(id, name_tx, ggxh_tx, vehicle_state_id, vehicle_type_id, vehicle_structure_id, vehicle_parametere_id, vehicle_special_id) values('1','车辆基础信息', 'E123','1', '1','1','1','1');
-insert into vehicle(id, name_tx, ggxh_tx, vehicle_state_id, vehicle_type_id, vehicle_structure_id, vehicle_parametere_id, vehicle_special_id) values('2','车辆基础信息2', 'E123','2', '2','2','2','2');
+insert into vehicle(id, pz_tx, nbpz_tx, name_tx, ggxh_tx, vehicle_state_id, vehicle_type_id, vehicle_structure_id, vehicle_parametere_id, vehicle_special_id) values('1','P123', 'N123','车辆基础信息', 'E123','1', '1','1','1','1');
+insert into vehicle(id, pz_tx, nbpz_tx, name_tx, ggxh_tx, vehicle_state_id, vehicle_type_id, vehicle_structure_id, vehicle_parametere_id, vehicle_special_id) values('2','P223', 'N223','车辆基础信息2', 'E123','2', '2','2','2','2');

@@ -23,9 +23,11 @@ public class VehicleFacade {
 
     private final FindAllVehicleUseCase findAllVehicleUseCase;
     private final FindByIdVehicleUseCase findByIdVehicleUseCase;
-    //    private final ExistsByNameVehicleUseCase existsByNameVehicleUseCase;
-//    private final DeleteVehicleUseCase deleteVehicleUseCase;
+        private final ExistsByPzVehicleUseCase existsByPzVehicleUseCase;
+    private final ExistsByNbpzVehicleUseCase existsByNbpzVehicleUseCase;
+
     private final CreateVehicleUseCase createVehicleUseCase;
+    //    private final DeleteVehicleUseCase deleteVehicleUseCase;
 //    private final UpdateVehicleUseCase updateVehicleUseCase;
 //    private final UpdateVehicleNameUseCase updateVehicleNameUseCase;
 
@@ -41,9 +43,12 @@ public class VehicleFacade {
 
     }
 
-//    public CompletableFuture<Boolean> existsByName(String name) {
-//        return existsByNameVehicleUseCase.existsByName(name);
-//    }
+    public CompletableFuture<Boolean> existsByPz(String pz) {
+        return existsByPzVehicleUseCase.existsByPz(pz);
+    }
+    public CompletableFuture<Boolean> existsByNbpz(String nbpz) {
+        return existsByNbpzVehicleUseCase.existsByNbpz(nbpz);
+    }
 
 /*
 command
