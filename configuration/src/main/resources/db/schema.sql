@@ -88,7 +88,7 @@ create table vehicle
 
     ccrq_dt               date,
     tcrq_dt               date,
-    yz_nb                 number(4),
+    yz_nb                 number(10,2),
     csys_tx               varchar(40),
     fdjxh_tx              varchar(40),
     fdjbh_tx              varchar(40),
