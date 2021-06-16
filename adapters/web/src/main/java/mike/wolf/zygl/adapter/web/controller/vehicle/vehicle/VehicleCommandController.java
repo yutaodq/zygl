@@ -2,6 +2,7 @@ package mike.wolf.zygl.adapter.web.controller.vehicle.vehicle;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mike.wolf.zygl.adapter.web.model.FormVehicleDTO;
 import mike.wolf.zygl.adapter.web.service.VehicleFacade;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,14 @@ public class VehicleCommandController {
 
     @PostMapping()
     public ResponseEntity<?> createVehicle(
-            @Valid @RequestBody VehicleDTO vehicleDTO)
+            @Valid @RequestBody FormVehicleDTO formVehicleDTO)
             throws URISyntaxException {
 
-        log.info("REST createVehicle : {}", vehicleDTO.getName());
-        vehicleFacade.create(vehicleDTO);
+        log.info("REST createVehicle : {}", formVehicleDTO.getName());
+//        vehicleFacade.create(formVehicleDTO);
 
-        return ResponseEntity.ok(vehicleDTO);
+//        return ResponseEntity.ok(formVehicleDTO);
+        return ResponseEntity.ok("a");
     }
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteVehicleState(@PathVariable String id) {
