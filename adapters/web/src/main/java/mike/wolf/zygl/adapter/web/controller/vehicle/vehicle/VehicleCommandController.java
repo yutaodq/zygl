@@ -26,7 +26,7 @@ public class VehicleCommandController {
             throws URISyntaxException {
 
         log.info("REST createVehicle : {}", formVehicleDTO.getName());
-//        vehicleFacade.create(formVehicleDTO);
+        vehicleFacade.create(formVehicleDTO);
 
 //        return ResponseEntity.ok(formVehicleDTO);
         return ResponseEntity.ok("a");

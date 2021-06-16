@@ -45,6 +45,9 @@ public class Vehicle {
                 .dpxh(cmd.getDpxh())  //底盘型号
                 .dpbh(cmd.getDpbh())  //底盘编号
                 .description(cmd.getDescription())
+                .structure(cmd.getStructure())
+                .parameter(cmd.getParameter())
+                .special(cmd.getSpecial())
                 .build()
         );
     }

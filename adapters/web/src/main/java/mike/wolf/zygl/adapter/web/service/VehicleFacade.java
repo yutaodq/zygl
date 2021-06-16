@@ -6,6 +6,9 @@ import mike.wolf.zygl.adapter.web.model.FormVehicleDTO;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.*;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Parameter;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Special;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Structure;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -61,13 +64,54 @@ command
 //         deleteVehicleUseCase.deleteVehicle(id);
 //    }
 
-    public void create(VehicleDTO vehicleDTO)
+    public void create(FormVehicleDTO vehicleDTO)
             throws URISyntaxException {
         log.info("VehicleFacade REST createVehicle : {}", vehicleDTO.getName());
 
+        Structure structure = Structure.builder()
+                .cc(vehicleDTO.getStructure().getCc())
+                .ck(vehicleDTO.getStructure().getCk())
+                .cg(vehicleDTO.getStructure().getCg())
+                .zj(vehicleDTO.getStructure().getZj())
+                .qlj(vehicleDTO.getStructure().getQlj())
+                .hlj(vehicleDTO.getStructure().getHlj())
+                .qdxs(vehicleDTO.getStructure().getQdxs())
+                .fxpwz(vehicleDTO.getStructure().getFxpwz())
+                .bsqxs(vehicleDTO.getStructure().getBsqxs())
+                .build();
+        Parameter parameter = Parameter.builder()
+                .zczbzl(vehicleDTO.getParameter().getZczbzl())
+                .zdzzzl(vehicleDTO.getParameter().getZdzzzl())
+                .rylx(vehicleDTO.getParameter().getRylx())
+                .pjyh(vehicleDTO.getParameter().getPjyh())
+                .edgl(vehicleDTO.getParameter().getEdgl())
+                .zdnj(vehicleDTO.getParameter().getZdnj())
+                .zxzwbj(vehicleDTO.getParameter().getZxzwbj())
+                .zgcs(vehicleDTO.getParameter().getZgcs())
+                .build();
+        Special special = Special.builder()
+                .zdqzl(vehicleDTO.getSpecial().getZdqzl())
+                .gjbj(vehicleDTO.getSpecial().getGjbj())
+                .zb(vehicleDTO.getSpecial().getZb())
+                .zbc(vehicleDTO.getSpecial().getZbc())
+                .fbc(vehicleDTO.getSpecial().getFbc())
+                .fdjxh(vehicleDTO.getSpecial().getFdjxh())
+                .edgl(vehicleDTO.getSpecial().getEdgl())
+                .zdnj(vehicleDTO.getSpecial().getZdnj())
+                .qdxs(vehicleDTO.getSpecial().getQdxs())
+                .rylx(vehicleDTO.getSpecial().getRylx())
+                .pjyh(vehicleDTO.getSpecial().getPjyh())
+                .glxh(vehicleDTO.getSpecial().getGlxh())
+                .ysjxh(vehicleDTO.getSpecial().getYsjxh())
+                .bxh(vehicleDTO.getSpecial().getBxh())
+                .csyq(vehicleDTO.getSpecial().getCsyq())
+                .dr(vehicleDTO.getSpecial().getDr())
+                .bsqxs(vehicleDTO.getSpecial().getBsqxs())
+
+                .build()
         CreateVehicleUseCase.CreateVehicleCommand command = CreateVehicleUseCase.CreateVehicleCommand
                 .builder()
-                .vehicleId(VehicleId.create(vehicleDTO.getId()))
+                .vehicleId(VehicleId.create())
                 .name(vehicleDTO.getName())
                 .ggxh(vehicleDTO.getGgxh())  //规格型号
                 .pz(vehicleDTO.getPz())  //牌照号

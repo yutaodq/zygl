@@ -3,6 +3,9 @@ package mike.wolf.zygl.api.application.port.in.vehicle.vehicle;
 import lombok.Builder;
 import lombok.Value;
 import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Parameter;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Special;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Structure;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
@@ -32,5 +35,8 @@ public class VehicleCreateEvent {
     String dpxh;  //底盘型号
     String dpbh;  //底盘编号
     String description; // 备注
+    Structure structure;
+    Parameter parameter;
+    Special special;
 
 }
