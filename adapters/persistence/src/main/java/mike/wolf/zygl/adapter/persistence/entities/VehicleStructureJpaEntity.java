@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -18,7 +19,9 @@ import javax.persistence.*;
 @Slf4j
 public class VehicleStructureJpaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @Column(name = "cc_nb")

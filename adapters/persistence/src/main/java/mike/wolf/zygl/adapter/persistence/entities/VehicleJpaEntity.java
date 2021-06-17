@@ -38,6 +38,8 @@ public class VehicleJpaEntity {
     private String sccj;  //生产厂家
 
     @Column(name = "ccrq_dt")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Temporal(TemporalType.DATE)
     private Date ccrq;  //出厂日期
 
     @Column(name = "tcrq_dt")
