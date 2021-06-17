@@ -2,6 +2,7 @@ package mike.wolf.zygl.adapter.web.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mike.wolf.zygl.adapter.persistence.entities.VehicleStructureJpaEntity;
 import mike.wolf.zygl.adapter.web.model.FormVehicleDTO;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 
@@ -63,23 +64,21 @@ command
 //    public void deleteVehicle(String id) {
 //         deleteVehicleUseCase.deleteVehicle(id);
 //    }
-
-    public void create(FormVehicleDTO formVehicleDTO)
-            throws URISyntaxException {
-        log.info("VehicleFacade REST createVehicle : {}", formVehicleDTO.getName());
-
-        Structure structure = Structure.builder()
-                .cc(formVehicleDTO.getStructure().getCc())
-                .ck(formVehicleDTO.getStructure().getCk())
-                .cg(formVehicleDTO.getStructure().getCg())
-                .zj(formVehicleDTO.getStructure().getZj())
-                .qlj(formVehicleDTO.getStructure().getQlj())
-                .hlj(formVehicleDTO.getStructure().getHlj())
-                .qdxs(formVehicleDTO.getStructure().getQdxs())
-                .fxpwz(formVehicleDTO.getStructure().getFxpwz())
-                .bsqxs(formVehicleDTO.getStructure().getBsqxs())
-                .build();
-        Parameter parameter = Parameter.builder()
+private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
+    return Structure.builder()
+            .cc(formVehicleDTO.getStructure().getCc())
+            .ck(formVehicleDTO.getStructure().getCk())
+            .cg(formVehicleDTO.getStructure().getCg())
+            .zj(formVehicleDTO.getStructure().getZj())
+            .qlj(formVehicleDTO.getStructure().getQlj())
+            .hlj(formVehicleDTO.getStructure().getHlj())
+            .qdxs(formVehicleDTO.getStructure().getQdxs())
+            .fxpwz(formVehicleDTO.getStructure().getFxpwz())
+            .bsqxs(formVehicleDTO.getStructure().getBsqxs())
+            .build();
+}
+    private Parameter parameterInstance(final FormVehicleDTO formVehicleDTO) {
+        return Parameter.builder()
                 .zczbzl(formVehicleDTO.getParameter().getZczbzl())
                 .zdzzzl(formVehicleDTO.getParameter().getZdzzzl())
                 .rylx(formVehicleDTO.getParameter().getRylx())
@@ -89,7 +88,9 @@ command
                 .zxzwbj(formVehicleDTO.getParameter().getZxzwbj())
                 .zgcs(formVehicleDTO.getParameter().getZgcs())
                 .build();
-        Special special = Special.builder()
+    }
+    private Special specialInstance(final FormVehicleDTO formVehicleDTO) {
+        return Special.builder()
                 .zdqzl(formVehicleDTO.getSpecial().getZdqzl())
                 .gjbj(formVehicleDTO.getSpecial().getGjbj())
                 .zb(formVehicleDTO.getSpecial().getZb())
@@ -108,7 +109,9 @@ command
                 .dr(formVehicleDTO.getSpecial().getDr())
                 .bsqxs(formVehicleDTO.getSpecial().getBsqxs())
                 .build();
-        CreateVehicleUseCase.CreateVehicleCommand command = CreateVehicleUseCase.CreateVehicleCommand
+    }
+    private CreateVehicleUseCase.CreateVehicleCommand createVehicleCommandInstance(final FormVehicleDTO formVehicleDTO) {
+        return CreateVehicleUseCase.CreateVehicleCommand
                 .builder()
                 .vehicleId(VehicleId.create())
                 .name(formVehicleDTO.getName())
@@ -125,8 +128,16 @@ command
                 .dpxh(formVehicleDTO.getDpxh())  //底盘型号
                 .dpbh(formVehicleDTO.getDpbh())  //底盘编号
                 .description(formVehicleDTO.getDescription())
+                .structure(this.structureInstance(formVehicleDTO))
+                .parameter(this.parameterInstance(formVehicleDTO))
+                .special(this.specialInstance(formVehicleDTO))
+
                 .build();
-        createVehicleUseCase.createVehicle(command);
+    }
+    public void create(FormVehicleDTO formVehicleDTO)
+            throws URISyntaxException {
+        log.info("VehicleFacade REST createVehicle : {}", formVehicleDTO.getName());
+        createVehicleUseCase.createVehicle(this.createVehicleCommandInstance(formVehicleDTO));
     }
 
 //    public void updateVehicle(FormVehicleDTO dto) {

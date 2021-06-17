@@ -109,14 +109,14 @@ public class VehicleEventHandler {
 
         return VehicleStructureJpaEntity.builder()
                 .cc(event.getStructure().getCc())
-                .ck(event.getStructure().getCk())
-                .cg(event.getStructure().getCg())
-                .zj(event.getStructure().getZj())
-                .qlj(event.getStructure().getQlj())
-                .hlj(event.getStructure().getHlj())
-                .qdxs(event.getStructure().getQdxs())
-                .fxpwz(event.getStructure().getFxpwz())
-                .bsqxs(event.getStructure().getBsqxs())
+//                .ck(event.getStructure().getCk())
+//                .cg(event.getStructure().getCg())
+//                .zj(event.getStructure().getZj())
+//                .qlj(event.getStructure().getQlj())
+//                .hlj(event.getStructure().getHlj())
+//                .qdxs(event.getStructure().getQdxs())
+//                .fxpwz(event.getStructure().getFxpwz())
+//                .bsqxs(event.getStructure().getBsqxs())
                 .build();
 
     }
