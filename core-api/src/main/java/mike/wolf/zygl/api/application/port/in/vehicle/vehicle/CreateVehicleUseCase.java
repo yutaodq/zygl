@@ -42,8 +42,6 @@ public interface CreateVehicleUseCase {
         Structure structure;
         Parameter parameter;
         Special special;
-
-
     }
 
 }

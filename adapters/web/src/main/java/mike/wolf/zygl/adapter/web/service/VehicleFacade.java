@@ -64,68 +64,67 @@ command
 //         deleteVehicleUseCase.deleteVehicle(id);
 //    }
 
-    public void create(FormVehicleDTO vehicleDTO)
+    public void create(FormVehicleDTO formVehicleDTO)
             throws URISyntaxException {
-        log.info("VehicleFacade REST createVehicle : {}", vehicleDTO.getName());
+        log.info("VehicleFacade REST createVehicle : {}", formVehicleDTO.getName());
 
         Structure structure = Structure.builder()
-                .cc(vehicleDTO.getStructure().getCc())
-                .ck(vehicleDTO.getStructure().getCk())
-                .cg(vehicleDTO.getStructure().getCg())
-                .zj(vehicleDTO.getStructure().getZj())
-                .qlj(vehicleDTO.getStructure().getQlj())
-                .hlj(vehicleDTO.getStructure().getHlj())
-                .qdxs(vehicleDTO.getStructure().getQdxs())
-                .fxpwz(vehicleDTO.getStructure().getFxpwz())
-                .bsqxs(vehicleDTO.getStructure().getBsqxs())
+                .cc(formVehicleDTO.getStructure().getCc())
+                .ck(formVehicleDTO.getStructure().getCk())
+                .cg(formVehicleDTO.getStructure().getCg())
+                .zj(formVehicleDTO.getStructure().getZj())
+                .qlj(formVehicleDTO.getStructure().getQlj())
+                .hlj(formVehicleDTO.getStructure().getHlj())
+                .qdxs(formVehicleDTO.getStructure().getQdxs())
+                .fxpwz(formVehicleDTO.getStructure().getFxpwz())
+                .bsqxs(formVehicleDTO.getStructure().getBsqxs())
                 .build();
         Parameter parameter = Parameter.builder()
-                .zczbzl(vehicleDTO.getParameter().getZczbzl())
-                .zdzzzl(vehicleDTO.getParameter().getZdzzzl())
-                .rylx(vehicleDTO.getParameter().getRylx())
-                .pjyh(vehicleDTO.getParameter().getPjyh())
-                .edgl(vehicleDTO.getParameter().getEdgl())
-                .zdnj(vehicleDTO.getParameter().getZdnj())
-                .zxzwbj(vehicleDTO.getParameter().getZxzwbj())
-                .zgcs(vehicleDTO.getParameter().getZgcs())
+                .zczbzl(formVehicleDTO.getParameter().getZczbzl())
+                .zdzzzl(formVehicleDTO.getParameter().getZdzzzl())
+                .rylx(formVehicleDTO.getParameter().getRylx())
+                .pjyh(formVehicleDTO.getParameter().getPjyh())
+                .edgl(formVehicleDTO.getParameter().getEdgl())
+                .zdnj(formVehicleDTO.getParameter().getZdnj())
+                .zxzwbj(formVehicleDTO.getParameter().getZxzwbj())
+                .zgcs(formVehicleDTO.getParameter().getZgcs())
                 .build();
         Special special = Special.builder()
-                .zdqzl(vehicleDTO.getSpecial().getZdqzl())
-                .gjbj(vehicleDTO.getSpecial().getGjbj())
-                .zb(vehicleDTO.getSpecial().getZb())
-                .zbc(vehicleDTO.getSpecial().getZbc())
-                .fbc(vehicleDTO.getSpecial().getFbc())
-                .fdjxh(vehicleDTO.getSpecial().getFdjxh())
-                .edgl(vehicleDTO.getSpecial().getEdgl())
-                .zdnj(vehicleDTO.getSpecial().getZdnj())
-                .qdxs(vehicleDTO.getSpecial().getQdxs())
-                .rylx(vehicleDTO.getSpecial().getRylx())
-                .pjyh(vehicleDTO.getSpecial().getPjyh())
-                .glxh(vehicleDTO.getSpecial().getGlxh())
-                .ysjxh(vehicleDTO.getSpecial().getYsjxh())
-                .bxh(vehicleDTO.getSpecial().getBxh())
-                .csyq(vehicleDTO.getSpecial().getCsyq())
-                .dr(vehicleDTO.getSpecial().getDr())
-                .bsqxs(vehicleDTO.getSpecial().getBsqxs())
-
-                .build()
+                .zdqzl(formVehicleDTO.getSpecial().getZdqzl())
+                .gjbj(formVehicleDTO.getSpecial().getGjbj())
+                .zb(formVehicleDTO.getSpecial().getZb())
+                .zbc(formVehicleDTO.getSpecial().getZbc())
+                .fbc(formVehicleDTO.getSpecial().getFbc())
+                .fdjxh(formVehicleDTO.getSpecial().getFdjxh())
+                .edgl(formVehicleDTO.getSpecial().getEdgl())
+                .zdnj(formVehicleDTO.getSpecial().getZdnj())
+                .qdxs(formVehicleDTO.getSpecial().getQdxs())
+                .rylx(formVehicleDTO.getSpecial().getRylx())
+                .pjyh(formVehicleDTO.getSpecial().getPjyh())
+                .glxh(formVehicleDTO.getSpecial().getGlxh())
+                .ysjxh(formVehicleDTO.getSpecial().getYsjxh())
+                .bxh(formVehicleDTO.getSpecial().getBxh())
+                .csyq(formVehicleDTO.getSpecial().getCsyq())
+                .dr(formVehicleDTO.getSpecial().getDr())
+                .bsqxs(formVehicleDTO.getSpecial().getBsqxs())
+                .build();
         CreateVehicleUseCase.CreateVehicleCommand command = CreateVehicleUseCase.CreateVehicleCommand
                 .builder()
                 .vehicleId(VehicleId.create())
-                .name(vehicleDTO.getName())
-                .ggxh(vehicleDTO.getGgxh())  //规格型号
-                .pz(vehicleDTO.getPz())  //牌照号
-                .nbpz(vehicleDTO.getNbpz())  //内部牌照号
-                .sccj(vehicleDTO.getSccj())  //生产厂家
-                .ccrq(vehicleDTO.getCcrq())  //出厂日期
-                .tcrq(vehicleDTO.getTcrq())  //投产日期
-                .yz(vehicleDTO.getYz())  //车辆原值
-                .csys(vehicleDTO.getCsys())  //车身颜色
-                .fdjxh(vehicleDTO.getFdjxh())  //发动机型号
-                .fdjbh(vehicleDTO.getFdjbh())  //发动机编号
-                .dpxh(vehicleDTO.getDpxh())  //底盘型号
-                .dpbh(vehicleDTO.getDpbh())  //底盘编号
-                .description(vehicleDTO.getDescription())
+                .name(formVehicleDTO.getName())
+                .ggxh(formVehicleDTO.getGgxh())  //规格型号
+                .pz(formVehicleDTO.getPz())  //牌照号
+                .nbpz(formVehicleDTO.getNbpz())  //内部牌照号
+                .sccj(formVehicleDTO.getSccj())  //生产厂家
+                .ccrq(formVehicleDTO.getCcrq())  //出厂日期
+                .tcrq(formVehicleDTO.getTcrq())  //投产日期
+                .yz(formVehicleDTO.getYz())  //车辆原值
+                .csys(formVehicleDTO.getCsys())  //车身颜色
+                .fdjxh(formVehicleDTO.getFdjxh())  //发动机型号
+                .fdjbh(formVehicleDTO.getFdjbh())  //发动机编号
+                .dpxh(formVehicleDTO.getDpxh())  //底盘型号
+                .dpbh(formVehicleDTO.getDpbh())  //底盘编号
+                .description(formVehicleDTO.getDescription())
                 .build();
         createVehicleUseCase.createVehicle(command);
     }

@@ -3,12 +3,18 @@ package mike.wolf.zygl.adapter.persistence.adapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.persistence.entities.VehicleJpaEntity;
+import mike.wolf.zygl.adapter.persistence.entities.VehicleParameterJpaEntity;
+import mike.wolf.zygl.adapter.persistence.entities.VehicleSpecialJpaEntity;
+import mike.wolf.zygl.adapter.persistence.entities.VehicleStructureJpaEntity;
 import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleRepository;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.*;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Parameter;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Special;
+import mike.wolf.zygl.api.domain.vehicle.vehicle.Structure;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -62,10 +68,23 @@ public class VehicleEventHandler {
     /*
       Command
     */
+
     @EventHandler
     public void on(final VehicleCreateEvent event) {
         log.info("VehicleEventHandler on(VehicleCreateEvent event) : {}", event.getVehicleId().getIdentifier());
-        VehicleJpaEntity entity = VehicleJpaEntity.builder()
+        final VehicleJpaEntity entity = this.vehicleEntityInstance(event);
+        try {
+            vehicleRepository.save(entity);
+
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            throw new DuplicatedNameException(entity.getName());
+        }
+
+    }
+    private VehicleJpaEntity vehicleEntityInstance(final VehicleCreateEvent event) {
+
+        return VehicleJpaEntity.builder()
                 .id(event.getVehicleId().getIdentifier())
                 .name(event.getName())
                 .ggxh(event.getGgxh())  //规格型号
@@ -81,15 +100,61 @@ public class VehicleEventHandler {
                 .dpxh(event.getDpxh())  //底盘型号
                 .dpbh(event.getDpbh())  //底盘编号
                 .description(event.getDescription())
+                .vehicleStructure(this.structureEntityInstance(event))
+                .vehicleParameter(this.parameterEntityInstance(event))
+                .vehicleSpecial(this.specialEntityInstance(event))
                 .build();
-        try {
-            vehicleRepository.save(entity);
+    }
+    private VehicleStructureJpaEntity structureEntityInstance(final VehicleCreateEvent event) {
 
-        } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
-            throw new DuplicatedNameException(entity.getName());
-        }
+        return VehicleStructureJpaEntity.builder()
+                .cc(event.getStructure().getCc())
+                .ck(event.getStructure().getCk())
+                .cg(event.getStructure().getCg())
+                .zj(event.getStructure().getZj())
+                .qlj(event.getStructure().getQlj())
+                .hlj(event.getStructure().getHlj())
+                .qdxs(event.getStructure().getQdxs())
+                .fxpwz(event.getStructure().getFxpwz())
+                .bsqxs(event.getStructure().getBsqxs())
+                .build();
 
+    }
+    private VehicleParameterJpaEntity parameterEntityInstance(final VehicleCreateEvent event) {
+
+        return VehicleParameterJpaEntity.builder()
+                .zczbzl(event.getParameter().getZczbzl())
+                .zdzzzl(event.getParameter().getZdzzzl())
+                .rylx(event.getParameter().getRylx())
+                .pjyh(event.getParameter().getPjyh())
+                .edgl(event.getParameter().getEdgl())
+                .zdnj(event.getParameter().getZdnj())
+                .zxzwbj(event.getParameter().getZxzwbj())
+                .zgcs(event.getParameter().getZgcs())
+                .build();
+    }
+
+    private VehicleSpecialJpaEntity specialEntityInstance(final VehicleCreateEvent event) {
+
+        return VehicleSpecialJpaEntity.builder()
+                .zdqzl(event.getSpecial().getZdqzl())
+                .gjbj(event.getSpecial().getGjbj())
+                .zb(event.getSpecial().getZb())
+                .zbc(event.getSpecial().getZbc())
+                .fbc(event.getSpecial().getFbc())
+                .fdjxh(event.getSpecial().getFdjxh())
+                .edgl(event.getSpecial().getEdgl())
+                .zdnj(event.getSpecial().getZdnj())
+                .qdxs(event.getSpecial().getQdxs())
+                .rylx(event.getSpecial().getRylx())
+                .pjyh(event.getSpecial().getPjyh())
+                .glxh(event.getSpecial().getGlxh())
+                .ysjxh(event.getSpecial().getYsjxh())
+                .bxh(event.getSpecial().getBxh())
+                .csyq(event.getSpecial().getCsyq())
+                .dr(event.getSpecial().getDr())
+                .bsqxs(event.getSpecial().getBsqxs())
+                .build();
     }
 
 //    @EventHandler

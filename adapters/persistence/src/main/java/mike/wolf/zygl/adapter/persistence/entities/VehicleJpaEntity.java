@@ -43,11 +43,11 @@ public class VehicleJpaEntity {
     @Column(name = "tcrq_dt")
     private Date tcrq;  //投产日期
 
-//    @Column(name = "yz_nb", columnDefinition = "Float (10,2)")
+    //    @Column(name = "yz_nb", columnDefinition = "Float (10,2)")
 //    private Float  yz;  //车辆原值
 //private BigDecimal  yz;  //车辆原值
     @Column(name = "yz_nb", precision = 10, scale = 2)
-    private Float  yz;  //车辆原值
+    private Float yz;  //车辆原值
 
     @Column(name = "csys_tx")
     private String csys;  //车身颜色
@@ -67,24 +67,26 @@ public class VehicleJpaEntity {
     @Column(name = "description_tx")
     private String description; // 备注
 
-    @ManyToOne(targetEntity=VehicleStateJpaEntity.class)
-    @JoinColumn(name = "vehicle_state_id",referencedColumnName="id")
+    @ManyToOne(targetEntity = VehicleStateJpaEntity.class)
+    @JoinColumn(name = "vehicle_state_id", referencedColumnName = "id")
     private VehicleStateJpaEntity vehicleState; // 备注
 
-    @ManyToOne(targetEntity=VehicleTypeJpaEntity.class)
-    @JoinColumn(name = "vehicle_type_id",referencedColumnName="id")
+    @ManyToOne(targetEntity = VehicleTypeJpaEntity.class)
+    @JoinColumn(name = "vehicle_type_id", referencedColumnName = "id")
     private VehicleTypeJpaEntity vehicleType; // 备注
 
-    @ManyToOne(targetEntity=VehicleStructureJpaEntity.class)
-    @JoinColumn(name = "vehicle_structure_id",referencedColumnName="id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = VehicleStructureJpaEntity.class)
+    //VehicleJpaEntity是关系的维护端，当删除 VehicleJpaEntity，会级联删除 VehicleStructureJpaEntity , 懒加载
+    @JoinColumn(name = "vehicle_structure_id", referencedColumnName = "id")
+    //VehicleJpaEntity中的vehicle_structure_id字段参考VehicleStructureJpaEntity表中的id字段 注意, 1-1 关联关系, 所以需要添加 unique=true
     private VehicleStructureJpaEntity vehicleStructure; // 备注
 
-    @ManyToOne(targetEntity=VehicleParameterJpaEntity.class)
-    @JoinColumn(name = "vehicle_parametere_id",referencedColumnName="id")
+     @OneToOne(targetEntity = VehicleParameterJpaEntity.class)
+    @JoinColumn(name = "vehicle_parametere_id", referencedColumnName = "id")
     private VehicleParameterJpaEntity vehicleParameter; // 备注
 
-    @ManyToOne(targetEntity=VehicleSpecialJpaEntity.class)
-    @JoinColumn(name = "vehicle_special_id",referencedColumnName="id")
+    @OneToOne(targetEntity = VehicleSpecialJpaEntity.class)
+    @JoinColumn(name = "vehicle_special_id", referencedColumnName = "id")
     private VehicleSpecialJpaEntity vehicleSpecial; // 备注
 
 }
