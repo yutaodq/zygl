@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "vehicle_special")
@@ -22,40 +20,42 @@ import javax.persistence.Table;
 
 public class VehicleSpecialJpaEntity {
     @Id
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @Column(name = "zdqzl_nb")
-    private Number zdqzl;  //最大起重量
+    private int zdqzl;  //最大起重量
 
     @Column(name = "gjbj_nb")
-    private Number gjbj;  //工作半径
+    private int gjbj;  //工作半径
 
     @Column(name = "zb_nb")
-    private Number zb;  //主笔
+    private int zb;  //主笔
 
     @Column(name = "zbc_nb")
-    private Number zbc;  //主臂长
+    private int zbc;  //主臂长
 
     @Column(name = "fbc_nb")
-    private Number fbc;  //副臂长
+    private int fbc;  //副臂长
 
     @Column(name = "fdjxh_tx")
     private String fdjxh;  //发动机型号
 
     @Column(name = "edgl_nb")
-    private Number edgl;  //额定功率
+    private int edgl;  //额定功率
 
     @Column(name = "zdnj_nb")
-    private Number zdnj;  //最大扭矩
+    private int zdnj;  //最大扭矩
 
     @Column(name = "zgzs_nb")
-    private Number qdxs;  //最高转速
+    private int qdxs;  //最高转速
 
     @Column(name = "rylx_tx")
     private String rylx;  //燃油类型
 
     @Column(name = "pjyh_nb")
-    private Number pjyh;  //平均油耗
+    private int pjyh;  //平均油耗
 
     @Column(name = "glxh_tx")
     private String glxh;  //锅炉型号
@@ -70,7 +70,7 @@ public class VehicleSpecialJpaEntity {
     private String csyq;  //测试仪器
 
     @Column(name = "dr_nb")
-    private Number dr;  //斗容
+    private int dr;  //斗容
 
     @Column(name = "bsqxs_tx")
     private String bsqxs;  //变数器形式

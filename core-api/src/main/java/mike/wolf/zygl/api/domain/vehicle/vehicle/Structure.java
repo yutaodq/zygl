@@ -8,17 +8,17 @@ import lombok.Value;
 public class Structure {
     private String id;
 
-    private Number cc;  //车长
+    private int cc;  //车长
 
-    private Number ck;  //车宽
+    private int ck;  //车宽
 
-    private Number cg;  //车高
+    private int cg;  //车高
 
-    private Number zj;  //轴距
+    private int zj;  //轴距
 
-    private Number qlj;  //前轮距
+    private int qlj;  //前轮距
 
-    private Number hlj;  //后轮距
+    private int hlj;  //后轮距
 
     private String qdxs;  //驱动形式
 

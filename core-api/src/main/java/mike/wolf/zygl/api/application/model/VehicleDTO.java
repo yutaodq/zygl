@@ -32,12 +32,12 @@ public class VehicleDTO {
     VehicleStructureJpaEntity
      */
     private String stId;
-    private Number stCc;  //车长
-    private Number stCk;  //车宽
-    private Number stCg;  //车高
-    private Number stZj;  //轴距
-    private Number stQlj;  //前轮距
-    private Number stHlj;  //后轮距
+    private int stCc;  //车长
+    private int stCk;  //车宽
+    private int stCg;  //车高
+    private int stZj;  //轴距
+    private int stQlj;  //前轮距
+    private int stHlj;  //后轮距
     private String stQdxs;  //驱动形式
     private String stFxpwz;  //方向盘位置
     private String stBsqxs;  //变数器形式
@@ -47,36 +47,36 @@ public class VehicleDTO {
      */
     private String paId;
 
-    private Number paZczbzl;  //整车装备质量
-    private Number paZdzzzl;  //最大装载质量
+    private int paZczbzl;  //整车装备质量
+    private int paZdzzzl;  //最大装载质量
     private String paRylx;  //燃油类型
-    private Number paPjyh;  //平均油耗
-    private Number paEdgl;  //额定功率
-    private Number paZdnj;  //最大扭矩
-    private Number paZxzwbj;  //最小转弯半径
-    private Number paZgcs;  //最高车速
+    private int paPjyh;  //平均油耗
+    private int paEdgl;  //额定功率
+    private int paZdnj;  //最大扭矩
+    private int paZxzwbj;  //最小转弯半径
+    private int paZgcs;  //最高车速
     private String paDescription; // 备注
 
     /*
     VehicleSpecial
      */
     private String spId;
-    private Number spZdqzl;  //最大起重量
-    private Number spGjbj;  //工作半径
-    private Number spZb;  //主笔
-    private Number spZbc;  //主臂长
-    private Number spFbc;  //副臂长
+    private int spZdqzl;  //最大起重量
+    private int spGjbj;  //工作半径
+    private int spZb;  //主笔
+    private int spZbc;  //主臂长
+    private int spFbc;  //副臂长
     private String spFdjxh;  //发动机型号
-    private Number spEdgl;  //额定功率
-    private Number spZdnj;  //最大扭矩
-    private Number spQdxs;  //最高转速
+    private int spEdgl;  //额定功率
+    private int spZdnj;  //最大扭矩
+    private int spQdxs;  //最高转速
     private String spRylx;  //燃油类型
-    private Number spPjyh;  //平均油耗
+    private int spPjyh;  //平均油耗
     private String spGlxh;  //锅炉型号
     private String spYsjxh;  //压缩机型号
     private String spBxh;  //泵型号
     private String spCsyq;  //测试仪器
-    private Number spDr;  //斗容
+    private int spDr;  //斗容
     private String spBsqxs;  //变数器形式
     private String spDescription; // 备注
 

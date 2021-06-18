@@ -83,11 +83,11 @@ public class VehicleJpaEntity {
     //VehicleJpaEntity中的vehicle_structure_id字段参考VehicleStructureJpaEntity表中的id字段 注意, 1-1 关联关系, 所以需要添加 unique=true
     private VehicleStructureJpaEntity vehicleStructure; // 备注
 
-     @OneToOne(targetEntity = VehicleParameterJpaEntity.class)
+     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,targetEntity = VehicleParameterJpaEntity.class)
     @JoinColumn(name = "vehicle_parametere_id", referencedColumnName = "id")
     private VehicleParameterJpaEntity vehicleParameter; // 备注
 
-    @OneToOne(targetEntity = VehicleSpecialJpaEntity.class)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,targetEntity = VehicleSpecialJpaEntity.class)
     @JoinColumn(name = "vehicle_special_id", referencedColumnName = "id")
     private VehicleSpecialJpaEntity vehicleSpecial; // 备注
 

@@ -10,7 +10,6 @@ import mike.wolf.zygl.adapter.persistence.exception.DuplicatedNameException;
 import mike.wolf.zygl.adapter.persistence.mappers.VehicleMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleRepository;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
-import mike.wolf.zygl.api.application.port.in.vehicle.type.ExistsByNameVehicleTypeUseCase;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.*;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.Parameter;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.Special;
@@ -106,23 +105,24 @@ public class VehicleEventHandler {
                 .build();
     }
     private VehicleStructureJpaEntity structureEntityInstance(final VehicleCreateEvent event) {
+        log.info("错误的提示VehicleStructureJpaEntity： " + event.getStructure().getCc());
 
         return VehicleStructureJpaEntity.builder()
                 .cc(event.getStructure().getCc())
-//                .ck(event.getStructure().getCk())
-//                .cg(event.getStructure().getCg())
-//                .zj(event.getStructure().getZj())
-//                .qlj(event.getStructure().getQlj())
-//                .hlj(event.getStructure().getHlj())
-//                .qdxs(event.getStructure().getQdxs())
-//                .fxpwz(event.getStructure().getFxpwz())
-//                .bsqxs(event.getStructure().getBsqxs())
+                .ck(event.getStructure().getCk())
+                .cg(event.getStructure().getCg())
+                .zj(event.getStructure().getZj())
+                .qlj(event.getStructure().getQlj())
+                .hlj(event.getStructure().getHlj())
+                .qdxs(event.getStructure().getQdxs())
+                .fxpwz(event.getStructure().getFxpwz())
+                .bsqxs(event.getStructure().getBsqxs())
                 .build();
 
     }
     private VehicleParameterJpaEntity parameterEntityInstance(final VehicleCreateEvent event) {
 
-        return VehicleParameterJpaEntity.builder()
+        VehicleParameterJpaEntity build = VehicleParameterJpaEntity.builder()
                 .zczbzl(event.getParameter().getZczbzl())
                 .zdzzzl(event.getParameter().getZdzzzl())
                 .rylx(event.getParameter().getRylx())
@@ -132,6 +132,7 @@ public class VehicleEventHandler {
                 .zxzwbj(event.getParameter().getZxzwbj())
                 .zgcs(event.getParameter().getZgcs())
                 .build();
+        return build;
     }
 
     private VehicleSpecialJpaEntity specialEntityInstance(final VehicleCreateEvent event) {

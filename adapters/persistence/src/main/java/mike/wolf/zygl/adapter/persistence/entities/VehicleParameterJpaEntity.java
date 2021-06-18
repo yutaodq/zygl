@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "vehicle_parameter")
@@ -22,31 +20,33 @@ import javax.persistence.Table;
 
 public class VehicleParameterJpaEntity {
     @Id
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @Column(name = "zczbzl_nb")
-    private Number zczbzl;  //整车装备质量
+    private int zczbzl;  //整车装备质量
 
     @Column(name = "zdzzzl_nb")
-    private Number zdzzzl;  //最大装载质量
+    private int zdzzzl;  //最大装载质量
 
     @Column(name = "rylx_tx")
     private String rylx;  //燃油类型
 
     @Column(name = "pjyh_nb")
-    private Number pjyh;  //平均油耗
+    private int pjyh;  //平均油耗
 
     @Column(name = "edgl_nb")
-    private Number edgl;  //额定功率
+    private int edgl;  //额定功率
 
     @Column(name = "zdnj_nb")
-    private Number zdnj;  //最大扭矩
+    private int zdnj;  //最大扭矩
 
     @Column(name = "zxzwbj_nb")
-    private Number zxzwbj;  //最小转弯半径
+    private int zxzwbj;  //最小转弯半径
 
     @Column(name = "zgcs_nb")
-    private Number zgcs;  //最高车速
+    private int zgcs;  //最高车速
 
     @Column(name = "description_tx")
     private String description; // 备注

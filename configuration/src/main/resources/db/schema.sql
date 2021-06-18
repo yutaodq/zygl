@@ -37,9 +37,7 @@ create table vehicle_parameter
     id             varchar(40) PRIMARY KEY,
     zczbzl_nb      number(4),
     zdzzzl_nb      number(4),
-
     rylx_tx        varchar(40),
-
     pjyh_nb        number(4),
     edgl_nb        number(4),
     zdnj_nb        number(4),

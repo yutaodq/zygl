@@ -19,28 +19,27 @@ import javax.persistence.*;
 @Slf4j
 public class VehicleStructureJpaEntity {
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @Column(name = "cc_nb")
-    private Number cc;  //车长
+    private int cc;  //车长
 
     @Column(name = "ck_nb")
-    private Number ck;  //车宽
+    private int ck;  //车宽
 
     @Column(name = "cg_nb")
-    private Number cg;  //车高
+    private int cg;  //车高
 
     @Column(name = "zj_nb")
-    private Number zj;  //轴距
+    private int zj;  //轴距
 
     @Column(name = "qlj_nb")
-    private Number qlj;  //前轮距
+    private int qlj;  //前轮距
 
     @Column(name = "hlj_nb")
-    private Number hlj;  //后轮距
+    private int hlj;  //后轮距
 
     @Column(name = "qdxs_tx")
     private String qdxs;  //驱动形式
