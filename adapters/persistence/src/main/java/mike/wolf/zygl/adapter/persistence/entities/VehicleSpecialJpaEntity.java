@@ -49,7 +49,7 @@ public class VehicleSpecialJpaEntity {
     private int zdnj;  //最大扭矩
 
     @Column(name = "zgzs_nb")
-    private int qdxs;  //最高转速
+    private int zgzs;  //最高转速
 
     @Column(name = "rylx_tx")
     private String rylx;  //燃油类型

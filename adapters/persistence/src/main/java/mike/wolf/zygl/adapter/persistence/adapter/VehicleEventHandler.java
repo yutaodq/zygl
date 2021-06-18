@@ -11,9 +11,6 @@ import mike.wolf.zygl.adapter.persistence.mappers.VehicleMapper;
 import mike.wolf.zygl.adapter.persistence.repositories.VehicleRepository;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.*;
-import mike.wolf.zygl.api.domain.vehicle.vehicle.Parameter;
-import mike.wolf.zygl.api.domain.vehicle.vehicle.Special;
-import mike.wolf.zygl.api.domain.vehicle.vehicle.Structure;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -146,7 +143,7 @@ public class VehicleEventHandler {
                 .fdjxh(event.getSpecial().getFdjxh())
                 .edgl(event.getSpecial().getEdgl())
                 .zdnj(event.getSpecial().getZdnj())
-                .qdxs(event.getSpecial().getQdxs())
+                .zgzs(event.getSpecial().getZgzs())
                 .rylx(event.getSpecial().getRylx())
                 .pjyh(event.getSpecial().getPjyh())
                 .glxh(event.getSpecial().getGlxh())

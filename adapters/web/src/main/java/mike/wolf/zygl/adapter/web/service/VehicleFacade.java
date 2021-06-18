@@ -2,7 +2,6 @@ package mike.wolf.zygl.adapter.web.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mike.wolf.zygl.adapter.persistence.entities.VehicleStructureJpaEntity;
 import mike.wolf.zygl.adapter.web.model.FormVehicleDTO;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
 
@@ -14,9 +13,7 @@ import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 import java.net.URISyntaxException;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -99,7 +96,7 @@ private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
                 .fdjxh(formVehicleDTO.getSpecial().getFdjxh())
                 .edgl(formVehicleDTO.getSpecial().getEdgl())
                 .zdnj(formVehicleDTO.getSpecial().getZdnj())
-                .qdxs(formVehicleDTO.getSpecial().getQdxs())
+                .zgzs(formVehicleDTO.getSpecial().getZgzs())
                 .rylx(formVehicleDTO.getSpecial().getRylx())
                 .pjyh(formVehicleDTO.getSpecial().getPjyh())
                 .glxh(formVehicleDTO.getSpecial().getGlxh())

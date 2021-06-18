@@ -24,7 +24,7 @@ public class Special {
 
     private int zdnj;  //最大扭矩
 
-    private int qdxs;  //最高转速
+    private int zgzs;  //最高转速
 
     private String rylx;  //燃油类型
 

@@ -13,7 +13,7 @@ public class FormVehicleSpecialDTO {
     private String fdjxh;  //发动机型号
     private int edgl;  //额定功率
     private int zdnj;  //最大扭矩
-    private int qdxs;  //最高转速
+    private int zgzs;  //最高转速
     private String rylx;  //燃油类型
     private int pjyh;  //平均油耗
     private String glxh;  //锅炉型号

@@ -66,7 +66,7 @@ create table vehicle_special
     ysjxh_tx       varchar(40),
     bxh_tx         varchar(40),
     csyq_tx        varchar(40),
-    dr_nbb         number(4),
+    dr_nb         number(4),
     bsqxs_tx       varchar(40),
 
     description_tx varchar(500)
@@ -83,7 +83,6 @@ create table vehicle
     pz_tx                 varchar(40),
     nbpz_tx               varchar(40),
     sccj_tx               varchar(40),
-
     ccrq_dt               date,
     tcrq_dt               date,
     yz_nb                 number(10,2),
