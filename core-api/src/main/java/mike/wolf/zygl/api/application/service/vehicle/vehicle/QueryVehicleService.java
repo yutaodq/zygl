@@ -35,7 +35,6 @@ public class QueryVehicleService implements
 
     @Override
     public CompletableFuture<ResponseEntity<List<VehicleDTO>>> findAll() {
-
         return queryGateway.query(
                 FindAllQuery.builder().build(),
                 ResponseTypes.multipleInstancesOf(VehicleDTO.class))

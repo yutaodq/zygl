@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 public class VehicleFacade {
 
     private final FindAllVehicleUseCase findAllVehicleUseCase;
-//    private final FindByNameVehicleUseCase findByNameVehicleUseCase;
+    //    private final FindByNameVehicleUseCase findByNameVehicleUseCase;
     private final FindByIdVehicleUseCase findByIdVehicleUseCase;
     private final ExistsByPzVehicleUseCase existsByPzVehicleUseCase;
     private final ExistsByNbpzVehicleUseCase existsByNbpzVehicleUseCase;
@@ -51,29 +51,31 @@ public class VehicleFacade {
     public CompletableFuture<Boolean> existsByPz(String pz) {
         return existsByPzVehicleUseCase.existsByPz(pz);
     }
+
     public CompletableFuture<Boolean> existsByNbpz(String nbpz) {
         return existsByNbpzVehicleUseCase.existsByNbpz(nbpz);
     }
 
-/*
-command
- */
+    /*
+    command
+     */
 //    public void deleteVehicle(String id) {
 //         deleteVehicleUseCase.deleteVehicle(id);
 //    }
-private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
-    return Structure.builder()
-            .cc(formVehicleDTO.getStructure().getCc())
-            .ck(formVehicleDTO.getStructure().getCk())
-            .cg(formVehicleDTO.getStructure().getCg())
-            .zj(formVehicleDTO.getStructure().getZj())
-            .qlj(formVehicleDTO.getStructure().getQlj())
-            .hlj(formVehicleDTO.getStructure().getHlj())
-            .qdxs(formVehicleDTO.getStructure().getQdxs())
-            .fxpwz(formVehicleDTO.getStructure().getFxpwz())
-            .bsqxs(formVehicleDTO.getStructure().getBsqxs())
-            .build();
-}
+    private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
+        return Structure.builder()
+                .cc(formVehicleDTO.getStructure().getCc())
+                .ck(formVehicleDTO.getStructure().getCk())
+                .cg(formVehicleDTO.getStructure().getCg())
+                .zj(formVehicleDTO.getStructure().getZj())
+                .qlj(formVehicleDTO.getStructure().getQlj())
+                .hlj(formVehicleDTO.getStructure().getHlj())
+                .qdxs(formVehicleDTO.getStructure().getQdxs())
+                .fxpwz(formVehicleDTO.getStructure().getFxpwz())
+                .bsqxs(formVehicleDTO.getStructure().getBsqxs())
+                .build();
+    }
+
     private Parameter parameterInstance(final FormVehicleDTO formVehicleDTO) {
         return Parameter.builder()
                 .zczbzl(formVehicleDTO.getParameter().getZczbzl())
@@ -86,6 +88,7 @@ private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
                 .zgcs(formVehicleDTO.getParameter().getZgcs())
                 .build();
     }
+
     private Special specialInstance(final FormVehicleDTO formVehicleDTO) {
         return Special.builder()
                 .zdqzl(formVehicleDTO.getSpecial().getZdqzl())
@@ -107,6 +110,7 @@ private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
                 .bsqxs(formVehicleDTO.getSpecial().getBsqxs())
                 .build();
     }
+
     private CreateVehicleUseCase.CreateVehicleCommand createVehicleCommandInstance(final FormVehicleDTO formVehicleDTO) {
         return CreateVehicleUseCase.CreateVehicleCommand
                 .builder()
@@ -128,9 +132,9 @@ private Structure structureInstance(final FormVehicleDTO formVehicleDTO) {
                 .structure(this.structureInstance(formVehicleDTO))
                 .parameter(this.parameterInstance(formVehicleDTO))
                 .special(this.specialInstance(formVehicleDTO))
-
                 .build();
     }
+
     public void create(FormVehicleDTO formVehicleDTO)
             throws URISyntaxException {
         log.info("VehicleFacade REST createVehicle : {}", formVehicleDTO.getName());
