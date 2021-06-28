@@ -48,8 +48,10 @@ public class VehicleJpaEntity {
     //    @Column(name = "yz_nb", columnDefinition = "Float (10,2)")
 //    private Float  yz;  //车辆原值
 //private BigDecimal  yz;  //车辆原值
+
     @Column(name = "yz_nb", precision = 10, scale = 2)
-    private Float yz;  //车辆原值
+private BigDecimal  yz;  //车辆原值
+//    private Float yz;  //车辆原值
 
     @Column(name = "csys_tx")
     private String csys;  //车身颜色

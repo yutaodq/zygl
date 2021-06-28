@@ -10,6 +10,7 @@ import mike.wolf.zygl.api.domain.vehicle.vehicle.VehicleId;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Value
@@ -28,7 +29,7 @@ public class VehicleCreateEvent {
     String sccj;  //生产厂家
     Date ccrq;  //出厂日期
     Date tcrq;  //投产日期
-    Float yz;  //车辆原值
+    BigDecimal yz;  //车辆原值
     String csys;  //车身颜色
     String fdjxh;  //发动机型号
     String fdjbh;  //发动机编号

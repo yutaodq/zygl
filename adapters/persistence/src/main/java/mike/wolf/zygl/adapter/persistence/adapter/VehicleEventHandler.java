@@ -67,7 +67,7 @@ public class VehicleEventHandler {
 
     @EventHandler
     public void on(final VehicleCreateEvent event) {
-        log.info("VehicleEventHandler on(VehicleCreateEvent event) : {}", event.getVehicleId().getIdentifier());
+//        log.info("VehicleEventHandler on(VehicleCreateEvent event) : {}", event.getVehicleId().getIdentifier());
         final VehicleJpaEntity entity = this.vehicleEntityInstance(event);
         try {
             vehicleRepository.save(entity);

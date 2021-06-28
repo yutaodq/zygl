@@ -20,7 +20,7 @@ public class VehicleDTO {
     private String sccj;  //生产厂家
     private Date ccrq;  //出厂日期
     private Date tcrq;  //投产日期
-    private Float yz;  //车辆原值
+    private BigDecimal yz;  //车辆原值
     private String csys;  //车身颜色
     private String fdjxh;  //发动机型号
     private String fdjbh;  //发动机编号
@@ -69,7 +69,7 @@ public class VehicleDTO {
     private String spFdjxh;  //发动机型号
     private int spEdgl;  //额定功率
     private int spZdnj;  //最大扭矩
-    private int spQdxs;  //最高转速
+    private int spZgzs;  //最高转速
     private String spRylx;  //燃油类型
     private int spPjyh;  //平均油耗
     private String spGlxh;  //锅炉型号

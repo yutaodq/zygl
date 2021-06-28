@@ -2,6 +2,7 @@ package mike.wolf.zygl.adapter.web.model;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -14,7 +15,7 @@ public class FormVehicleDTO {
     private String sccj;  //生产厂家
     private Date ccrq;  //出厂日期
     private Date tcrq;  //投产日期
-    private Float yz;  //车辆原值
+    private BigDecimal yz;  //车辆原值
     private String csys;  //车身颜色
     private String fdjxh;  //发动机型号
     private String fdjbh;  //发动机编号
