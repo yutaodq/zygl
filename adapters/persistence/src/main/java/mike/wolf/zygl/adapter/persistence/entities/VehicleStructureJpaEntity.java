@@ -24,22 +24,22 @@ public class VehicleStructureJpaEntity {
     private String id;
 
     @Column(name = "cc_nb")
-    private int cc;  //车长
+    private Integer cc;  //车长
 
     @Column(name = "ck_nb")
-    private int ck;  //车宽
+    private Integer ck;  //车宽
 
     @Column(name = "cg_nb")
-    private int cg;  //车高
+    private Integer cg;  //车高
 
     @Column(name = "zj_nb")
-    private int zj;  //轴距
+    private Integer zj;  //轴距
 
     @Column(name = "qlj_nb")
-    private int qlj;  //前轮距
+    private Integer qlj;  //前轮距
 
     @Column(name = "hlj_nb")
-    private int hlj;  //后轮距
+    private Integer hlj;  //后轮距
 
     @Column(name = "qdxs_tx")
     private String qdxs;  //驱动形式

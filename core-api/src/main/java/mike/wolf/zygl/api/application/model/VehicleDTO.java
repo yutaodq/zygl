@@ -11,6 +11,8 @@ import java.util.Date;
 //@NoArgsConstructor
 //@EqualsAndHashCode(of = {"id"})
 @Data
+@Builder(toBuilder = true) //如果加true，可以修改这个对象属性值
+
 public class VehicleDTO {
     private String id;
     private String name;  //车辆名称
@@ -33,15 +35,15 @@ public class VehicleDTO {
      */
     private String stId;
     private int stCc;  //车长
-    private int stCk;  //车宽
-    private int stCg;  //车高
-    private int stZj;  //轴距
-    private int stQlj;  //前轮距
-    private int stHlj;  //后轮距
+    private Integer stCk;  //车宽
+    private Integer stCg;  //车高
+    private Integer stZj;  //轴距
+    private Integer stQlj;  //前轮距
+    private Integer stHlj;  //后轮距
     private String stQdxs;  //驱动形式
     private String stFxpwz;  //方向盘位置
     private String stBsqxs;  //变数器形式
-    private String stDescription; // 备注
+//    private String stDescription; // 备注
     /*
     VehicleParameterJpaEntity
      */
@@ -55,7 +57,7 @@ public class VehicleDTO {
     private int paZdnj;  //最大扭矩
     private int paZxzwbj;  //最小转弯半径
     private int paZgcs;  //最高车速
-    private String paDescription; // 备注
+//    private String paDescription; // 备注
 
     /*
     VehicleSpecial
@@ -78,7 +80,7 @@ public class VehicleDTO {
     private String spCsyq;  //测试仪器
     private int spDr;  //斗容
     private String spBsqxs;  //变数器形式
-    private String spDescription; // 备注
+//    private String spDescription; // 备注
 
     /*
     VehicleType
