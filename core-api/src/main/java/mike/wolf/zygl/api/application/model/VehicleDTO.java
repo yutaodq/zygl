@@ -34,7 +34,7 @@ public class VehicleDTO {
     VehicleStructureJpaEntity
      */
     private String stId;
-    private int stCc;  //车长
+    private Integer stCc;  //车长
     private Integer stCk;  //车宽
     private Integer stCg;  //车高
     private Integer stZj;  //轴距
@@ -49,36 +49,36 @@ public class VehicleDTO {
      */
     private String paId;
 
-    private int paZczbzl;  //整车装备质量
-    private int paZdzzzl;  //最大装载质量
+    private Integer paZczbzl;  //整车装备质量
+    private Integer paZdzzzl;  //最大装载质量
     private String paRylx;  //燃油类型
-    private int paPjyh;  //平均油耗
-    private int paEdgl;  //额定功率
-    private int paZdnj;  //最大扭矩
-    private int paZxzwbj;  //最小转弯半径
-    private int paZgcs;  //最高车速
+    private Integer paPjyh;  //平均油耗
+    private Integer paEdgl;  //额定功率
+    private Integer paZdnj;  //最大扭矩
+    private Integer paZxzwbj;  //最小转弯半径
+    private Integer paZgcs;  //最高车速
 //    private String paDescription; // 备注
 
     /*
     VehicleSpecial
      */
     private String spId;
-    private int spZdqzl;  //最大起重量
-    private int spGjbj;  //工作半径
-    private int spZb;  //主笔
-    private int spZbc;  //主臂长
-    private int spFbc;  //副臂长
+    private Integer spZdqzl;  //最大起重量
+    private Integer spGjbj;  //工作半径
+    private Integer spZb;  //主笔
+    private Integer spZbc;  //主臂长
+    private Integer spFbc;  //副臂长
     private String spFdjxh;  //发动机型号
-    private int spEdgl;  //额定功率
-    private int spZdnj;  //最大扭矩
-    private int spZgzs;  //最高转速
+    private Integer spEdgl;  //额定功率
+    private Integer spZdnj;  //最大扭矩
+    private Integer spZgzs;  //最高转速
     private String spRylx;  //燃油类型
-    private int spPjyh;  //平均油耗
+    private Integer spPjyh;  //平均油耗
     private String spGlxh;  //锅炉型号
     private String spYsjxh;  //压缩机型号
     private String spBxh;  //泵型号
     private String spCsyq;  //测试仪器
-    private int spDr;  //斗容
+    private Integer spDr;  //斗容
     private String spBsqxs;  //变数器形式
 //    private String spDescription; // 备注
 

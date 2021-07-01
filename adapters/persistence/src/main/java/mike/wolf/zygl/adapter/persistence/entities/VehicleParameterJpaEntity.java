@@ -25,28 +25,28 @@ public class VehicleParameterJpaEntity {
     private String id;
 
     @Column(name = "zczbzl_nb")
-    private int zczbzl;  //整车装备质量
+    private Integer zczbzl;  //整车装备质量
 
     @Column(name = "zdzzzl_nb")
-    private int zdzzzl;  //最大装载质量
+    private Integer zdzzzl;  //最大装载质量
 
     @Column(name = "rylx_tx")
     private String rylx;  //燃油类型
 
     @Column(name = "pjyh_nb")
-    private int pjyh;  //平均油耗
+    private Integer pjyh;  //平均油耗
 
     @Column(name = "edgl_nb")
-    private int edgl;  //额定功率
+    private Integer edgl;  //额定功率
 
     @Column(name = "zdnj_nb")
-    private int zdnj;  //最大扭矩
+    private Integer zdnj;  //最大扭矩
 
     @Column(name = "zxzwbj_nb")
-    private int zxzwbj;  //最小转弯半径
+    private Integer zxzwbj;  //最小转弯半径
 
     @Column(name = "zgcs_nb")
-    private int zgcs;  //最高车速
+    private Integer zgcs;  //最高车速
 
     @Column(name = "description_tx")
     private String description; // 备注
