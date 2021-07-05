@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import mike.wolf.zygl.adapter.web.model.FormVehicleDTO;
 import mike.wolf.zygl.adapter.web.service.VehicleFacade;
 import mike.wolf.zygl.api.application.model.VehicleDTO;
+import mike.wolf.zygl.api.application.port.in.vehicle.vehicle.CreateVehicleUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -19,6 +20,7 @@ import java.net.URISyntaxException;
 @CrossOrigin
 public class VehicleCommandController {
     private final VehicleFacade vehicleFacade;
+    private final CreateVehicleUseCase createVehicleUseCase;
 
     @PostMapping()
     public ResponseEntity<?> createVehicle(
@@ -28,7 +30,9 @@ public class VehicleCommandController {
         log.info("REST createVehicle : {}", vehicleDTO.getName());        log.info("REST createVehicle : {}", vehicleDTO.getName());
         log.info("REST createVehicle IDDDDDDDDDDDDDDDDDDDDDDDD : {}", vehicleDTO.getId());        log.info("REST createVehicle : {}", vehicleDTO.getName());
 
-        vehicleFacade.create(vehicleDTO);
+//        vehicleFacade.create(vehicleDTO);
+        createVehicleUseCase.createVehicle(vehicleDTO);
+
 //
         return ResponseEntity.ok(vehicleDTO);
     }

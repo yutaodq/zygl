@@ -62,54 +62,8 @@ public class VehicleFacade {
 //    public void deleteVehicle(String id) {
 //         deleteVehicleUseCase.deleteVehicle(id);
 //    }
-    private Structure structureInstance(final VehicleDTO vehicleDTO) {
-        return Structure.builder()
-                .cc(vehicleDTO.getStCc())
-                .ck(vehicleDTO.getStCk())
-                .cg(vehicleDTO.getStCg())
-                .zj(vehicleDTO.getStZj())
-                .qlj(vehicleDTO.getStQlj())
-                .hlj(vehicleDTO.getStHlj())
-                .qdxs(vehicleDTO.getStQdxs())
-                .fxpwz(vehicleDTO.getStFxpwz())
-                .bsqxs(vehicleDTO.getStBsqxs())
-                .build();
-    }
 
-    private Parameter parameterInstance(final VehicleDTO vehicleDTO) {
-        return Parameter.builder()
-                .zczbzl(vehicleDTO.getPaZczbzl())
-                .zdzzzl(vehicleDTO.getPaZdzzzl())
-                .rylx(vehicleDTO.getPaRylx())
-                .pjyh(vehicleDTO.getPaPjyh())
-                .edgl(vehicleDTO.getPaEdgl())
-                .zdnj(vehicleDTO.getPaZdnj())
-                .zxzwbj(vehicleDTO.getPaZxzwbj())
-                .zgcs(vehicleDTO.getPaZgcs())
-                .build();
-    }
 
-    private Special specialInstance(final VehicleDTO vehicleDTO) {
-        return Special.builder()
-                .zdqzl(vehicleDTO.getSpZdqzl())
-                .gjbj(vehicleDTO.getSpGjbj())
-                .zb(vehicleDTO.getSpZb())
-                .zbc(vehicleDTO.getSpZbc())
-                .fbc(vehicleDTO.getSpFbc())
-                .fdjxh(vehicleDTO.getSpFdjxh())
-                .edgl(vehicleDTO.getSpEdgl())
-                .zdnj(vehicleDTO.getSpZdnj())
-                .zgzs(vehicleDTO.getSpZgzs())
-                .rylx(vehicleDTO.getSpRylx())
-                .pjyh(vehicleDTO.getSpPjyh())
-                .glxh(vehicleDTO.getSpGlxh())
-                .ysjxh(vehicleDTO.getSpYsjxh())
-                .bxh(vehicleDTO.getSpBxh())
-                .csyq(vehicleDTO.getSpCsyq())
-                .dr(vehicleDTO.getSpDr())
-                .bsqxs(vehicleDTO.getSpBsqxs())
-                .build();
-    }
 
 
 /*
@@ -126,7 +80,6 @@ public class VehicleFacade {
         createVehicleUseCase.createVehicle(this.createVehicleCommandInstance(vehicleDTO));
     }
     private CreateVehicleUseCase.CreateVehicleCommand createVehicleCommandInstance(final VehicleDTO vehicleDTO) {
-//        VehicleId id = VehicleId.create(vehicleDTO.getId());
         return CreateVehicleUseCase.CreateVehicleCommand
                 .builder()
                 .vehicleId(VehicleId.create(vehicleDTO.getId()))
@@ -149,6 +102,53 @@ public class VehicleFacade {
                 .special(this.specialInstance(vehicleDTO))
                 .build();
     }
+    private Special specialInstance(final VehicleDTO vehicleDTO) {
+        return Special.builder()
+                .zdqzl(vehicleDTO.getSpZdqzl())
+                .gjbj(vehicleDTO.getSpGjbj())
+                .zb(vehicleDTO.getSpZb())
+                .zbc(vehicleDTO.getSpZbc())
+                .fbc(vehicleDTO.getSpFbc())
+                .fdjxh(vehicleDTO.getSpFdjxh())
+                .edgl(vehicleDTO.getSpEdgl())
+                .zdnj(vehicleDTO.getSpZdnj())
+                .zgzs(vehicleDTO.getSpZgzs())
+                .rylx(vehicleDTO.getSpRylx())
+                .pjyh(vehicleDTO.getSpPjyh())
+                .glxh(vehicleDTO.getSpGlxh())
+                .ysjxh(vehicleDTO.getSpYsjxh())
+                .bxh(vehicleDTO.getSpBxh())
+                .csyq(vehicleDTO.getSpCsyq())
+                .dr(vehicleDTO.getSpDr())
+                .bsqxs(vehicleDTO.getSpBsqxs())
+                .build();
+    }
+    private Parameter parameterInstance(final VehicleDTO vehicleDTO) {
+        return Parameter.builder()
+                .zczbzl(vehicleDTO.getPaZczbzl())
+                .zdzzzl(vehicleDTO.getPaZdzzzl())
+                .rylx(vehicleDTO.getPaRylx())
+                .pjyh(vehicleDTO.getPaPjyh())
+                .edgl(vehicleDTO.getPaEdgl())
+                .zdnj(vehicleDTO.getPaZdnj())
+                .zxzwbj(vehicleDTO.getPaZxzwbj())
+                .zgcs(vehicleDTO.getPaZgcs())
+                .build();
+    }
+    private Structure structureInstance(final VehicleDTO vehicleDTO) {
+        return Structure.builder()
+                .cc(vehicleDTO.getStCc())
+                .ck(vehicleDTO.getStCk())
+                .cg(vehicleDTO.getStCg())
+                .zj(vehicleDTO.getStZj())
+                .qlj(vehicleDTO.getStQlj())
+                .hlj(vehicleDTO.getStHlj())
+                .qdxs(vehicleDTO.getStQdxs())
+                .fxpwz(vehicleDTO.getStFxpwz())
+                .bsqxs(vehicleDTO.getStBsqxs())
+                .build();
+    }
+
 //    public void updateVehicle(FormVehicleDTO dto) {
 //        String updateType = dto.getUpdateType();
 //        switch (updateType) {

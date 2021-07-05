@@ -2,6 +2,7 @@ package mike.wolf.zygl.api.application.port.in.vehicle.vehicle;
 
 import lombok.Builder;
 import lombok.Value;
+import mike.wolf.zygl.api.application.model.VehicleDTO;
 import mike.wolf.zygl.api.domain.vehicle.type.TypeName;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.Parameter;
 import mike.wolf.zygl.api.domain.vehicle.vehicle.Special;
@@ -15,6 +16,7 @@ import java.util.Date;
 
 public interface CreateVehicleUseCase {
     public void createVehicle(CreateVehicleCommand command);
+    public void createVehicle(VehicleDTO vehicleDTO);
 
     @Builder()
     @Value
