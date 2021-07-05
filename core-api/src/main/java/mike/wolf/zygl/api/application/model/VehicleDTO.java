@@ -11,7 +11,7 @@ import java.util.Date;
 //@NoArgsConstructor
 //@EqualsAndHashCode(of = {"id"})
 @Data
-@Builder(toBuilder = true) //如果加true，可以修改这个对象属性值
+//@Builder(toBuilder = true) //如果加true，可以修改这个对象属性值
 
 public class VehicleDTO {
     private String id;
@@ -33,7 +33,7 @@ public class VehicleDTO {
     /*
     VehicleStructureJpaEntity
      */
-    private String stId;
+//    private String stId;
     private Integer stCc;  //车长
     private Integer stCk;  //车宽
     private Integer stCg;  //车高
@@ -47,7 +47,7 @@ public class VehicleDTO {
     /*
     VehicleParameterJpaEntity
      */
-    private String paId;
+//    private String paId;
 
     private Integer paZczbzl;  //整车装备质量
     private Integer paZdzzzl;  //最大装载质量
@@ -62,7 +62,7 @@ public class VehicleDTO {
     /*
     VehicleSpecial
      */
-    private String spId;
+//    private String spId;
     private Integer spZdqzl;  //最大起重量
     private Integer spGjbj;  //工作半径
     private Integer spZb;  //主笔
@@ -85,13 +85,13 @@ public class VehicleDTO {
     /*
     VehicleType
      */
-    private String typeId;
+//    private String typeId;
     private String typeName;
 
     /*
     VehicleState
      */
-    private String stateId;
+//    private String stateId;
     private String stateName;
 
 }

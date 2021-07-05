@@ -102,8 +102,6 @@ public class VehicleEventHandler {
                 .build();
     }
     private VehicleStructureJpaEntity structureEntityInstance(final VehicleCreateEvent event) {
-        log.info("错误的提示VehicleStructureJpaEntity： " + event.getStructure().getCc());
-
         return VehicleStructureJpaEntity.builder()
                 .cc(event.getStructure().getCc())
                 .ck(event.getStructure().getCk())

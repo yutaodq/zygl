@@ -12,13 +12,13 @@ public interface VehicleMapper {
     VehicleMapper INSTANCE = Mappers.getMapper(VehicleMapper.class);
 
     @Mappings({
-            @Mapping(source = "vehicleJpaEntity.vehicleState.id", target = "stateId"),
+//            @Mapping(source = "vehicleJpaEntity.vehicleState.id", target = "stateId"),
             @Mapping(source = "vehicleJpaEntity.vehicleState.name", target = "stateName"),
 
-            @Mapping(source = "vehicleJpaEntity.vehicleType.id", target = "typeId"),
+//            @Mapping(source = "vehicleJpaEntity.vehicleType.id", target = "typeId"),
             @Mapping(source = "vehicleJpaEntity.vehicleType.name", target = "typeName"),
 
-            @Mapping(source = "vehicleJpaEntity.vehicleStructure.id", target = "stId"),
+//            @Mapping(source = "vehicleJpaEntity.vehicleStructure.id", target = "stId"),
             @Mapping(source = "vehicleJpaEntity.vehicleStructure.cc", target = "stCc", defaultValue = "0"),
             @Mapping(source = "vehicleJpaEntity.vehicleStructure.ck", target = "stCk"),
             @Mapping(source = "vehicleJpaEntity.vehicleStructure.cg", target = "stCg"),
@@ -29,7 +29,7 @@ public interface VehicleMapper {
             @Mapping(source = "vehicleJpaEntity.vehicleStructure.fxpwz", target = "stFxpwz"),
             @Mapping(source = "vehicleJpaEntity.vehicleStructure.bsqxs", target = "stBsqxs"),
 
-            @Mapping(source = "vehicleJpaEntity.vehicleParameter.id", target = "paId"),
+//            @Mapping(source = "vehicleJpaEntity.vehicleParameter.id", target = "paId"),
             @Mapping(source = "vehicleJpaEntity.vehicleParameter.zczbzl", target = "paZczbzl"),
             @Mapping(source = "vehicleJpaEntity.vehicleParameter.zdzzzl", target = "paZdzzzl"),
             @Mapping(source = "vehicleJpaEntity.vehicleParameter.rylx", target = "paRylx"),
@@ -39,7 +39,7 @@ public interface VehicleMapper {
             @Mapping(source = "vehicleJpaEntity.vehicleParameter.zxzwbj", target = "paZxzwbj"),
             @Mapping(source = "vehicleJpaEntity.vehicleParameter.zgcs", target = "paZgcs"),
 
-            @Mapping(source = "vehicleJpaEntity.vehicleSpecial.id", target = "spId"),
+//            @Mapping(source = "vehicleJpaEntity.vehicleSpecial.id", target = "spId"),
             @Mapping(source = "vehicleJpaEntity.vehicleSpecial.zdqzl", target = "spZdqzl"),
             @Mapping(source = "vehicleJpaEntity.vehicleSpecial.gjbj", target = "spGjbj"),
             @Mapping(source = "vehicleJpaEntity.vehicleSpecial.zb", target = "spZb"),

@@ -22,15 +22,31 @@ public class VehicleCommandController {
 
     @PostMapping()
     public ResponseEntity<?> createVehicle(
+            @Valid @RequestBody VehicleDTO vehicleDTO)
+            throws URISyntaxException {
+
+        log.info("REST createVehicle : {}", vehicleDTO.getName());        log.info("REST createVehicle : {}", vehicleDTO.getName());
+        log.info("REST createVehicle IDDDDDDDDDDDDDDDDDDDDDDDD : {}", vehicleDTO.getId());        log.info("REST createVehicle : {}", vehicleDTO.getName());
+
+        vehicleFacade.create(vehicleDTO);
+//
+        return ResponseEntity.ok(vehicleDTO);
+    }
+/*
+FormVehicleDTO 改为 VehicleDTO
+    @PostMapping()
+    public ResponseEntity<?> createVehicle(
             @Valid @RequestBody FormVehicleDTO formVehicleDTO)
             throws URISyntaxException {
 
         log.info("REST createVehicle : {}", formVehicleDTO.getName());
         vehicleFacade.create(formVehicleDTO);
 
-//        return ResponseEntity.ok(formVehicleDTO);
+        return ResponseEntity.ok(formVehicleDTO);
         return ResponseEntity.ok("a");
     }
+ */
+
 //    @DeleteMapping("/{id}")
 //    public ResponseEntity<Void> deleteVehicleState(@PathVariable String id) {
 //        log.info("REST request to delete vehicleStates : {}", id);
